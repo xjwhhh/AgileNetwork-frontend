@@ -10,6 +10,9 @@ const SingleView = () => import ('@/views/SingleView/SingleView.vue')
 // SubMenu
 const SubMenu = () => import ('@/views/SubMenu/SubMenu.vue')
 const Hello=() => import('@/views/SubMenu/Hello.vue');
+const Square=() =>import('@/views/Square.vue');
+const PersonalInfo=() =>import('@/views/PersonalInfo.vue');
+const DeliveredResume=() =>import('@/views/DeliveredResume.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +36,18 @@ export default new Router({
                 }, {
                     path: '/hello',
                     component: Hello
+                },
+                {
+                    path:'/square',
+                    component:Square
+                },
+                {
+                    path:'/deliveredResume',
+                    component:DeliveredResume,
+                },
+                {
+                    path:'/personalInfo',
+                    component:PersonalInfo
                 }
             ]
         },

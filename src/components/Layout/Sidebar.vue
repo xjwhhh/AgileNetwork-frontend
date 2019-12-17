@@ -71,13 +71,13 @@
 
     import { mapState } from 'vuex';
     import SidebarRun from './Sidebar.run.js';
-    import Menu from '../../menu.js';
+    import CommonUserMenu from '../../commonUserMenu.js';
 
     export default {
         name: 'Sidebar',
         data() {
             return {
-                Menu,
+                Menu: CommonUserMenu,
                 collapse: this.buildCollapseList()
             }
         },
@@ -98,7 +98,7 @@
             buildCollapseList() {
                 /** prepare initial state of collapse menus. Doesnt allow same route names */
                 let collapse = {};
-                Menu
+                CommonUserMenu
                     .filter(({heading}) => !heading)
                     .forEach(({name, path, submenu}) => {
                         collapse[name] = this.isRouteActive(submenu ? submenu.map(({path})=>path) : path)

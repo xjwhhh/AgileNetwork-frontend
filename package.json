@@ -14,6 +14,7 @@
         "build-themes": "node-sass src/styles/themes -o public/themes"
     },
     "dependencies": {
+        "axios": "0.19.0",
         "@fortawesome/fontawesome-free": "5.5.0",
         "@panter/vue-i18next": "0.13.0",
         "animate.css": "3.7.0",

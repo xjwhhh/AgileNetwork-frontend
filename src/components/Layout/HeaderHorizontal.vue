@@ -131,7 +131,7 @@
     import { mapMutations } from 'vuex'
     import HeaderSearch from '@/components/Layout/HeaderSearch'
     import ToggleFullscreen from '@/components/Common/ToggleFullscreen'
-    import Menu from '../../menu.js';
+    import CommonUserMenu from '../../commonUserMenu.js';
 
     export default {
         name: 'Header',
@@ -141,7 +141,7 @@
         },
         data() {
             return {
-                Menu: Menu.slice(0,4)
+                Menu: CommonUserMenu.slice(0,4)
             }
         },
         methods: {

@@ -4,6 +4,7 @@
 
 <script>
     import store from './store/index.js'
+    import Vue from 'vue'
 
     export default {
         name: 'App',
