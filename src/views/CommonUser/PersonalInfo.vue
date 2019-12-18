@@ -160,11 +160,37 @@
     // import qs from 'qs'
     // Vue.prototype.$axios = axios
 
+    class User {
+        constructor() {
+            this.username='';
+        }
+
+
+    }
+
     export default {
         data () {
             return {
                 aboutMsg: '我是personal组件'
             }
+        },
+        methods: {
+
+            //获取用户信息
+            getUserPersonalInfo: function() {
+
+            },
+
+            //更新用户信息
+            updateUserPersonInfo:function () {
+
+            },
+
+            //获取用户已投递简历
+            getUserDeliveredResume:function () {
+
+            }
+
         },
     }
 </script>

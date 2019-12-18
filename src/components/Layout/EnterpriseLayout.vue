@@ -5,7 +5,7 @@
         <Header />
 
         <!-- sidebar-->
-        <Sidebar />
+        <EnterpriseSidebar />
 
         <!-- offsidebar-->
         <Offsidebar />
@@ -25,24 +25,18 @@
 <script>
     import Vue from 'vue';
     import Header from './Header'
-    import Sidebar from './Sidebar'
     import Offsidebar from './Offsidebar'
     import Footer from './Footer'
     import ContentWrapper from './ContentWrapper'
-    import CommonUserMenu from "../../assets/commonUserMenu";
+    import EnterpriseSidebar from "./EnterpriseSidebar";
 
     Vue.component('ContentWrapper', ContentWrapper)
 
     export default {
         name: 'Layout',
-        data(){
-            return{
-                CommonUserMenu,
-            }
-        },
         components: {
             Header,
-            Sidebar,
+            EnterpriseSidebar,
             Offsidebar,
             Footer
         },

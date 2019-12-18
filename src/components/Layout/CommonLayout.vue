@@ -5,7 +5,7 @@
         <Header />
 
         <!-- sidebar-->
-        <Sidebar />
+        <CommonSidebar />
 
         <!-- offsidebar-->
         <Offsidebar />
@@ -30,19 +30,15 @@
     import Footer from './Footer'
     import ContentWrapper from './ContentWrapper'
     import CommonUserMenu from "../../assets/commonUserMenu";
+    import CommonSidebar from "./CommonSidebar";
 
     Vue.component('ContentWrapper', ContentWrapper)
 
     export default {
         name: 'Layout',
-        data(){
-            return{
-                CommonUserMenu,
-            }
-        },
         components: {
             Header,
-            Sidebar,
+            CommonSidebar,
             Offsidebar,
             Footer
         },
