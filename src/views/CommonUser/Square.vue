@@ -313,6 +313,17 @@
             }
         },
 
+        methods:{
+            getPosts(){
+
+            },
+
+            getPostsByCondition(){
+
+            }
+
+        },
+
         mounted() {
             $(this.$refs.jqcloud).jQCloud(this.word_array, {
                 width: 240,

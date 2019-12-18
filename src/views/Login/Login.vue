@@ -12,7 +12,7 @@
                 <form class="mb-3" @submit.prevent="validateBeforeSubmit('login')" data-vv-scope="login">
                     <div class="form-group">
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="Enter email" v-model="login.email" v-validate="'required|email'" type="text" name="email"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="Enter email" v-model="loginInfo.email" v-validate="'required|email'" type="text" name="email"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-envelope"></em>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group with-focus">
-                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="login.password" v-validate="'required'" type="password" name="password" placeholder="Password"/>
+                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="loginInfo.password" v-validate="'required'" type="password" name="password" placeholder="Password"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-lock"></em>
@@ -35,7 +35,7 @@
                     <div class="clearfix">
                         <div class="float-left">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme" v-model="login.rememberme">
+                                <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme" v-model="loginInfo.rememberme">
                                 <label class="custom-control-label" for="rememberme">Remember Me</label>
                             </div>
                         </div>
@@ -52,19 +52,23 @@
             </div>
         </div>
         <!-- END card-->
-        <div class="p-3 text-center">
-            <span class="mr-2">&copy;</span>
-            <span>2018</span>
-            <span class="mr-2">-</span>
-            <span>Angle</span>
-            <br/>
-            <span>Bootstrap Admin Template</span>
-        </div>
+<!--        <div class="p-3 text-center">-->
+<!--            <span class="mr-2">&copy;</span>-->
+<!--            <span>2018</span>-->
+<!--            <span class="mr-2">-</span>-->
+<!--            <span>Angle</span>-->
+<!--            <br/>-->
+<!--            <span>Bootstrap Admin Template</span>-->
+<!--        </div>-->
     </div>
 </template>
 <script>
     import Vue from 'vue'
     import VeeValidate from 'vee-validate';
+    import axios from 'axios'
+    import qs from 'qs'
+    Vue.prototype.$axios = axios
+    import CommonUser from "../../model/CommonUser";
 
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
@@ -73,11 +77,12 @@
     export default {
         data() {
             return {
-                login: {
+                loginInfo: {
                     email: '',
                     password: '',
                     rememberme: false
-                }
+                },
+                user:CommonUser,
             }
         },
         methods: {
@@ -85,14 +90,43 @@
                 this.$validator.validateAll(scope).then((result) => {
                     if (result) {
                         console.log('Form Submitted!');
-                        console.log(`Email: ${this.login.email}`)
-                        console.log(`Password: ${this.login.password}`)
-                        console.log(`Remember Me: ${this.login.rememberme}`)
+                        console.log(`Email: ${this.loginInfo.email}`);
+                        console.log(`Password: ${this.loginInfo.password}`);
+                        console.log(`Remember Me: ${this.loginInfo.rememberme}`);
+                        this.login(this.loginInfo);
+                        this.$router.push('/common');
                         return;
                     }
                     console.log('Correct them errors!');
                 });
-            }
+            },
+
+            login(loginInfo){
+                console.log('success');
+                console.log(loginInfo.email);
+                this.$axios({
+                    method: "POST",
+                    url: '',
+                    transformRequest: [
+                        function(data) {
+                            // 对 data 进行任意转换处理
+                            return qs.stringify(data);
+                        }
+                    ],
+                    data: { email: loginInfo.email, password: loginInfo.password },
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                    .then(function(response) {
+                        var data = response.data
+                        //显示错误信息
+                        console.log(data);
+                        console.log(JSON.parse(data));
+                    }, function(response) {
+                        alert(response.status)
+                    })
+            },
         }
     }
 </script>

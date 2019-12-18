@@ -1,21 +1,21 @@
 <template>
     <ContentWrapper>
-        <div class="content-heading">Articles</div>
+        <div class="content-heading">简历管理</div>
         <!-- Zero Configuration-->
         <div class="card card-default">
-            <div class="card-header">Blog articles manager</div>
+<!--            <div class="card-header">Blog articles manager</div>-->
             <div class="card-body">
                 <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
                     <thead>
                     <tr>
-                        <th data-priority="1">Post title</th>
-                        <th>Author</th>
-                        <th>Categories</th>
-                        <th>Tags</th>
-                        <th>Created</th>
+                        <th data-priority="1">简历名称</th>
+                        <th>公司</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>投递时间</th>
                         <th>Updated</th>
                         <th>Comments</th>
-                        <th data-priority="2">Status</th>
+                        <th data-priority="2">状态</th>
                     </tr>
                     </thead>
                     <tbody>

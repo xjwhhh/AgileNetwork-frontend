@@ -8,7 +8,7 @@ const CommonUserMenu = [
         path:'square'
     },
     {
-        name:'已投简历',
+        name:'简历管理',
         path:'deliveredResume'
     },
     {
