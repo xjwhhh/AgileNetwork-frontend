@@ -65,7 +65,8 @@
 <script>
     import Vue from 'vue'
     import VeeValidate from 'vee-validate';
-
+    import Post from "../../model/Post";
+    import Resume from "../../model/Resume";
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
     })
@@ -77,7 +78,8 @@
                     email: '',
                     password: '',
                     rememberme: false
-                }
+                },
+                postList:[],
             }
         },
         methods: {
