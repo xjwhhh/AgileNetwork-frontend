@@ -32,13 +32,15 @@
                             <span>{{$t(item.translate) || item.heading}}</span>
                         </li>
                         <!-- Single Menu -->
-                        <router-link tag="li" :to="item.path" active-class="active" v-if="!item.heading && !item.submenu">
+                        <router-link tag="li" :to="{name:item.routerName}" active-class="active" v-if="!item.heading && !item.submenu">
                             <a :title="tr(item.translate, item.name)">
                                 <span v-if="item.label" :class="'float-right badge badge-'+item.label.color">{{item.label.value}}</span>
                                 <em :class="item.icon"></em>
                                 <span>{{tr(item.translate, item.name)}}</span>
                             </a>
                         </router-link>
+
+<!--                        <router-link tag="li" :to="{name:'personalInfo'}" active-class="active">jjjjj</router-link>-->
                         <!-- Menu With Subitems -->
                         <li :class="routeActiveClass(getSubRoutes(item))" v-if="!item.heading && item.submenu">
                             <a :title="tr(item.translate, item.name)" @click.prevent="toggleItemCollapse(item.name)" href>

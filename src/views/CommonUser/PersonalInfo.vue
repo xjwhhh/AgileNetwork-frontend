@@ -5,9 +5,9 @@
                 <div class="card card-default">
                     <div class="card-body text-center">
                         <div class="py-4">
-                            <img class="img-fluid rounded-circle img-thumbnail thumb96" src="img/user/02.jpg" alt="Contact" />
+                            <img class="img-fluid rounded-circle img-thumbnail thumb96" v-bind:src="user.headUrl" alt="Contact" />
                         </div>
-                        <h3 class="m-0 text-bold">Audrey Hunt</h3>
+                        <h3 class="m-0 text-bold">{{user.name}}</h3>
                         <div class="my-3">
                             <p>Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!</p>
                         </div>
@@ -82,49 +82,55 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact1">Name</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact1" type="text" placeholder="" value="Audrey Hunt" />
+                                            <input class="form-control" id="inputContact1" type="text" placeholder="" v-model="user.name" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact2">Email</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact2" type="email" value="mail@example.com" />
+                                            <input class="form-control" id="inputContact2" type="email" v-model="user.email" />
                                         </div>
                                     </div>
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact3">Phone</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <input class="form-control" id="inputContact3" type="text" value="(123) 465 789" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact4">Mobile</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <input class="form-control" id="inputContact4" type="text" value="(12) 123 987 465" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact5">Website</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <input class="form-control" id="inputContact5" type="text" value="http://some.wesbite.com" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact6">Address</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <textarea class="form-control" id="inputContact6" rows="4">Some nice Street, 1234</textarea>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact7">Social</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <input class="form-control" id="inputContact7" type="text" value="@Social" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group row">-->
+<!--                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact8">Company</label>-->
+<!--                                        <div class="col-xl-10 col-md-9 col-8">-->
+<!--                                            <input class="form-control" id="inputContact8" type="text" placeholder="No Company" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact3">Phone</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact2">University</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact3" type="text" value="(123) 465 789" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact4">Mobile</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact4" type="text" value="(12) 123 987 465" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact5">Website</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact5" type="text" value="http://some.wesbite.com" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact6">Address</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <textarea class="form-control" id="inputContact6" rows="4">Some nice Street, 1234</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact7">Social</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact7" type="text" value="@Social" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact8">Company</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact8" type="text" placeholder="No Company" />
+                                            <input class="form-control" id="inputContact9" type="email" v-model="user.email" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -160,21 +166,29 @@
     // import qs from 'qs'
     // Vue.prototype.$axios = axios
 
-    class User {
-        constructor() {
-            this.username='';
-        }
+    import CommonUser from "../../model/CommonUser";
 
-
-    }
 
     export default {
+        name:'personalInfo',
         data () {
             return {
-                aboutMsg: '我是personal组件'
+                aboutMsg: '我是personal组件',
+                user:new CommonUser(),
+
             }
         },
+
+        created(){
+            console.log(this.aboutMsg);
+            this.user.email='151250171@smail.nju.edu.cn';
+            this.user.name='xjw';
+            this.user.university='南京大学';
+            this.user.headUrl='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576728316801&di=c15b96aa6a47e262a6433b04157253c4&imgtype=0&src=http%3A%2F%2Fpic1.zhimg.com%2F50%2Fv2-ae582c5670958a0f6fbe53a149527059_hd.jpg';
+            console.log(this.user.email);
+        },
         methods: {
+
 
             //获取用户信息
             getUserPersonalInfo: function() {

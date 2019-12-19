@@ -75,6 +75,7 @@
     })
 
     export default {
+        name:'Login',
         data() {
             return {
                 loginInfo: {
@@ -85,7 +86,12 @@
                 user:CommonUser,
             }
         },
+
+        created(){
+            console.log("ll");
+        },
         methods: {
+
             validateBeforeSubmit(scope) {
                 this.$validator.validateAll(scope).then((result) => {
                     if (result) {
@@ -93,8 +99,9 @@
                         console.log(`Email: ${this.loginInfo.email}`);
                         console.log(`Password: ${this.loginInfo.password}`);
                         console.log(`Remember Me: ${this.loginInfo.rememberme}`);
+                        this.$router.push({name:'commonLayout',params:{id:1}});
+
                         this.login(this.loginInfo);
-                        this.$router.push('/common');
                         return;
                     }
                     console.log('Correct them errors!');

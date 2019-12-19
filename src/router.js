@@ -1,21 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// Layouts
-import Layout from "@/components/Layout/Layout";
-import LayoutHorizontal from '@/components/Layout/LayoutHorizontal'
-import LayoutPage from '@/components/Layout/LayoutPage'
 
 import AdminLayout from "@/components/Layout/AdminLayout";
 import EnterpriseLayout from "@/components/Layout/EnterpriseLayout";
 import CommonLayout from "@/components/Layout/CommonLayout";
-// SingleView
-const SingleView = () => import ('@/views/SingleView/SingleView.vue')
-// SubMenu
-const SubMenu = () => import ('@/views/SubMenu/SubMenu.vue')
-const Hello = () => import('@/views/SubMenu/Hello.vue');
+
 
 const Login = () => import('@/views/Login/Login.vue');
+// import Login from '@/views/Login/Login';
 const Register = () => import('@/views/Login/Register.vue');
 
 //CommonUser
@@ -44,7 +37,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/singleview'
+            redirect: '/login'
         },
         {
             path: '/login',
@@ -56,67 +49,80 @@ export default new Router({
         },
         // CommonUser Pages
         {
-            path: '/common',
+            path: '/common/:id',
+            name:'commonLayout',
             component: CommonLayout,
             children: [
                 {
-                    path: '/square',
+                    path: 'square',
+                    name:'square',
                     component: Square
                 },
                 {
-                    path: '/deliveredResume',
+                    path: 'deliveredResume',
+                    name:'deliveredResume',
                     component: DeliveredResume,
                 },
                 {
-                    path: '/personalInfo',
+                    path: 'personalInfo',
+                    name:'personalInfo',
                     component: PersonalInfo
                 }
             ]
         },
 
         {
-            path: '/enterprise',
+            path: '/enterprise/:id',
             component: EnterpriseLayout,
             children: [
                 {
-                    path: '/enterpriseInfo',
+                    path: 'enterpriseInfo',
+                    name:'enterpriseInfo',
                     component: EnterpriseInfo,
                 },
                 {
-                    path: '/publishPost',
+                    path: 'publishPost',
+                    name:'publishPost',
                     component: PublishPost,
                 },
                 {
-                    path: '/publishedPost',
+                    path: 'publishedPost',
+                    name:'publishedPost',
                     component: PublishedPost,
                 },
                 {
-                    path: '/entStatistics',
+                    path: 'entStatistics',
+                    name:'entStatistics',
                     component: Statistics
                 }
             ]
         },
         {
-            path: '/admin',
+            path: '/admin/:id',
             component: AdminLayout,
             children: [
                 {
-                    path: '/adminStatistics',
+                    path: 'adminStatistics',
+                    name:'adminStatistics',
                     component: AdminStatistics,
                 },
                 {
-                    path: '/checkEnt',
+                    path: 'checkEnt',
+                    name:'checkEnt',
                     component: CheckEnt,
                 },
                 {
-                    path: '/checkPost',
+                    path: 'checkPost',
+                    name:'checkPost',
                     component: CheckPost,
                 },
                 {
-                    path: '/commonUserManage',
+                    path: 'commonUserManage',
+                    name:'commonUserManage',
                     component: CommonUserManagement
                 },{
-                    path:'/enterpriseUserManage',
+                    path:'enterpriseUserManage',
+                    name:'enterpriseUserManage',
                     component: EnterpriseUserManagement
                 }
             ]

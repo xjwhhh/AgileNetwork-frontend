@@ -2,13 +2,13 @@
     <div class="wrapper">
 
         <!-- top navbar-->
-        <Header />
+        <Header/>
 
         <!-- sidebar-->
-        <CommonSidebar />
+        <CommonSidebar/>
 
         <!-- offsidebar-->
-        <Offsidebar />
+        <Offsidebar/>
 
         <!-- Main section-->
         <section class="section-container">
@@ -17,7 +17,7 @@
         </section>
 
         <!-- Page footer-->
-        <Footer />
+        <Footer/>
 
     </div>
 </template>
@@ -25,12 +25,11 @@
 <script>
     import Vue from 'vue';
     import Header from './Header'
-    import Sidebar from './Sidebar'
     import Offsidebar from './Offsidebar'
     import Footer from './Footer'
     import ContentWrapper from './ContentWrapper'
-    import CommonUserMenu from "../../assets/commonUserMenu";
     import CommonSidebar from "./CommonSidebar";
+    import PersonalInfo from "../../views/CommonUser/PersonalInfo";
 
     Vue.component('ContentWrapper', ContentWrapper)
 
@@ -40,7 +39,43 @@
             Header,
             CommonSidebar,
             Offsidebar,
-            Footer
+            Footer,
+            PersonalInfo,
         },
+
+        data() {
+            return {
+                userId: '',
+            }
+        },
+
+        created(){
+            console.log(this.$route.params.userId);
+            this.userId = this.$route.params.userId;
+            console.log(this.userId);
+        },
+        methods: {
+            mounted: function () {
+                console.log('mount');
+            },
+
+            // watch: function () {
+            //     '$route':
+            //     {
+            //         handler(router)
+            //         {
+            //             const that = this;
+            //             console.log(router.name);
+            //         }
+            //     }
+            //
+            // },
+
+            getUserInfo: function () {
+
+            }
+
+
+        }
     }
 </script>

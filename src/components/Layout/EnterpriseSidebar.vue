@@ -32,7 +32,7 @@
                             <span>{{$t(item.translate) || item.heading}}</span>
                         </li>
                         <!-- Single Menu -->
-                        <router-link tag="li" :to="item.path" active-class="active" v-if="!item.heading && !item.submenu">
+                        <router-link tag="li" :to="{name:item.path}" active-class="active" v-if="!item.heading && !item.submenu">
                             <a :title="tr(item.translate, item.name)">
                                 <span v-if="item.label" :class="'float-right badge badge-'+item.label.color">{{item.label.value}}</span>
                                 <em :class="item.icon"></em>

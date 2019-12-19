@@ -5,15 +5,18 @@ const CommonUserMenu = [
     },
     {
         name:'广场',
-        path:'square'
+        path:'square',
+        routerName:'square',
     },
     {
         name:'简历管理',
-        path:'deliveredResume'
+        path:'deliveredResume',
+        routerName:'deliveredResume',
     },
     {
         name:'个人中心',
-        path:'personalInfo'
+        path:'personalInfo',
+        routerName:'personalInfo',
     }
 ];
 

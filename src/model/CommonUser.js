@@ -7,6 +7,7 @@ class CommonUser{
         this.password='';
         this.name='';
         this.headUrl='';
+        this.university='';
     }
 
 
