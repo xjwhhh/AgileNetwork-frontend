@@ -1,338 +1,138 @@
 <template>
     <ContentWrapper>
+
         <div class="content-heading">简历管理</div>
         <!-- Zero Configuration-->
-        <div class="card card-default">
-<!--            <div class="card-header">Blog articles manager</div>-->
-            <div class="card-body">
-                <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
-                    <thead>
-                    <tr>
-                        <th data-priority="1">简历名称</th>
-                        <th>公司</th>
-                        <th>创建时间</th>
-                        <th>更新时间</th>
-                        <th>投递时间</th>
-                        <th>Updated</th>
-                        <th>Comments</th>
-                        <th data-priority="2">状态</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <a href="">AngularJS</a>
-                        </td>
-                        <td>
-                            <a href="">Keith Gutierrez</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">HTML5</a>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">angularjs</a>
-                            <a class="mr-1 badge badge-primary" href="">mvc</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>1251</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">MeteorJs and Angularjs</a>
-                        </td>
-                        <td>
-                            <a href="">Carlos Wilson</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">WEB</a>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">angularjs</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                            <a class="mr-1 badge badge-primary" href="">meteor</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>1361</td>
-                        <td>
-                            <a class="mr-1 badge badge-warning" href="">Pending</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Working with ExpressJS</a>
-                        </td>
-                        <td>
-                            <a href="">Carlos Wilson</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">SERVER</a>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">expressJS</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Abstract object styles</a>
-                        </td>
-                        <td>
-                            <a href="">Carlos Wilson</a>
-                        </td>
-                        <td>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Animating progress bars</a>
-                        </td>
-                        <td>
-                            <a href="">Clyde Bailey</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">BOOTSTRAP</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">css</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-danger" href="">Deleted</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Contextual alternatives</a>
-                        </td>
-                        <td>
-                            <a href="">Tracy Black</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">BOOTSTRAP</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">less</a>
-                            <a class="mr-1 badge badge-primary" href="">sass</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-warning" href="">Pending</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Responsive embed</a>
-                        </td>
-                        <td>
-                            <a href="">Brittany Harrison</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">FOUNDATION</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">techniques</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge" href="">Draft</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Digging into AngularJS</a>
-                        </td>
-                        <td>
-                            <a href="">Keith Gutierrez</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">HTML5</a>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">angularjs</a>
-                            <a class="mr-1 badge badge-primary" href="">mvc</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Application with MeteorJs and Angularjs</a>
-                        </td>
-                        <td>
-                            <a href="">Nevaeh Hunter</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">WEB</a>
-                            <a href="">SERVER</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">angularjs</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                            <a class="mr-1 badge badge-primary" href="">meteor</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-warning" href="">Pending</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Introduction to ExpressJS</a>
-                        </td>
-                        <td>
-                            <a href="">Carlos Wilson</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">SERVER</a>
-                            <a href="">JAVASCRIPT</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">expressJS</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Optional classes</a>
-                        </td>
-                        <td>
-                            <a href="">Peter Lucas</a>
-                        </td>
-                        <td>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">node</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>125</td>
-                        <td>
-                            <a class="mr-1 badge badge-success" href="">Public</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Typical user actions</a>
-                        </td>
-                        <td>
-                            <a href="">Clyde Bailey</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">BOOTSTRAP</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">css</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>1471</td>
-                        <td>
-                            <a class="mr-1 badge badge-danger" href="">Deleted</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">A lightweight, flexible component</a>
-                        </td>
-                        <td>
-                            <a href="">Brittany Harrison</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">BOOTSTRAP</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">less</a>
-                            <a class="mr-1 badge badge-primary" href="">sass</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>1581</td>
-                        <td>
-                            <a class="mr-1 badge badge-warning" href="">Pending</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="">Highlight new or unread items</a>
-                        </td>
-                        <td>
-                            <a href="">Abigail Phillips</a>
-                        </td>
-                        <td>
-                            <a class="mr-2" href="">FOUNDATION</a>
-                            <a href="">WEB</a>
-                        </td>
-                        <td>
-                            <a class="mr-1 badge badge-primary" href="">coding</a>
-                            <a class="mr-1 badge badge-primary" href="">techniques</a>
-                        </td>
-                        <td>10/05/2015</td>
-                        <td>10/05/2015</td>
-                        <td>1691</td>
-                        <td>
-                            <a class="mr-1 badge" href="">Draft</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </Datatable>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card card-default">
+                    <!--            <div class="card-header">Blog articles manager</div>-->
+                    <div class="card-header d-flex align-items-center">
+                        <div class="d-flex justify-content-center col">
+                            <div class="h4 m-0 text-center">投递列表</div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <!--<button  class="btn btn-primary" v-on:click="addResume('fe')">添加简历</button>-->
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">简历名称</th>
+                                <th>投递时间</th>
+                                <th>招聘信息</th>
+                                <th>公司</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="">Java后端简历</a>
+                                </td>
+                                <td>
+                                    10/05/2015
+                                </td>
+                                <td><a href="">找一个背锅的月薪3000</a></td>
+                                <td>352场</td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-lg-6">
+                <div class="card card-default" v-if="addFile">
+                    <div class="card-header d-flex align-items-center">
+                        <div class="d-flex justify-content-center col">
+                            <div class="h4 m-0 text-center">添加简历</div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+
+                            <a v-on:click="closeAddFile()" class="button">
+                                <em  class="fa-2x icon-close mr-2"></em>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row py-4 justify-content-center">
+                            <div class="col-12 col-sm-10">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label class="text-bold col-xl-3 col-md-4 col-5 col-form-label text-right" >名称</label>
+                                        <div class="col-xl-9 col-md-8 col-7">
+                                            <input class="form-control" id="addName" type="text" placeholder=""   />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="text-bold col-xl-3 col-md-4 col-5 col-form-label text-right">简历文件</label>
+                                        <div class="col-xl-9 col-md-8 col-7">
+                                            <!-- Styled -->
+                                            <b-form-file v-model="file"  placeholder="选择一个文件"></b-form-file>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row text-right">
+                                        <div class="col-md-9">
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-info right " type="button" v-on:click="addResume()" >确认添加</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card card-default">
+                    <!--            <div class="card-header">Blog articles manager</div>-->
+                    <div class="card-header d-flex align-items-center">
+                        <div class="d-flex justify-content-center col">
+                            <div class="h4 m-0 text-center">简历列表</div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button  class="btn btn-primary" v-on:click="showAddResume()">添加简历</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">简历名称</th>
+                                <th>简历附件</th>
+                                <th>创建时间</th>
+                                <th>更新时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#">AngularJS</a>
+                                </td>
+                                <td>
+                                    <a href="#">Keith Gutierrez</a>
+                                </td>
+                                <td>10/05/2015</td>
+                                <td>10/05/2015</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-secondary">修改</button>
+                                        <button class="btn btn-secondary">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
+                    </div>
+                </div>
             </div>
         </div>
+
     </ContentWrapper>
 </template>
 <script>
@@ -363,8 +163,35 @@
                             sPrevious: '<em class="fa fa-caret-left"></em>'
                         }
                     }
-                }
+                },
+                file:null,
+                addFile:false,
+            }
+        },
+        created(){
+
+        },
+        methods:{
+            showAddResume:function () {
+                this.addFile = true;
+            },
+            closeAddFile:function () {
+                this.addFile = false;
+            },
+            addResume:function () {
+                // 添加简历
             }
         }
     }
 </script>
+
+<style scoped>
+
+    #datatable1 {
+        /* margin-top: 0px; */
+        /* padding-top: 0px; */
+        margin-top: 0rem !important;
+    }
+
+
+</style>
