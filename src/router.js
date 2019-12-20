@@ -29,6 +29,9 @@ const CheckEnt=()=>import('@/views/AdminUser/CheckEnt.vue');
 const CheckPost=()=>import('@/views/AdminUser/CheckPost.vue');
 const CommonUserManagement=()=>import('@/views/AdminUser/CommonUserManagement.vue');
 const EnterpriseUserManagement=()=>import('@/views/AdminUser/EnterpriseUserManagement.vue');
+const ShowEntInfo=()=> import('@/views/AdminUser/ShowEntInfo.vue');
+const ShowCommonInfo=()=> import('@/views/AdminUser/ShowCommonInfo.vue');
+
 
 Vue.use(Router)
 
@@ -130,6 +133,14 @@ export default new Router({
                     path:'enterpriseUserManage',
                     name:'enterpriseUserManage',
                     component: EnterpriseUserManagement
+                },{
+                    path:'showCommonInfo/:commonId',
+                    name:'showCommonInfo',
+                    component:ShowCommonInfo,
+                },{
+                    path:'showEntInfo/:entId',
+                    name:'showEntInfo',
+                    component:ShowEntInfo,
                 }
             ]
         },
