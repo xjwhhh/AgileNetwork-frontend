@@ -21,6 +21,7 @@ const EnterpriseInfo=()=>import('@/views/EnterpriseUser/EnterpriseInfo.vue');
 const PublishPost=()=>import('@/views/EnterpriseUser/PublishPost.vue');
 const PublishedPost=()=>import('@/views/EnterpriseUser/PublishedPost.vue');
 const Statistics=()=>import('@/views/EnterpriseUser/Statistics.vue');
+const ResumeInfo=()=>import('@/views/EnterpriseUser/ResumeInfo.vue');
 
 //AdminUser
 const AdminStatistics=()=>import('@/views/AdminUser/AdminStatistics.vue');
@@ -94,6 +95,11 @@ export default new Router({
                     path: 'entStatistics',
                     name:'entStatistics',
                     component: Statistics
+                },
+                {
+                    path:'ResumeInfo/:userId',
+                    name:'entResumeInfo',
+                    component:ResumeInfo,
                 }
             ]
         },

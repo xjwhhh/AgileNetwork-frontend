@@ -7,6 +7,8 @@ class EnterpriseUser {
         this.status='';
         this.name='';
         this.headUrl='';
+        this.creditCode='';
+        this.licenceUrl='';
     }
 }
 
