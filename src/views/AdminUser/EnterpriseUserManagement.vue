@@ -1,98 +1,107 @@
 <template>
-    <div class="block-center mt-4 wd-xl">
-        <!-- START card-->
-        <div class="card card-flat">
-            <div class="card-header text-center bg-dark">
-                <a href="#">
-                    <img class="block-center rounded" src="img/logo.png" alt="Image" />
-                </a>
-            </div>
+    <ContentWrapper>
+        <div class="content-heading">企业管理
+
+        </div>
+
+        <!-- Zero Configuration-->
+        <div class="card card-default">
+            <!--            <div class="card-header">Blog articles manager</div>-->
             <div class="card-body">
-                <p class="text-center py-2">SIGN IN TO CONTINUE.</p>
-                <form class="mb-3" @submit.prevent="validateBeforeSubmit('login')" data-vv-scope="login">
-                    <div class="form-group">
-                        <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="Enter email" v-model="login.email" v-validate="'required|email'" type="text" name="email"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text text-muted bg-transparent border-left-0">
-                                    <em class="fa fa-envelope"></em>
-                                </span>
-                            </div>
-                            <span v-show="errors.has('login.email')" class="invalid-feedback">{{ errors.first('login.email') }}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group with-focus">
-                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="login.password" v-validate="'required'" type="password" name="password" placeholder="Password"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text text-muted bg-transparent border-left-0">
-                                    <em class="fa fa-lock"></em>
-                                </span>
-                            </div>
-                            <span v-show="errors.has('login.password')" class="invalid-feedback">{{ errors.first('login.password') }}</span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme" v-model="login.rememberme">
-                                <label class="custom-control-label" for="rememberme">Remember Me</label>
-                            </div>
-                        </div>
-                        <div class="float-right">
-                            <router-link class="text-muted" to="/recover">
-                                <small>Forgot your password?</small>
+                <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
+                    <thead>
+                    <tr>
+                        <th data-priority="1">公司名称</th>
+                        <th>地址</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th>已发招聘</th>
+                        <th>已收简历</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="enterprise of enterpriseList">
+                        <td>
+                            <router-link :to="{name:'showEntInfo',params:{entId:enterprise.id}}">
+                            <label>{{enterprise.name}}</label>
                             </router-link>
-                        </div>
-                    </div>
-                    <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
-                </form>
-                <p class="pt-3 text-center">Need to Signup?</p>
-                <router-link class="btn btn-block btn-secondary" to="/register">Register Now</router-link>
+                        </td>
+                        <td>
+                            <label>{{enterprise.location}}</label>
+                        </td>
+                        <td>
+                            <label>{{enterprise.createTime}}</label>
+                        </td>
+                        <td>
+                            <label>{{enterprise.updateTime}}</label>
+                        </td>
+                        <td>{{enterprise.publishedPostCount}}</td>
+                        <td>{{enterprise.receivedResumeCount}}</td>
+                    </tr>
+                    </tbody>
+                </Datatable>
             </div>
         </div>
-        <!-- END card-->
-        <div class="p-3 text-center">
-            <span class="mr-2">&copy;</span>
-            <span>2018</span>
-            <span class="mr-2">-</span>
-            <span>Angle</span>
-            <br/>
-            <span>Bootstrap Admin Template</span>
-        </div>
-    </div>
+    </ContentWrapper>
 </template>
 <script>
-    import Vue from 'vue'
-    import VeeValidate from 'vee-validate';
-
-    Vue.use(VeeValidate, {
-        fieldsBagName: 'formFields'  // fix issue with b-table
-    })
+    import Datatable from '@/components/Tables/Datatable';
+    import EnterpriseUser from "../../model/EnterpriseUser";
 
     export default {
+        components: {
+            Datatable
+        },
         data() {
             return {
-                login: {
-                    email: '',
-                    password: '',
-                    rememberme: false
-                }
+                dtOptions1: {
+                    'paging': true, // Table pagination
+                    'ordering': true, // Column ordering
+                    'info': true, // Bottom left status text
+                    responsive: true,
+                    // Text translation options
+                    // Note the required keywords between underscores (e.g _MENU_)
+                    oLanguage: {
+                        sSearch: '<em class="fa fa-search"></em>',
+                        sLengthMenu: '_MENU_ records per page',
+                        info: 'Showing page _PAGE_ of _PAGES_',
+                        zeroRecords: 'Nothing found - sorry',
+                        infoEmpty: 'No records available',
+                        infoFiltered: '(filtered from _MAX_ total records)',
+                        oPaginate: {
+                            sNext: '<em class="fa fa-caret-right"></em>',
+                            sPrevious: '<em class="fa fa-caret-left"></em>'
+                        }
+                    }
+                },
+                enterpriseList:[],
             }
         },
-        methods: {
-            validateBeforeSubmit(scope) {
-                this.$validator.validateAll(scope).then((result) => {
-                    if (result) {
-                        console.log('Form Submitted!');
-                        console.log(`Email: ${this.login.email}`)
-                        console.log(`Password: ${this.login.password}`)
-                        console.log(`Remember Me: ${this.login.rememberme}`)
-                        return;
-                    }
-                    console.log('Correct them errors!');
-                });
+
+        created(){
+            this.getEnterpriseList();
+
+        },
+
+        methods:{
+            getEnterpriseList(){
+                this.enterpriseList=[];
+                for(let i=0;i<10;i++){
+                    let enterprise=new EnterpriseUser();
+                    enterprise.id='1';
+                    enterprise.name='南京大学';
+                    enterprise.email='nju@nju.edu.cn';
+                    enterprise.headUrl='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576742745082&di=139aaf86c89d1c21698da6fd57cd1be6&imgtype=0&src=http%3A%2F%2F787823.s21i.faiusr.com%2F2%2FABUIABACGAAg-ZmKwwUowL7X5AUwigU41AQ.jpg';
+
+                    enterprise.description='南京大学（Nanjing University），简称南大，是中华人民共和国教育部直属的综合性全国重点大学，位列世界一流大学建设高校（A类）、211工程、985工程，是九校联盟、中国大学校长联谊会、环太平洋大学联盟、21世纪学术联盟、国际应用科技开发协作网、东亚研究型大学协会、新工科教育国际联盟、中国高校行星科学联盟、长三角研究型大学联盟成员，入选珠峰计划、111计划、2011计划、卓越工程师教育培养计划、卓越医生教育培养计划、卓越法律人才教育培养计划、国家建设高水平大学公派研究生项目、新工科研究与实践项目、全国深化创新创业教育改革示范高校、中国政府奖学金来华留学生接收院校、教育部来华留学示范基地、国家级双创示范基地。';
+                    enterprise.location="南京";
+                    enterprise.status='1';
+                    enterprise.creditCode='税号';
+                    enterprise.licenceUrl='认证文件url';
+                    this.enterpriseList.push(enterprise);
+                }
             }
         }
     }
 </script>
+
