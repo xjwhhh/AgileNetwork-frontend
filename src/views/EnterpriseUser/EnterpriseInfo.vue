@@ -16,7 +16,7 @@
                             <p>{{enterprise.description}}</p>
                         </div>
                         <div class="text-center" v-if="!ifEdit">
-                            <button class="btn btn-primary" v-on:click="setIfEdit()">编辑</button>
+                            <button class="btn btn-primary" v-on:click="setIfEdit(true)">编辑</button>
                         </div>
                         <div class="text-center" v-if="ifEdit">
                             <button class="btn btn-primary" v-on:click="updateAccountInfo()">保存</button>
@@ -51,7 +51,7 @@
                                 <template slot="button-content">
                                     <em class="fa fa-ellipsis-v fa-lg text-muted"></em>
                                 </template>
-                                <b-dropdown-item>修改密码</b-dropdown-item>
+                                <b-dropdown-item v-on:click="setIfChangePassword(true)">修改密码</b-dropdown-item>
                             </b-dropdown>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-6 ">
-                                            <button class="btn btn-info" type="button" style="float:right" >提交审核</button>
+                                            <button class="btn btn-info" type="button" style="float:right" v-on:click="updateEnterpriseInfo" >提交审核</button>
                                         </div>
                                         <div class="col-md-6 ">
                                             <button class="btn btn-info " type="button" v-if="enterprise.status!=='1'" v-on:click="applyForCertification">申请认证</button>
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card-default">
+                <div class="card card-default"  v-if="ifChangePassword">
                     <div class="card-header d-flex align-items-center">
                         <div class="d-flex justify-content-center col">
                             <div class="h4 m-0 text-center">修改密码</div>
@@ -146,6 +146,9 @@
                                         <div class="col-md-6 ">
                                             <button class="btn btn-info" type="button" style="float:right" v-on:click="updatePassword()" >修改密码</button>
                                         </div>
+                                        <div class="col-md-6 ">
+                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -161,11 +164,10 @@
     import axios from 'axios'
     import Vue from 'Vue'
     import qs from 'qs'
-    Vue.prototype.$axios = axios
+    // Vue.prototype.$axios = axios
 
     import EnterpriseUser from "../../model/EnterpriseUser";
     import CommonUser from "../../model/CommonUser";
-    import API from "../../model/api";
     import EnterpriseService from "../../service/EnterpriseService";
     import EntAPI from '../../service/EnterpriseService';
 
@@ -181,8 +183,11 @@
                 newPassword1:'',
                 newPassword2:'',
 
+                ent:{},
+
                 //视图控制变量
                 ifEdit:false,
+                ifChangePassword:false,
             }
         },
 
@@ -190,9 +195,29 @@
         created(){
             this.getRecommendUser();
 
-            this.enterprise.id=this.$route.params['id'];
+            this.enterprise.accountId=this.$route.params['id'];
 
-            this.getEnterpriseInfo(this.enterprise.id);
+            this.getEnterpriseInfo(this.enterprise.accountId);
+
+            this.ent={
+                name:"徐佳炜",
+                email:"920054996@qq.com",
+                password:"123456",
+            };
+            // axios.post('http://118.25.180.45:8088/api/enterprise', {
+            //     name:"徐佳炜",
+            //     email:"920054996@qq.com",
+            //     password:"123456",
+            // }, {withCredentials: true}).
+            // then((res) => {
+            //     console.log(res);
+            // })
+            //     .catch(function (error) {
+            //         console.log(error);
+            //     });
+
+
+            // EnterpriseService.registerEnterprise(this.ent);
 
 
 
@@ -203,29 +228,35 @@
 
             //获取企业信息
             getEnterpriseInfo: function(id) {
-                EntAPI.getEnterpriseById('14').then(data=>{
+                EntAPI.getEnterpriseById(id).then(data=>{
                     console.log(data);
                     this.enterprise.transfer(data);
                 })
             },
 
-            setIfEdit:function (){
-                this.ifEdit=true;
+            setIfEdit:function (flag){
+                this.ifEdit=flag;
             },
 
-            //更新账号信息
+            setIfChangePassword:function(flag){
+                this.ifChangePassword=flag;
+            },
+
+            //更新企业账号信息
             updateAccountInfo:function(){
                 console.log(this.enterprise.name);
                 console.log(this.enterprise.mobile);
-                EntAPI.updateAccountInfo(this.enterprise);
-
-
-
-                this.ifEdit=false;
+                EntAPI.updateAccountInfo(this.enterprise).then(data=>{
+                    console.log(data);
+                    alert("更新成功");
+                    this.ifEdit=false;
+                });
             },
 
-            //更新企业信息
+            //更新企业认证信息
             updateEnterpriseInfo:function () {
+                console.log(this.enterprise);
+                EnterpriseService.updateEnterpriseInfo(this.enterprise);
 
             },
 
@@ -249,6 +280,8 @@
             },
 
             updatePassword: function () {
+                console.log(this.oldPassword);
+                console.log(this.enterprise.password);
                 if(this.oldPassword===this.enterprise.password){
                     if(this.newPassword1===this.newPassword2){
                         console.log('success');

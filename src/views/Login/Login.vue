@@ -118,6 +118,7 @@
                 data1.append('password','123456');
                 data1.append('email','mf1932216@smail.nju.edu.cn');
                 // console.log(data)
+                console.log(loginInfo);
                 axios.post('http://118.25.180.45:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
                     console.log(res);
                     if(res.data.role=='1'){

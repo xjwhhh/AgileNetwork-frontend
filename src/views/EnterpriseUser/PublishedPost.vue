@@ -365,9 +365,10 @@
         },
 
         methods:{
+            //根据企业id获取招聘信息
             getPostList(){
 
-            }
+            },
 
 
         }

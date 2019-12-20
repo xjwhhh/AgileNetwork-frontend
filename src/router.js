@@ -78,6 +78,7 @@ export default new Router({
         {
             path: '/enterprise/:id',
             component: EnterpriseLayout,
+            name:'enterpriseLayout',
             children: [
                 {
                     path: 'enterpriseInfo',
@@ -109,6 +110,7 @@ export default new Router({
         {
             path: '/admin/:id',
             component: AdminLayout,
+            name:'adminLayout',
             children: [
                 {
                     path: 'adminStatistics',

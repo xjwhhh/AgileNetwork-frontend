@@ -15,19 +15,19 @@
                     <div class="form-group row">
                         <label class="col-xl-2 col-form-label">招聘标题</label>
                         <div class="col-xl-10">
-                            <input class="form-control"/>
+                            <input class="form-control" v-model="post.name"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-2 col-form-label">职位</label>
                         <div class="col-xl-10">
-                            <input class="form-control"/>
+                            <input class="form-control" v-model="post.job"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">位置</label>
                         <div class="col-md-10">
-                            <select class="custom-select">
+                            <select class="custom-select" v-model="post.workLocation">
                                 <option v-for="location of locationOptionList">{{location}}</option>
                             </select>
 
@@ -36,19 +36,19 @@
                     <div class="form-group row">
                         <label class="col-xl-2 col-form-label">薪酬(RMB/M)</label>
                         <div class="col-xl-10">
-                            <input class="form-control" type="number"/>
+                            <input class="form-control" type="number" v-model="post.salary"/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-2 col-form-label">描述</label>
                         <div class="col-xl-10">
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control" v-model="post.description"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-xl-2 col-form-label">招聘人数</label>
                         <div class="col-xl-10">
-                            <input class="form-control" type="number"/>
+                            <input class="form-control" type="number" v-model="post.peopleNum"/>
                         </div>
                     </div>
                     <div class="form-group row mb-2">
@@ -56,7 +56,7 @@
                         <div class="col-xl-6 col-10">
                             <div class="mb-3">
                                 <datepicker
-                                        v-model="startValue"
+                                        v-model="post.startTime"
                                         :bootstrapStyling="true"
                                         :monday-first="true"
                                         :full-month-name="true"
@@ -74,7 +74,7 @@
                         <div class="col-xl-6 col-10">
                             <div class="mb-3">
                                 <datepicker
-                                        v-model="endValue"
+                                        v-model="post.endTime"
                                         :bootstrapStyling="true"
                                         :monday-first="true"
                                         :full-month-name="true"
@@ -87,24 +87,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-xl-12">
-                            <button class="btn btn-sm btn-secondary" type="submit" style="float: right">提交审核</button>
-                        </div>
-                    </div>
 
-                    <!--                    <div class="form-group row">-->
-                    <!--                        <div class="col-xl-10">-->
-                    <!--                            <div class="btn btn-sm btn-secondary" v-on:click="changelll()">test</div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-
-                    <!--                    <div class="form-group row"  v-if="test">-->
-                    <!--                        <div class="col-xl-10">-->
-                    <!--                            <button class="btn btn-sm btn-secondary" >llll</button>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                 </form>
+                <div class="form-group row">
+                    <div class="col-xl-12">
+                        <button class="btn btn-sm btn-secondary" v-on:click="publishPost()" style="float: right">提交审核</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END card-->
@@ -114,6 +103,7 @@
 <script>
     import Datepicker from 'vuejs-datepicker'
     import moment from 'moment'
+    import Post from "../../model/Post";
 
     export default {
         data() {
@@ -138,6 +128,8 @@
 
                 test: false,
 
+                post:new Post(),
+
             }
         },
         components: {
@@ -145,8 +137,11 @@
         },
 
         methods: {
-            changelll() {
-                this.test = true;
+
+            //发布招聘信息
+            publishPost(){
+                console.log(this.post);
+
             }
         }
 

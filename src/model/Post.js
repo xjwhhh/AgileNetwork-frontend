@@ -3,6 +3,7 @@ class Post{
         this.id='';
         this.eid='';
         this.name='';
+        this.job='';
         this.description='';
         this.workLocation='';
         this.salary='';

@@ -2,6 +2,8 @@ class EnterpriseUser {
     constructor(){
         this.id='';
         this.accountId='';
+        this.email='';
+        this.password='';
         this.location='';
         this.description='';
         this.mobile='';
@@ -23,6 +25,7 @@ class EnterpriseUser {
         this.headUrl=data['avatar'];
         this.createTime=data['createTime'];
         this.authPassed=data['authPassed'];
+        this.mobile=data['mobile'];
         let enterpriseInfo=eval(data['enterpriseInfo']);
         this.id=enterpriseInfo['id'];
         this.accountId=enterpriseInfo['accountId'];
