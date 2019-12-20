@@ -129,7 +129,7 @@
                                                     <!--<button class="btn btn-info right " type="button" v-on:click="changeInfo()" >确认修改</button>-->
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <button class="btn btn-info right " type="button" v-on:click="changeAtatar()" >确认修改</button>
+                                                    <button class="btn btn-info right " type="button" v-on:click="confirmChangeAtatar()" >确认修改</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -273,7 +273,7 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info right " type="button" v-on:click="changeInfo()" >确认修改</button>
+                                            <button class="btn btn-info right " type="button" v-on:click="confirmChangeInfo()" >确认修改</button>
                                         </div>
                                     </div>
                                 </form>
@@ -337,14 +337,24 @@
 </template>
 
 <script>
-    // import axios from 'axios'
+    import axios from 'axios'
     // import Vue from 'Vue'
-    // import qs from 'qs'
+    import qs from 'qs'
     // Vue.prototype.$axios = axios
 
     import CommonUser from "../../model/CommonUser";
     import Vue from 'vue'
     import VueCropper from 'vue-cropper'
+    // import commonService from '../../service/CommonService'
+    // import
+    // import api from '@/api/getData'
+
+    // axios.defaults.timeout = 5000
+    // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+    // axios.defaults.headers.post['Accept'] = 'application/json'
+    // axios.defaults.baseURL = 'http://localhost:9004'
+    // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
+    // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 
     Vue.use(VueCropper)
@@ -360,30 +370,33 @@
                 changePassword:false,
                 changeAtatar:false,
 
-
+                uid:null,
                 imageSrc: 'img/mb-sample.jpg',
                 outputSize: 1,
                 outputType: 'jpeg',
                 realTimePreviewData: {},
                 crap: false,
                 previewImage: null,
-                previewModalShow: false
+                previewModalShow: false,
+                tempData:null
             }
         },
 
         created(){
-            console.log(this.aboutMsg);
-            this.user.id='a1234sga';
-            this.user.age='24';
-            this.user.gender='男';
-            this.user.aid='88324sd38';
-            this.user.email='123123@smail.nju.edu.cn';
-            this.user.name='张伟';
-            this.user.avatar='https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
-            this.user.education='博士';
-            this.user.mobile='13234772773';
-            this.user.university='南京大学';
-            this.imageSrc = 'https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
+            // console.log(this.aboutMsg);
+            // this.user.id=this.$route.params('id');
+            // this.user.id='12';
+            // this.user.age='24';
+            // this.user.gender='男';
+            // this.user.aid='88324sd38';
+            // this.user.email='123123@smail.nju.edu.cn';
+            // this.user.name='张伟';
+            // this.user.avatar='https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
+            // this.user.education='博士';
+            // this.user.mobile='13234772773';
+            // this.user.university='南京大学';
+            this.getUserPersonalInfo();
+            // this.imageSrc = 'https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
         },
         methods: {
             closeAtatar:function(){
@@ -413,15 +426,35 @@
 
             //获取用户信息
             getUserPersonalInfo: function() {
-
+                console.log(this.$route.params.id);
+                this.user.id=this.$route.params.id;
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
+                    console.log(data);
+                    this.user.transfer(data.data);
+                })
+                console.log(this.user)
             },
 
             //更新用户信息
-            // changeInfo:function () {
-            //     this.$axios({
-            //
-            //     })
-            // },
+            confirmChangeInfo:function () {
+                console.log(this.user);
+                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
+                    .then(function (response) {
+                        // do something...
+                        console.log("my",response)
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log("ree",error)
+                    });
+
+                // axios.put('http://118.25.180.45:8088/api/user',this.user).then(res=>{
+                //     console.log(res);
+                //
+                // }).catch(res=>{
+                //     alert("账号或密码不正确");
+                //     console.log("err",res)
+                // })
+            },
 
             // //修改用户的密码
             // changePassword:function(){
@@ -433,6 +466,9 @@
 
             },
 
+            confirmChangeAtatar(){
+                //上传图片
+            },
 
 
             startCrop () {

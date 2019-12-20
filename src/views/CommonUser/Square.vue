@@ -1,6 +1,55 @@
 <template>
     <ContentWrapper>
         <div class="row">
+            <li class="multi-chosen"><span class="title">学历要求：</span>
+
+                <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                            0001
+                                                    " data-lg-tj-cid="idnull">不限
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0002
+                                                            " data-lg-tj-cid="idnull">大专
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0003
+                                                            " data-lg-tj-cid="idnull">本科
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0004
+                                                            " data-lg-tj-cid="idnull">硕士
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0005
+                                                            " data-lg-tj-cid="idnull">博士
+                    <i class="delete"></i>
+                </a>
+                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0006
+                                                            " data-lg-tj-cid="idnull">不要求
+                    <i class="delete"></i>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-search-open="">
+                    <em class="icon-magnifier"></em>
+                </a>
+                <a class="nav-link" href="#" data-search-open="">
+                    <em class="icon-magnifier"></em>
+                </a>
+                <a class="nav-link" href="#" data-search-open="">
+                    <em class="icon-magnifier"></em>
+                </a> <a class="nav-link" href="#" data-search-open="">
+                <em class="icon-magnifier"></em>
+            </a>
+            </li>
+        </div>
+        <div class="row">
             <!-- Blog Content-->
             <div class="col-xl-9">
                 <div class="card-columns">
@@ -277,10 +326,10 @@
                 </div>
                 <!-- Ads-->
                 <div class="card card-default">
-                    <div class="card-header">Ads</div>
+                    <div class="card-header">广告</div>
                     <div class="card-body ie-fix-flex">
-                        <a href="#">
-                            <img class="img-fluid img-thumbnail" src="img/mockup.png" alt="demo" />
+                        <a href="http://www.jd.com">
+                            <img class="img-fluid img-thumbnail" src="https://file.adbug.cn/m/image/bf33e7cd1f184deb973c3b5c7651a42a.jpg?x-oss-process=image/resize,w_650/watermark,type_d3F5LXplbmhlaQ,size_22,text_QURCVUc=,color_FFFFFF,t_5,g_sw,x_10,y_10,p_10,fill_1,interval_80,rotate_45" alt="demo" />
                         </a>
                     </div>
                 </div>

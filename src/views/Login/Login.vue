@@ -118,14 +118,14 @@
                 data1.append('password','123456');
                 data1.append('email','mf1932216@smail.nju.edu.cn');
                 // console.log(data)
-                axios.post('http://118.25.180.45:8088/api/login',loginInfo).then(res=>{
+                axios.post('http://118.25.180.45:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
                     console.log(res);
                     if(res.data.role=='1'){
                         console.log(1)
                         this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})
                     }else  if ( res.data.role == '2'){
                         console.log(2)
-                        this.$router.push({name:'adminLayout',params:{id:res.data.id}})
+                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
                     }else{
                         console.log(3)
                         this.$router.push({name:'commonLayout',params:{id:res.data.id}})

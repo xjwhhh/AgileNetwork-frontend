@@ -115,7 +115,12 @@
                 <!-- START Offsidebar button-->
                 <li class="nav-item">
                     <a href="" class="nav-link" @click.prevent.prevent="toggleOffsidebar">
-                        <em class="icon-notebook"></em>
+                        <em class="icon-notebook">nihao </em>
+                    </a>
+                </li>
+                <li>
+                    <a href="" class="nav-link" @click.prevent.prevent="toggleOffsidebar" href="/logout">
+                        <em class="">推出 </em>
                     </a>
                 </li>
                 <!-- END Offsidebar.prevent menu-->
