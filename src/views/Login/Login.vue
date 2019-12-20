@@ -65,10 +65,12 @@
 <script>
     import Vue from 'vue'
     import VeeValidate from 'vee-validate';
-    import axios from 'axios'
+    // import axios from '../../service/CommonService'
+    import  axios from 'axios'
     import qs from 'qs'
-    Vue.prototype.$axios = axios
+    // Vue.prototype.$axios = axios
     import CommonUser from "../../model/CommonUser";
+    // import commonService from '@/service/CommonService'
 
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
@@ -99,40 +101,58 @@
                         console.log(`Email: ${this.loginInfo.email}`);
                         console.log(`Password: ${this.loginInfo.password}`);
                         console.log(`Remember Me: ${this.loginInfo.rememberme}`);
-                        this.$router.push({name:'commonLayout',params:{id:1}});
 
                         this.login(this.loginInfo);
-                        return;
+
+                        // this.$router.push({name:'commonLayout',params:{id:1}});
+                        // return;
+                    }else{
+                        console.log('Correct them errors!');
                     }
-                    console.log('Correct them errors!');
                 });
             },
 
             login(loginInfo){
-                console.log('success');
-                console.log(loginInfo.email);
-                this.$axios({
-                    method: "POST",
-                    url: '',
-                    transformRequest: [
-                        function(data) {
-                            // 对 data 进行任意转换处理
-                            return qs.stringify(data);
-                        }
-                    ],
-                    data: { email: loginInfo.email, password: loginInfo.password },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                let data = {"email":"mf1932216@smail.nju.edu.cn","password":"123456"};
+                let data1 = new FormData();
+                data1.append('password','123456');
+                data1.append('email','mf1932216@smail.nju.edu.cn');
+                // console.log(data)
+                axios.post('http://118.25.180.45:8088/api/login',loginInfo).then(res=>{
+                    console.log(res);
+                    if(res.data.role=='1'){
+                        console.log(1)
+                        this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})
+                    }else  if ( res.data.role == '2'){
+                        console.log(2)
+                        this.$router.push({name:'adminLayout',params:{id:res.data.id}})
+                    }else{
+                        console.log(3)
+                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
                     }
+                }).catch(res=>{
+                    alert("账号或密码不正确");
+                    console.log("err",res)
                 })
-                    .then(function(response) {
-                        var data = response.data
-                        //显示错误信息
-                        console.log(data);
-                        console.log(JSON.parse(data));
-                    }, function(response) {
-                        alert(response.status)
-                    })
+                // commonService.login(data).then(res=>{
+                //     console.log("ew3")
+                //     console.log(res)
+                // }).catch(res=>{
+                //     console.log("324")
+                //     console.log(res)
+                // })
+
+
+                // let information = {
+                //     email: this.loginInfo.email,
+                //     password: this.loginInfo.password
+                // }
+                // commonService.login(this.loginInfo).then(data=>{
+                //     console.log(data)
+                // }).catch(res =>{
+                //     console.log("----");
+                //     console.log(res)
+                // })
             },
         }
     }
