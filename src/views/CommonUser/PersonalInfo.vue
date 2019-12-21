@@ -15,7 +15,7 @@
                             <button  class="btn btn-primary" v-on:click="hello('fe')">修改个人信息</button>
                         </div>
                         <!--<div class="text-center">-->
-                            <!--<a class="btn btn-primary" href="#">修改密码</a>-->
+                        <!--<a class="btn btn-primary" href="#">修改密码</a>-->
                         <!--</div>-->
 
                     </div>
@@ -25,38 +25,24 @@
                         <div class="card-title text-center">最近投递的简历</div>
                     </div>
                     <div class="card-body">
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3672407583,4066110750&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
+                        <Datatable  class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">简历名称</th>
+                                <th>公司</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  v-for="item in postResume">
+                                <td style="width: 150px;">
+                                    <a :href="item.annexUrl">{{item.resumeName}}</a>
+                                </td>
+                                <td style="width: 150px;">
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseName}}</router-link>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
                     </div>
                 </div>
             </div>
@@ -100,18 +86,18 @@
                                             </div>
 
                                             <!--<div class="btn-group flex-wrap">-->
-                                                <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('base64')" :disabled="!imageSrc">Preview (base64)</b-btn>-->
-                                                <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('blob')" :disabled="!imageSrc">Preview (blob)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('base64')" :disabled="!imageSrc">Preview (base64)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('blob')" :disabled="!imageSrc">Preview (blob)</b-btn>-->
                                             <!--</div>-->
                                             <!--<b-form-group label="Output Format" class="p-0 my-4">-->
-                                                <!--<b-radio-group-->
-                                                        <!--v-model="outputType"-->
-                                                        <!--:disabled="!imageSrc"-->
-                                                        <!--:options="[{ text: 'jpeg', value: 'jpeg' }, { text: 'png', value: 'png' }, { text: 'webp', value: 'webp' }]" />-->
+                                            <!--<b-radio-group-->
+                                            <!--v-model="outputType"-->
+                                            <!--:disabled="!imageSrc"-->
+                                            <!--:options="[{ text: 'jpeg', value: 'jpeg' }, { text: 'png', value: 'png' }, { text: 'webp', value: 'webp' }]" />-->
                                             <!--</b-form-group>-->
                                             <!--<div class="btn-group flex-wrap">-->
-                                                <!--<b-btn class="mr-2 mb-4" @click="downloadImg('base64')" :disabled="!imageSrc">Download (base64)</b-btn>-->
-                                                <!--<b-btn class="mr-2 mb-4" @click="downloadImg('blob')" :disabled="!imageSrc">Download (blob)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-4" @click="downloadImg('base64')" :disabled="!imageSrc">Download (base64)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-4" @click="downloadImg('blob')" :disabled="!imageSrc">Download (blob)</b-btn>-->
                                             <!--</div>-->
                                         </div>
                                         <div class="col-xl-5">
@@ -373,13 +359,15 @@
                 newPassword:'',
                 retryPass:'',
                 oldPassword:'',
+                postResume:new Array(),
             }
         },
 
         created(){
             this.getUserPersonalInfo();
+            this.getUserDeliveredResume();
             console.log(this.user.avatar)
-            this.imageSrc = 'img/logonju.png';
+            this.imageSrc = 'img/logo.jpg';
             console.log("imageSrc=>",this.imageSrc)
         },
         methods: {
@@ -436,12 +424,12 @@
                         //     heightAuto: false
                         // })
                     }.bind(this)).catch(function (error) {
-                        // console.log("ree",error)
-                        swal({
-                            title: "更新失败，请注意格式问题",
-                            heightAuto: false
-                        })
-                    });
+                    // console.log("ree",error)
+                    swal({
+                        title: "更新失败，请注意格式问题",
+                        heightAuto: false
+                    })
+                });
             },
 
             //修改用户的密码
@@ -468,7 +456,14 @@
 
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                    console.log("data=>",data.data);
+                    if(data.data.length>=5){
+                        this.postResume = data.data.slice(0,5)
+                    }else{
+                        this.postResume = data.data
+                    }
+                })
             },
 
             confirmChangeAtatar(){

@@ -4,7 +4,7 @@
         <div class="content-heading">简历管理</div>
         <!-- Zero Configuration-->
         <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-6">
                 <div class="card card-default">
                     <!--            <div class="card-header">Blog articles manager</div>-->
                     <div class="card-header d-flex align-items-center">
@@ -26,15 +26,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr v-for="item in postResume ">
                                 <td>
-                                    <a href="">Java后端简历</a>
+                                    <a  :href="item.annexUrl" >{{item.resumeName}}</a>
                                 </td>
                                 <td>
-                                    10/05/2015
+                                    {{item.createTime}}
                                 </td>
-                                <td><a href="">找一个背锅的月薪3000</a></td>
-                                <td>352场</td>
+                                <td>
+                                    <router-link  :to="{name:'postInfo', params: { pid: item.postId }}">{{item.postTitle}}</router-link>
+                                <td>
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseName}}</router-link>
+                                </td>
+
                             </tr>
                             </tbody>
                         </Datatable>
@@ -43,7 +47,7 @@
 
 
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <div class="card card-default" v-if="addFile">
                     <div class="card-header d-flex align-items-center">
                         <div class="d-flex justify-content-center col">
@@ -99,7 +103,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
+                        <Datatable  class="table table-striped my-4 w-100" id="datatable1">
                             <thead>
                             <tr>
                                 <th data-priority="1">简历名称</th>
@@ -122,10 +126,11 @@
                                 <td>
                                     <div class="btn-group">
                                         <!--<button class="btn btn-secondary">修改</button>-->
-                                        <button class="btn btn-secondary">删除</button>
+                                        <button class="btn btn-secondary" @click="delResume(item.id)">删除</button>
                                     </div>
                                 </td>
                             </tr>
+
                             </tbody>
                         </Datatable>
                     </div>
@@ -171,58 +176,54 @@
                 file:null,
                 addFile:false,
                 addName:'',
+                postResume:new Array(),
                 resumes:new Array(),
             }
         },
-        filters: {
-            formatDate(time) {
-                var date = new Date(time);
-                return this.format(date, 'yyyy-MM-dd');
-            }
-        },
+
         created(){
             this.init();
         },
         methods:{
-            formatDate:function(time){
-                let date = new Date(time);
-                return fo
+            delResume:function(id) {
+               // alert("you want delete this "+id)
+                axios.delete('http://118.25.180.45:8088/api/user/resume/'+id, {withCredentials:true})
+                    .then(function (response) {
+                        // console.log("2345678")
+                        // alert("bbb")
+                        swal({
+                            title: "删除成功",
+                            heightAuto: false
+                        })
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "上传失败，请注意格式问题",
+                        heightAuto: false
+                    })
+                    return '';
+                })
             },
+
             init:function(){
                 axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
                     this.resumes=data.data;
-                    console.log(this.resumes)
+                    console.log(data.data)
                 })
+                this.getUserDeliveredResume()
             },
-            formatDate:function(time){
-                let date = new Date(time);
-                return this.format(time,'yyyy-MM-dd hh:mm')
-            },
-             format:function  (date, fmt) {
-                if (/(y+)/.test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
-                }
-                let o = {
-                    'M+': date.getMonth() + 1,
-                    'd+': date.getDate(),
-                    'h+': date.getHours(),
-                    'm+': date.getMinutes(),
-                    's+': date.getSeconds()
-                }
-                for (let k in o) {
-                    if (new RegExp(`(${k})`).test(fmt)) {
-                        let str = o[k] + ''
-                        fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : this.padLeftZero(str))
-                    }
-                }
-                 return fmt
-             },
 
-             padLeftZero:function  (str) {
-                 return ('00' + str).substr(str.length)
-             },
+
+
             showAddResume:function () {
                 this.addFile = true;
+            },
+            //获取用户已投递简历
+            getUserDeliveredResume:function () {
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                    // console.log("data=>",data.data);
+                    this.postResume = data.data
+                })
             },
             closeAddFile:function () {
                 this.addFile = false;
