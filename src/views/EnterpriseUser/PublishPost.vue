@@ -152,7 +152,7 @@
             //发布招聘信息
             publishPost(){
                 EntAPI.publishPost(this.enterprise.accountId,this.post).then(data=>{
-                    EntAPI.showInfo('发布成功');
+                    EntAPI.showInfo('发布成功，请等待审核');
                     }
                 );
 

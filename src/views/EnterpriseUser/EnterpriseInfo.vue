@@ -85,12 +85,26 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证文件</label>
+
                                         <div class="col-xl-10 col-md-9 col-8">
                                             <div class="form-control">
                                             <a v-bind:href="enterprise.licenseUrl">认证文件</a>
                                             </div>
                                         </div>
                                     </div>
+                                        <div class="form-group row">
+                                            <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >更改文件</label>
+                                            <div class="col-xl-10 col-md-9 col-8">
+                                                <b-form-file  v-model="file"  placeholder="选择一个文件"></b-form-file>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row text-right">
+                                            <div class="col-md-9">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button class="btn btn-info right " type="button" v-on:click="addFile()" >确认添加</button>
+                                            </div>
+                                        </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact6">描述</label>
                                         <div class="col-xl-10 col-md-9 col-8">
@@ -132,9 +146,6 @@
                                         <div class="col-md-6 ">
                                             <button class="btn btn-info" type="button" style="float:right" v-on:click="updateEnterpriseInfo" >提交审核</button>
                                         </div>
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info " type="button" v-if="enterprise.status!=='1'" v-on:click="applyForCertification">申请认证</button>
-                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -173,9 +184,9 @@
                                         <div class="col-md-6 ">
                                             <button class="btn btn-info" type="button" style="float:right" v-on:click="updatePassword()" >修改密码</button>
                                         </div>
-<!--                                        <div class="col-md-6 ">-->
-<!--                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>-->
-<!--                                        </div>-->
+                                        <div class="col-md-6 ">
+                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -183,26 +194,21 @@
                     </div>
                 </div>
             </div>
-<!--            <label class="form-check-label">Right Top</label>-->
-<!--            <notifications group="notifdemo" :position="notifPosition" :duration="parseInt(notifDuration)" :class="getNotificationPositionClass()"/>-->
 
         </div>
     </ContentWrapper>
 </template>
 
 <script>
-    import axios from 'axios'
     import Vue from 'Vue'
-    import qs from 'qs'
-    // Vue.prototype.$axios = axios
+    import axios from 'axios';
 
 
     import EnterpriseUser from "../../model/EnterpriseUser";
     import CommonUser from "../../model/CommonUser";
-    // import EnterpriseService from "../../service/EnterpriseService";
     import EntAPI from '../../service/EnterpriseService';
     import Notifications from 'vue-notification';
-    Vue.use(Notifications)
+    Vue.use(Notifications);
 
     export default {
         data () {
@@ -221,11 +227,9 @@
                 ifEdit:false,
                 ifChangePassword:false,
 
-                notifDuration: 5000,
-                notifPosition: 'righttop',
-                notifTitle:'成功',
-                notifMessage:'成功',
-                notifVariant:'default',
+                file:null,
+
+
             }
         },
 
@@ -311,22 +315,18 @@
                 }
             },
 
-            showNotification() {
-                this.$notify({
-                    group: 'notifdemo',
-                    title: this.notifTitle,
-                    text: this.notifMessage,
-                    type: this.getNotificationVariantClass()
-                });
-            },
-            getNotificationVariantClass() {
-                if(this.notifVariant === 'default') return '';
-                return `bg-${this.notifVariant} text-white`
-            },
-
-            getNotificationPositionClass() {
-                return this.notifPosition.replace(' ', '-')
-            },
+            addFile:function () {
+                let formData = new FormData();
+                formData.append('file',this.file);
+                let that=this;
+                axios.post('http://118.25.180.45:8088/api/common/general_file', formData,{withCredentials:true})
+                    .then(function (response) {
+                        if (response.status === 200) {
+                            that.enterprise.licenseUrl = response.data;
+                            EntAPI.showInfo('更新认证文件成功，记得提交审核哦');
+                        }
+                    });
+            }
 
 
 

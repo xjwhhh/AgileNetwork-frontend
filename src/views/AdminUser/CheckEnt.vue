@@ -32,7 +32,7 @@
                                                 <label>{{enterprise.creditCode}}</label>
                                             </td>
                                             <td>
-                                                <label>{{enterprise.licenseUrl}}</label>
+                                                <a v-bind:href="enterprise.licenseUrl">认证文件</a>
                                             </td>
                                             <td><label>{{enterprise.createTime.split("T")[0]}}</label></td>
                                             <td><label>{{enterprise.updateTime.split("T")[0]}}</label></td>
