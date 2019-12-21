@@ -439,19 +439,26 @@
                         title:"新密码不一致，请检查",
                         heightAuto:false
                     });
-                    // this.$notify({
-                    //     group: 'notifdemo',
-                    //     title: '123123',
-                    //     text: '234234'
-                    //     // type: this.getNotificationVariantClass()
-                    // });
-
                 }
                 let info ={
-                    'oldPass':this.oldPassword,
-                    'newPass':this.newPassword,
-                    'retryPass':this.retryPass
+                    'oldPassword':this.oldPassword,
+                    'newPassword':this.newPassword,
+                    'repeatNewPwd':this.retryPass
                 }
+                axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/password", info,{withCredentials:true})
+                    .then(function (response) {
+                        swal({
+                            title:"更新成功",
+                            heightAuto:false
+                        })
+                        this.$router.push("login")
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "更新失败",
+                        heightAuto: false
+                    })
+                });
             },
 
             //获取用户已投递简历
