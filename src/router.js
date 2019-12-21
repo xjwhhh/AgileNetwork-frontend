@@ -116,7 +116,7 @@ export default new Router({
                     component: Statistics
                 },
                 {
-                    path:'ResumeInfo/:postId/:commonId',
+                    path:'ResumeInfo/:postId/:commonId/:resumeUrl',
                     name:'entResumeInfo',
                     component:ResumeInfo,
                 }

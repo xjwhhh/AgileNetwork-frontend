@@ -135,6 +135,21 @@ export default {
         });
     },
 
+    getEnterprisePostAll(accountId){
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/enterprise/'+accountId+'/posts/manage',
+                method: 'get',
+            })
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+        });
+    },
+
     showInfo(title){
         swal({
             title: title,

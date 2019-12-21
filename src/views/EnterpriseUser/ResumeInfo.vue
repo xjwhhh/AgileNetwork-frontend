@@ -57,15 +57,21 @@
                         <div class="form-group row">
                             <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >简历</label>
                             <div class="col-xl-10 col-md-9 col-8">
-                                <a class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" href="#">简历url</a>
+                                <a class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-bind:href="resumeUrl">点击下载</a>
                             </div>
                         </div>
-                        <div class="form-group row">
+<!--                        <div class="form-group row">-->
+                        <div class="row">
+                        <div class="col-xl-10 col-md-9 col-8">
+                        </div>
+                        <div class="">
                         <router-link :to="{name:'publishedPost'}">
                             <button  class="btn btn-secondary btn-sm" type="button">返回</button>
                         </router-link>
-                        </div>
+<!--                        </div>-->
                     </div>
+                        </div>
+                </div>
 
                 </div>
             </div>
@@ -86,25 +92,33 @@
             return{
                 user:new CommonUser(),
                 enterprise:new EnterpriseUser(),
+                resumeUrl:'',
             }
         },
 
         created(){
+
+            this.getUserPersonalInfo();
 
         },
         methods:{
 
             //获取用户信息
             getUserPersonalInfo: function() {
+                console.log(this.$route.params);
                 console.log(this.$route.params['postId']);
-                console.log(this.$route.params['userId']);
-                this.user.id=this.$route.params['userId'];
+                console.log(this.$route.params['commonId']);
+                this.resumeUrl=this.$route.params['resumeUrl']
+                this.user.id=this.$route.params['commonId'];
                 axios.get('http://118.25.180.45:8088/api/user/'+this.user.id).then(data=>{
                     console.log(data);
                     this.user.transfer(data.data);
                 });
-                console.log(this.user)
+                console.log(this.user);
             },
+
+
+
 
         },
 

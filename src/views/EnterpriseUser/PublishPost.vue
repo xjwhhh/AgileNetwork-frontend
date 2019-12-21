@@ -105,7 +105,7 @@
             return {
                 enterprise:new EnterpriseUser(),
 
-                locationOptionList: ['北京', '上海', '南京','深圳'],
+                locationOptionList: ['北京', '上海', '南京','深圳','杭州','其他'],
 
                 startValue: moment().toDate(),
                 endValue: moment().add(1, 'd').toDate(),

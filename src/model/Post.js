@@ -34,6 +34,21 @@ class Post{
         this.updateTime=postInfo['updateTime'];
     }
 
+    transferToEntPostManage(data){
+        let postInfo=data;
+        this.id=postInfo['id'];
+        this.title=postInfo['title'];
+        this.workLocation=postInfo['workLocation'];
+        this.description=postInfo['description'];
+        this.salary=postInfo['salary'];
+        this.headCount=postInfo['headCount'];
+        this.status=postInfo['status'];
+        this.startTime=postInfo['startTime'];
+        this.endTime=postInfo['endTime'];
+        this.createTime=postInfo['createTime'];
+        this.updateTime=postInfo['updateTime'];
+    }
+
     transferSimple(data){
         this.id = data.id;
         this.title = data.title;

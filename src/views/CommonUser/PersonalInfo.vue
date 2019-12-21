@@ -379,7 +379,7 @@
         created(){
             this.getUserPersonalInfo();
             console.log(this.user.avatar)
-            this.imageSrc = 'img/logo.jpg';
+            this.imageSrc = 'img/logonju.png';
             console.log("imageSrc=>",this.imageSrc)
         },
         methods: {
