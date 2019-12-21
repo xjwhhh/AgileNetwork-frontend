@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label class="text-muted" for="signupInputEmail1">名称</label>
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.name')}" placeholder="Enter email" v-model="registerInfo.name" v-validate="'required'" type="text" name="text"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.name')}" placeholder="Enter name" v-model="registerInfo.name" v-validate="'required'" type="text" name="text"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-envelope"></em>
@@ -57,6 +57,13 @@
                             </div>
                             <span v-show="errors.has('register.password2')" class="invalid-feedback">{{ errors.first('register.password2') }}</span>
                         </div>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" :class="{'custom-control-input':true, 'is-invalid': errors.has('register.type')}" v-model="registerInfo.type"  name="agreements" id="registertype">
+                        <label class="custom-control-label" for="registertype">
+                            注册为企业用户
+                        </label>
+                        <span v-show="errors.has('register.type')" class="invalid-feedback">{{ errors.first('register.type') }}</span>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" :class="{'custom-control-input':true, 'is-invalid': errors.has('register.agreements')}" v-model="registerInfo.agreements" v-validate="'required'" name="agreements" id="registeragree">
@@ -100,7 +107,8 @@
                     password1: '',
                     password2: '',
                     name:'',
-                    agreements: false
+                    agreements: false,
+                    type:false,
                 }
             }
         },
@@ -123,48 +131,25 @@
             register(registerInfo){
                 console.log('in register ');
                 console.log(registerInfo.email);
-                axios.post('http://118.25.180.45:8088/api/user',{
-                    email:registerInfo.email,
-                    password:registerInfo.password1,
-                    name:registerInfo.name
-                },{withCredentials:true}).then(res=>{
-                    console.log(res);
-                    if(res.data.role=='1'){
-                        console.log(1)
-                        this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})
-                    }else  if ( res.data.role == '2'){
-                        console.log(2)
-                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
-                    }else{
-                        console.log(3)
-                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
-                    }
-                }).catch(res=>{
-                    alert("账号或密码不正确");
-                    console.log("err",res)
-                })
+                console.log(registerInfo.type);
+                let url='';
+                if(registerInfo.type) {
+                    url='http://118.25.180.45:8088/api/enterprise';
+                }else{
+                    url='http://118.25.180.45:8088/api/user';
+                }
 
-                // axios({
-                //     method: "POST",
-                //     url: 'http://118.25.180.45:8088/api/account/user',
-                //     transformRequest: [
-                //         function(data) {
-                //             // 对 data 进行任意转换处理
-                //             return qs.stringify(data);
-                //         }
-                //     ],
-                //     data: { email: registerInfo.email, password: registerInfo.password1,name:registerInfo.name },
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     }
-                // }).then(function(response) {
-                //         var data = response.data
-                //         //显示错误信息
-                //         console.log(data);
-                //
-                //     }, function(response) {
-                //         console.log(response)
-                //     })
+                axios.post(url, {
+                    email: registerInfo.email,
+                    password: registerInfo.password1,
+                    name: registerInfo.name
+                }, {withCredentials: true}).then(res => {
+                    console.log(res);
+                    this.$router.push({name:'login'});
+                }).catch(res => {
+                    alert("注册失败");
+                    console.log("err", res)
+                })
             },
         }
     }
