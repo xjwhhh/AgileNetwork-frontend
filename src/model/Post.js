@@ -2,7 +2,7 @@ class Post{
     constructor(){
         this.id='';
         this.eid='';
-        this.name='';
+        this.title='';
         this.job='';
         this.description='';
         this.workLocation='';
@@ -10,7 +10,7 @@ class Post{
         this.createTime='';
         this.startTime='';
         this.endTime='';
-        this.peopleNum='';
+        this.headCount='';
         this.status='';
     }
 }
