@@ -8,12 +8,12 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="text-center py-2">SIGNUP TO GET INSTANT ACCESS.</p>
+                <p class="text-center py-2">注册账号</p>
                 <form class="mb-3" @submit.prevent="validateBeforeSubmit('register')" data-vv-scope="register">
                     <div class="form-group">
-                        <label class="text-muted" for="signupInputEmail1">Email address</label>
+                        <label class="text-muted" for="signupInputEmail1">邮箱</label>
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.email')}" placeholder="Enter email" v-model="registerInfo.email" v-validate="'required|email'" type="text" name="email"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.email')}" placeholder="输入邮箱" v-model="registerInfo.email" v-validate="'required|email'" type="text" name="email"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-envelope"></em>
@@ -23,9 +23,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="text-muted" for="signupInputEmail1">名称</label>
+                        <label class="text-muted" for="signupInputEmail1">名字</label>
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.name')}" placeholder="Enter name" v-model="registerInfo.name" v-validate="'required'" type="text" name="text"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.name')}" placeholder="输入名字" v-model="registerInfo.name" v-validate="'required'" type="text" name="text"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-envelope"></em>
@@ -35,9 +35,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="text-muted" for="signupInputPassword1">Password</label>
+                        <label class="text-muted" for="signupInputPassword1">密码</label>
                         <div class="input-group with-focus">
-                            <input ref="password1" :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.password1')}" v-model="registerInfo.password1" v-validate="'required'" type="password" name="password1" placeholder="Password"/>
+                            <input ref="password1" :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.password1')}" v-model="registerInfo.password1" v-validate="'required'" type="password" name="password1" placeholder="密码"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-lock"></em>
@@ -47,9 +47,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="text-muted" for="signupInputRePassword1">Retype Password</label>
+                        <label class="text-muted" for="signupInputRePassword1">确认密码</label>
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.password2')}" v-model="registerInfo.password2" v-validate="'required|confirmed:password1'" type="password" name="password2" placeholder="Retype Password"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.password2')}" v-model="registerInfo.password2" v-validate="'required|confirmed:password1'" type="password" name="password2" placeholder="确认密码"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-lock"></em>
@@ -68,14 +68,14 @@
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" :class="{'custom-control-input':true, 'is-invalid': errors.has('register.agreements')}" v-model="registerInfo.agreements" v-validate="'required'" name="agreements" id="registeragree">
                         <label class="custom-control-label" for="registeragree">
-                            I agree with the<a class="ml-1" href="#">terms</a>
+                            我已阅读并同意<a class="ml-1" href="#">用户协议</a>
                         </label>
                         <span v-show="errors.has('register.agreements')" class="invalid-feedback">{{ errors.first('register.agreements') }}</span>
                     </div>
-                    <button class="btn btn-block btn-primary mt-3" type="submit">Create account</button>
+                    <button class="btn btn-block btn-primary mt-3" type="submit">注册账号</button>
                 </form>
-                <p class="pt-3 text-center">Have an account?</p>
-                <router-link class="btn btn-block btn-secondary" to="/login">Signup</router-link>
+                <p class="pt-3 text-center">已有账号？</p>
+                <router-link class="btn btn-block btn-secondary" to="/login">立即登录</router-link>
             </div>
         </div>
         <!-- END card-->
@@ -129,16 +129,12 @@
             },
 
             register(registerInfo){
-                console.log('in register ');
-                console.log(registerInfo.email);
-                console.log(registerInfo.type);
                 let url='';
                 if(registerInfo.type) {
                     url='http://118.25.180.45:8088/api/enterprise';
                 }else{
                     url='http://118.25.180.45:8088/api/user';
                 }
-
                 axios.post(url, {
                     email: registerInfo.email,
                     password: registerInfo.password1,

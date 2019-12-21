@@ -8,11 +8,11 @@
                 </a>
             </div>
             <div class="card-body">
-                <p class="text-center py-2">SIGN IN TO CONTINUE.</p>
+                <p class="text-center py-2">登录账号</p>
                 <form class="mb-3" @submit.prevent="validateBeforeSubmit('login')" data-vv-scope="login">
                     <div class="form-group">
                         <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="Enter email" v-model="loginInfo.email" v-validate="'required|email'" type="text" name="email"/>
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="输入邮箱" v-model="loginInfo.email" v-validate="'required|email'" type="text" name="email"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-envelope"></em>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group with-focus">
-                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="loginInfo.password" v-validate="'required'" type="password" name="password" placeholder="Password"/>
+                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="loginInfo.password" v-validate="'required'" type="password" name="password" placeholder="输入密码"/>
                             <div class="input-group-append">
                                 <span class="input-group-text text-muted bg-transparent border-left-0">
                                     <em class="fa fa-lock"></em>
@@ -36,30 +36,22 @@
                         <div class="float-left">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme" v-model="loginInfo.rememberme">
-                                <label class="custom-control-label" for="rememberme">Remember Me</label>
+                                <label class="custom-control-label" for="rememberme">记住我</label>
                             </div>
                         </div>
                         <div class="float-right">
                             <router-link class="text-muted" to="/recover">
-                                <small>Forgot your password?</small>
+                                <small>忘记密码？</small>
                             </router-link>
                         </div>
                     </div>
-                    <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
+                    <button class="btn btn-block btn-primary mt-3" type="submit">登陆</button>
                 </form>
-                <p class="pt-3 text-center">Need to Signup?</p>
-                <router-link class="btn btn-block btn-secondary" to="/register">Register Now</router-link>
+                <p class="pt-3 text-center">没有账号？</p>
+                <router-link class="btn btn-block btn-secondary" to="/register">现在注册</router-link>
             </div>
         </div>
         <!-- END card-->
-<!--        <div class="p-3 text-center">-->
-<!--            <span class="mr-2">&copy;</span>-->
-<!--            <span>2018</span>-->
-<!--            <span class="mr-2">-</span>-->
-<!--            <span>Angle</span>-->
-<!--            <br/>-->
-<!--            <span>Bootstrap Admin Template</span>-->
-<!--        </div>-->
     </div>
 </template>
 <script>
@@ -104,8 +96,6 @@
 
                         this.login(this.loginInfo);
 
-                        // this.$router.push({name:'commonLayout',params:{id:1}});
-                        // return;
                     }else{
                         console.log('Correct them errors!');
                     }
@@ -113,10 +103,6 @@
             },
 
             login(loginInfo){
-                let data = {"email":"mf1932216@smail.nju.edu.cn","password":"123456"};
-                let data1 = new FormData();
-                data1.append('password','123456');
-                data1.append('email','mf1932216@smail.nju.edu.cn');
                 // console.log(data)
                 console.log(loginInfo);
                 axios.post('http://118.25.180.45:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
@@ -135,25 +121,6 @@
                     alert("账号或密码不正确");
                     console.log("err",res)
                 })
-                // commonService.login(data).then(res=>{
-                //     console.log("ew3")
-                //     console.log(res)
-                // }).catch(res=>{
-                //     console.log("324")
-                //     console.log(res)
-                // })
-
-
-                // let information = {
-                //     email: this.loginInfo.email,
-                //     password: this.loginInfo.password
-                // }
-                // commonService.login(this.loginInfo).then(data=>{
-                //     console.log(data)
-                // }).catch(res =>{
-                //     console.log("----");
-                //     console.log(res)
-                // })
             },
         }
     }
