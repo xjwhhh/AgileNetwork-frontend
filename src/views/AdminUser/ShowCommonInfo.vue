@@ -5,7 +5,8 @@
                 <div class="card card-default" id="simpleInfo">
                     <div class="card-body text-center">
                         <div class="py-4">
-                            <img class="img-fluid rounded-circle img-thumbnail thumb96" v-on:click="showChangeAtatar()" v-bind:src="user.avatar" alt="Contact" />
+                            <img class="img-fluid rounded-circle img-thumbnail thumb96" v-on:click="showChangeAtatar()"
+                                 v-bind:src="user.avatar" alt="Contact"/>
                         </div>
                         <h3 class="m-0 text-bold">{{user.name}}</h3>
                         <div class="my-3">
@@ -14,6 +15,7 @@
 
                     </div>
                 </div>
+
             </div>
             <div class="col-lg-8">
                 <div class="card card-default" v-if="changeAtatar" id="changeAtatar">
@@ -23,7 +25,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <a v-on:click="closeAtatar()" class="button">
-                                <em  class="fa-2x icon-close mr-2"></em>
+                                <em class="fa-2x icon-close mr-2"></em>
                             </a>
 
                         </div>
@@ -34,33 +36,54 @@
                                 <div class="container-md">
                                     <div class="row">
                                         <div class="col-xl-7">
-                                            <b-modal v-model="previewModalShow" :ok-only="true" ok-title="Close" ok-variant="secondary" :hide-header="true">
-                                                <img :src="previewImage" alt="Modal Preview Image" class="img-fluid d-block mx-auto">
+                                            <b-modal v-model="previewModalShow" :ok-only="true" ok-title="Close"
+                                                     ok-variant="secondary" :hide-header="true">
+                                                <img :src="previewImage" alt="Modal Preview Image"
+                                                     class="img-fluid d-block mx-auto">
                                             </b-modal>
                                             <div class="mb-3" :class="{ 'd-none': !imageSrc }" style="height: 400px;">
-                                                <vueCropper ref="cropper" :img="imageSrc" :outputSize="outputSize" :outputType="outputType" :info="true" @realTime="previewRealTime" />
+                                                <vueCropper ref="cropper" :img="imageSrc" :outputSize="outputSize"
+                                                            :outputType="outputType" :info="true"
+                                                            @realTime="previewRealTime"/>
                                             </div>
                                             <div class="btn-group flex-wrap">
                                                 <label class="btn btn-primary mb-2 mr-2" for="change-image">
-                                                    <input class="sr-only" type="file" id="change-image" accept="image/png, image/jpeg, image/gif, image/jpg" @change="changeImage($event)">修改图片
+                                                    <input class="sr-only" type="file" id="change-image"
+                                                           accept="image/png, image/jpeg, image/gif, image/jpg"
+                                                           @change="changeImage($event)">修改图片
                                                 </label>
-                                                <b-btn class="mr-2 mb-2" @click="startCrop" v-if="!crap" :disabled="!imageSrc">开始裁剪</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="stopCrop" variant="danger" v-else :disabled="!imageSrc">停止裁剪</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="clearCrop" :disabled="!imageSrc">清空</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="changeScale(1)" :disabled="!imageSrc">放大</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="changeScale(-1)" :disabled="!imageSrc">缩小</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="rotateLeft" :disabled="!imageSrc">向左旋转</b-btn>
-                                                <b-btn class="mr-2 mb-2" @click="rotateRight" :disabled="!imageSrc">向右旋转</b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="startCrop" v-if="!crap"
+                                                       :disabled="!imageSrc">开始裁剪
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="stopCrop" variant="danger" v-else
+                                                       :disabled="!imageSrc">停止裁剪
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="clearCrop" :disabled="!imageSrc">清空
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="changeScale(1)" :disabled="!imageSrc">
+                                                    放大
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="changeScale(-1)" :disabled="!imageSrc">
+                                                    缩小
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="rotateLeft" :disabled="!imageSrc">
+                                                    向左旋转
+                                                </b-btn>
+                                                <b-btn class="mr-2 mb-2" @click="rotateRight" :disabled="!imageSrc">
+                                                    向右旋转
+                                                </b-btn>
 
                                             </div>
-                                            
+
+
                                         </div>
                                         <div class="col-xl-5">
                                             <div class="mb-3" style="height: 400px">
                                                 <p>预览</p>
                                                 <div :style="{'width': realTimePreviewData.w + 'px', 'height': realTimePreviewData.h + 'px', 'overflow': 'hidden', 'margin': '5px'}">
                                                     <div :style="realTimePreviewData.div">
-                                                        <img :src="realTimePreviewData.url" :style="realTimePreviewData.img">
+                                                        <img :src="realTimePreviewData.url"
+                                                             :style="realTimePreviewData.img">
                                                     </div>
                                                 </div>
                                             </div>
@@ -70,7 +93,9 @@
                                                     <!--<button class="btn btn-info right " type="button" v-on:click="changeInfo()" >确认修改</button>-->
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <button class="btn btn-info right " type="button" v-on:click="confirmChangeAtatar()" >确认修改</button>
+                                                    <button class="btn btn-info right " type="button"
+                                                            v-on:click="confirmChangeAtatar()">确认修改
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,46 +120,53 @@
                             <div class="col-12 col-sm-10">
                                 <div class="form-horizontal">
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >名称</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">名称</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.name"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.name"></p>
                                             <!--<input class="form-control" id="inputContact1" type="text" placeholder="" v-model="user.name" />-->
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >邮箱</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">邮箱</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.email"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.email"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >大学</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">大学</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.university"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.university"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.education"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.education"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >年龄</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">年龄</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.age"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.age"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.gender"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.gender"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >手机</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">手机</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.mobile"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left"
+                                               v-text="user.mobile"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +189,7 @@
                                 <b-dropdown-item v-on:click="changePass()">修改密码</b-dropdown-item>
                             </b-dropdown>
                             <a v-on:click="closeInfo()" class="button">
-                                <em  class="fa-2x icon-close mr-2"></em>
+                                <em class="fa-2x icon-close mr-2"></em>
                             </a>
 
                         </div>
@@ -168,45 +200,52 @@
                                 <form class="form-horizontal">
 
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >邮箱</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">邮箱</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeEmail" type="email" placeholder="" v-model="user.email" disabled />
+                                            <input class="form-control" id="changeEmail" type="email" placeholder=""
+                                                   v-model="user.email" disabled/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right"  >名称</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">名称</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeName" type="text" placeholder="" v-model="user.name" />
+                                            <input class="form-control" id="changeName" type="text" placeholder=""
+                                                   v-model="user.name"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >大学</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">大学</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeUniversity" type="text" placeholder="" v-model="user.university" />
+                                            <input class="form-control" id="changeUniversity" type="text" placeholder=""
+                                                   v-model="user.university"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeEducation" type="text" placeholder="" v-model="user.education" />
+                                            <input class="form-control" id="changeEducation" type="text" placeholder=""
+                                                   v-model="user.education"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >年龄</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">年龄</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeAge" type="text" placeholder="" v-model="user.age" />
+                                            <input class="form-control" id="changeAge" type="text" placeholder=""
+                                                   v-model="user.age"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeGender" type="text" placeholder="" v-model="user.gender" />
+                                            <input class="form-control" id="changeGender" type="text" placeholder=""
+                                                   v-model="user.gender"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >手机</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right">手机</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeMobile" type="text" placeholder="" v-model="user.mobile" />
+                                            <input class="form-control" id="changeMobile" type="text" placeholder=""
+                                                   v-model="user.mobile"/>
                                         </div>
                                     </div>
                                     <div class="form-group row text-right">
@@ -214,7 +253,9 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info right " type="button" v-on:click="confirmChangeInfo()" >确认修改</button>
+                                            <button class="btn btn-info right " type="button"
+                                                    v-on:click="confirmChangeInfo()">确认修改
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -231,7 +272,7 @@
                         </div>
                         <div class="d-flex justify-content-end">
                             <a v-on:click="closePass()" class="button">
-                                <em  class="fa-2x icon-close mr-2"></em>
+                                <em class="fa-2x icon-close mr-2"></em>
                             </a>
 
                         </div>
@@ -241,21 +282,27 @@
                             <div class="col-12 col-sm-10">
                                 <form class="form-horizontal">
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="oldPassword" >旧密码</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right"
+                                               for="oldPassword">旧密码</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="oldPassword" type="password" placeholder="" v-model="oldPassword" />
+                                            <input class="form-control" id="oldPassword" type="password" placeholder=""
+                                                   v-model="oldPassword"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="newPassword">新密码</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right"
+                                               for="newPassword">新密码</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="newPassword" type="password" v-model="newPassword"  />
+                                            <input class="form-control" id="newPassword" type="password"
+                                                   v-model="newPassword"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="retryPassword">确认密码</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right"
+                                               for="retryPassword">确认密码</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="retryPassword" type="password" v-model="retryPass" />
+                                            <input class="form-control" id="retryPassword" type="password"
+                                                   v-model="retryPass"/>
                                         </div>
                                     </div>
                                     <div class="form-group row text-right">
@@ -263,7 +310,9 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info right " type="button" v-on:click="confirmChangePassword()">确认修改</button>
+                                            <button class="btn btn-info right " type="button"
+                                                    v-on:click="confirmChangePassword()">确认修改
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -289,12 +338,12 @@
     export default {
         data() {
             return {
-                user:new CommonUser(),
-                changeInfo:false,
-                changePassword:false,
-                changeAtatar:false,
+                user: new CommonUser(),
+                changeInfo: false,
+                changePassword: false,
+                changeAtatar: false,
 
-                uid:null,
+                uid: null,
                 imageSrc: '',
                 outputSize: 1,
                 outputType: 'jpeg',
@@ -302,15 +351,15 @@
                 crap: false,
                 previewImage: null,
                 previewModalShow: false,
-                tempData:null,
-                newPassword:'',
-                retryPass:'',
-                oldPassword:'',
+                tempData: null,
+                newPassword: '',
+                retryPass: '',
+                oldPassword: '',
             }
         },
 
-        created(){
-            this.user.id=this.$route.params['commonId'];
+        created() {
+            this.user.id = this.$route.params['commonId'];
             this.getUserInfo();
         },
 
@@ -318,8 +367,8 @@
         methods: {
 
 
-            getUserInfo:function () {
-                axios.get('http://118.25.180.45:8088/api/user/'+this.user.id).then(data=>{
+            getUserInfo: function () {
+                axios.get('http://118.25.180.45:8088/api/user/' + this.user.id).then(data => {
                     console.log(data);
                     this.user.transfer(data.data);
                     //console.log("--->user",this.user.avatar)
