@@ -14,9 +14,11 @@
                         <th data-priority="1">姓名</th>
                         <th>邮箱</th>
                         <th>大学</th>
+                        <th>手机</th>
+                        <th>年龄</th>
+                        <th>性别</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
-                        <th>已投简历</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,10 +35,21 @@
                             <label>{{user.university}}</label>
                         </td>
                         <td>
-                            <label>{{user.createTime}}</label>
+                            <label>{{user.mobile}}</label>
                         </td>
-                        <td>{{user.updateTime}}</td>
-                        <td>{{user.deliveredResume}}</td>
+                        <td>
+                            <label>{{user.age}}</label>
+                        </td>
+                        <td>
+                            <label>{{user.gender}}</label>
+                        </td>
+                        <td>
+                            <label>{{user.createTime.split("T")[0]}}</label>
+                        </td>
+                        <td><label>{{user.updateTime.split("T")[0]}}</label></td>
+                        <td>
+                            <button class="badge bg-gray-dark" v-on:click="deleteUser(user.id)">删除</button>
+                        </td>
                     </tr>
                     </tbody>
                 </Datatable>
@@ -47,6 +60,7 @@
 <script>
     import Datatable from '@/components/Tables/Datatable';
     import CommonUser from "../../model/CommonUser";
+    import AdminAPI from '../../service/AdminService';
 
     export default {
         components: {
@@ -80,24 +94,26 @@
 
 
         created(){
-            this.getUserInfo();
+            this.getUserList();
 
         },
 
         methods:{
             getUserList(){
-                this.commonUserList=[];
+                // this.commonUserList=[];
+                AdminAPI.getCommonUser().then(data=>{
+                    console.log(data);
+                    for(let i=0;i<data.length;i++){
+                        let user=new CommonUser();
+                        user.transfer(data[i]);
+                        this.commonUserList.push(user);
+                    }
+                })
             },
 
-            getUserInfo:function () {
-                for(let i=0;i<10;i++){
-                    let user=new CommonUser();
-                    user.id=i;
-                    user.name='testuser';
-                    user.university='njdx';
-                    user.headUrl='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576742745082&di=139aaf86c89d1c21698da6fd57cd1be6&imgtype=0&src=http%3A%2F%2F787823.s21i.faiusr.com%2F2%2FABUIABACGAAg-ZmKwwUowL7X5AUwigU41AQ.jpg';
-                    this.commonUserList.push(user);
-                }
+
+            deleteUser:function (userId) {
+                console.log(userId);
             }
         }
     }
