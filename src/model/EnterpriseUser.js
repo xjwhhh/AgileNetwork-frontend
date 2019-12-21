@@ -10,6 +10,7 @@ class EnterpriseUser {
         this.status='';
         this.name='';
         this.headUrl='';
+        this.enterpriseName='';
         this.creditCode='';
         this.licenseUrl='';
         this.createTime='';
@@ -26,14 +27,17 @@ class EnterpriseUser {
         this.createTime=data['createTime'];
         this.authPassed=data['authPassed'];
         this.mobile=data['mobile'];
+        this.authStatus=-1;
         let enterpriseInfo=eval(data['enterpriseInfo']);
         this.id=enterpriseInfo['id'];
         this.accountId=enterpriseInfo['accountId'];
+        this.enterpriseName=enterpriseInfo['enterpriseName'];
         this.location=enterpriseInfo['location'];
         this.description=enterpriseInfo['description'];
         this.creditCode=enterpriseInfo['creditCode'];
         this.licenseUrl=enterpriseInfo['licenseUrl'];
         this.updateTime=enterpriseInfo['updateTime'];
+        this.authStatus=enterpriseInfo['authStatus'];
 
         console.log(this);
     }

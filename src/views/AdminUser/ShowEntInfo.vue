@@ -67,10 +67,24 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===1">
                                             <div class="float-left">
                                                 <div class="form-control">
-                                                <div class="badge badge-info">已认证</div>
+                                                    <div class="badge badge-success">已认证</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===0">
+                                            <div class="float-left">
+                                                <div class="form-control">
+                                                    <div class="badge badge-info">审核中</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===-1">
+                                            <div class="float-left">
+                                                <div class="form-control">
+                                                    <div class="badge bg-gray-dark">认证失败</div>
                                                 </div>
                                             </div>
                                         </div>

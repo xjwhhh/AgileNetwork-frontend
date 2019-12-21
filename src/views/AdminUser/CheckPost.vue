@@ -1,97 +1,194 @@
 <template>
-    <div class="block-center mt-4 wd-xl">
-        <!-- START card-->
-        <div class="card card-flat">
-            <div class="card-header text-center bg-dark">
-                <a href="#">
-                    <img class="block-center rounded" src="img/logo.png" alt="Image" />
-                </a>
-            </div>
-            <div class="card-body">
-                <p class="text-center py-2">SIGN IN TO CONTINUE.</p>
-                <form class="mb-3" @submit.prevent="validateBeforeSubmit('login')" data-vv-scope="login">
-                    <div class="form-group">
-                        <div class="input-group with-focus">
-                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('login.email')}" placeholder="Enter email" v-model="login.email" v-validate="'required|email'" type="text" name="email"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text text-muted bg-transparent border-left-0">
-                                    <em class="fa fa-envelope"></em>
-                                </span>
-                            </div>
-                            <span v-show="errors.has('login.email')" class="invalid-feedback">{{ errors.first('login.email') }}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group with-focus">
-                            <input :class="{'form-control  border-right-0':true, 'is-invalid': errors.has('login.password')}" v-model="login.password" v-validate="'required'" type="password" name="password" placeholder="Password"/>
-                            <div class="input-group-append">
-                                <span class="input-group-text text-muted bg-transparent border-left-0">
-                                    <em class="fa fa-lock"></em>
-                                </span>
-                            </div>
-                            <span v-show="errors.has('login.password')" class="invalid-feedback">{{ errors.first('login.password') }}</span>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme" v-model="login.rememberme">
-                                <label class="custom-control-label" for="rememberme">Remember Me</label>
-                            </div>
-                        </div>
-                        <div class="float-right">
-                            <router-link class="text-muted" to="/recover">
-                                <small>Forgot your password?</small>
-                            </router-link>
-                        </div>
-                    </div>
-                    <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
-                </form>
-                <p class="pt-3 text-center">Need to Signup?</p>
-                <router-link class="btn btn-block btn-secondary" to="/register">Register Now</router-link>
-            </div>
+    <ContentWrapper>
+        <div class="content-heading">招聘信息审核
         </div>
-        <!-- END card-->
-        <div class="p-3 text-center">
-            <span class="mr-2">&copy;</span>
-            <span>2018</span>
-            <span class="mr-2">-</span>
-            <span>Angle</span>
-            <br/>
-            <span>Bootstrap Admin Template</span>
+        <div class="card card-default">
+            <form class="card">
+                <b-tabs nav-class="nav-justified" class="ie-fix-flex">
+                    <b-tab title="未审核" active>
+                        <div class="card-body">
+                            <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable1">
+                                <thead>
+                                <tr>
+                                    <th data-priority="1">公司名称</th>
+                                    <th>标题</th>
+                                    <th>工作地点</th>
+                                    <th>薪酬</th>
+                                    <th>招聘人数</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="post of unauthPosts">
+                                    <td>
+                                        <router-link :to="{name:'showEntInfo',params:{entId:post.enterpriseAccountId}}">
+                                            <label>{{post.enterpriseName}}</label>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <router-link :to="{name:'showPostInfo',params:{postId:post.id}}">
+
+                                            <label>{{post.title}}</label>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <label>{{post.workLocation}}</label>
+                                    </td>
+                                    <td><label>{{post.salary}}</label></td>
+                                    <td><label>{{post.headCount}}</label></td>
+                                    <td><label>{{post.createTime.split("T")[0]}}</label></td>
+                                    <td><label>{{post.updateTime.split("T")[0]}}</label></td>
+                                    <td>
+                                        <div class="badge badge-success" v-on:click="postPass(post.id)">通过</div>
+                                    </td>
+                                    <td>
+                                        <div class="badge bg-gray-dark" v-on:click="postRefuse(post.id)">拒绝</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </Datatable>
+                        </div>
+                    </b-tab>
+                    <b-tab title="已审核">
+                        <div class="card-body">
+                            <Datatable :options="dtOptions1" class="table table-striped my-4 w-100" id="datatable2">
+                                <thead>
+                                <tr>
+                                    <th data-priority="1">公司名称</th>
+                                    <th>标题</th>
+                                    <th>工作地点</th>
+                                    <th>薪酬</th>
+                                    <th>招聘人数</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="post of authedPosts">
+                                    <td>
+                                        <router-link :to="{name:'showEntInfo',params:{entId:post.enterpriseAccountId}}">
+
+                                            <label>{{post.enterpriseName}}</label>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <router-link :to="{name:'showPostInfo',params:{postId:post.id}}">
+
+                                            <label>{{post.title}}</label>
+                                        </router-link>
+                                    </td>
+                                    <td>
+                                        <label>{{post.workLocation}}</label>
+                                    </td>
+                                    <td><label>{{post.salary}}</label></td>
+                                    <td><label>{{post.headCount}}</label></td>
+                                    <td><label>{{post.createTime.split("T")[0]}}</label></td>
+                                    <td><label>{{post.updateTime.split("T")[0]}}</label></td>
+                                    <td>
+                                        <div class="badge bg-gray-dark" v-if="post.status===-1">已拒绝</div>
+                                        <div class="badge badge-success" v-if="post.status===1">已通过</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </Datatable>
+                        </div>
+                    </b-tab>
+                </b-tabs>
+            </form>
         </div>
-    </div>
+    </ContentWrapper>
 </template>
 <script>
     import Vue from 'vue'
     import VeeValidate from 'vee-validate';
+    import AdminAPI from '../../service/AdminService';
+    import Datatable from '@/components/Tables/Datatable';
+    import Post from "../../model/Post";
 
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
-    })
+    });
 
     export default {
         data() {
             return {
-                login: {
-                    email: '',
-                    password: '',
-                    rememberme: false
-                }
+
+                postList: [],
+                dtOptions1: {
+                    'paging': true, // Table pagination
+                    'ordering': true, // Column ordering
+                    'info': true, // Bottom left status text
+                    responsive: true,
+                    // Text translation options
+                    // Note the required keywords between underscores (e.g _MENU_)
+                    oLanguage: {
+                        sSearch: '<em class="fa fa-search"></em>',
+                        sLengthMenu: '_MENU_ records per page',
+                        info: 'Showing page _PAGE_ of _PAGES_',
+                        zeroRecords: 'Nothing found - sorry',
+                        infoEmpty: 'No records available',
+                        infoFiltered: '(filtered from _MAX_ total records)',
+                        oPaginate: {
+                            sNext: '<em class="fa fa-caret-right"></em>',
+                            sPrevious: '<em class="fa fa-caret-left"></em>'
+                        }
+                    }
+                },
+
+                authedPosts: [],
+                unauthPosts: [],
             }
         },
+
+        components: {
+            Datatable
+        },
+
+        created() {
+            this.getAllPosts();
+
+
+        },
         methods: {
-            validateBeforeSubmit(scope) {
-                this.$validator.validateAll(scope).then((result) => {
-                    if (result) {
-                        console.log('Form Submitted!');
-                        console.log(`Email: ${this.login.email}`)
-                        console.log(`Password: ${this.login.password}`)
-                        console.log(`Remember Me: ${this.login.rememberme}`)
-                        return;
+
+            getAllPosts: function () {
+                this.authedPosts=[];
+                this.unauthPosts=[];
+                AdminAPI.getPosts().then(data => {
+                    console.log(data);
+
+                    for (let i = 0; i < data['authedPosts'].length; i++) {
+                        let post = new Post();
+                        post.transfer(data['authedPosts'][i]);
+                        console.log(post);
+                        this.authedPosts.push(post);
                     }
-                    console.log('Correct them errors!');
-                });
+                    for (let i = 0; i < data['unauthPosts'].length; i++) {
+                        let post = new Post();
+                        post.transfer(data['unauthPosts'][i]);
+                        console.log(post);
+                        this.unauthPosts.push(post);
+                    }
+
+
+                })
+            },
+
+
+            postPass: function (postId) {
+                AdminAPI.postPass(postId).then(data=>{
+                    console.log(data);
+                    this.getAllPosts();
+                })
+
+            },
+
+            postRefuse: function (postId) {
+                AdminAPI.postRefuse(postId).then(data=>{
+                    console.log(data);
+                    this.getAllPosts();
+                })
             }
         }
     }

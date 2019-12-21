@@ -60,6 +60,12 @@
                             <div class="col-12 col-sm-10">
                                 <form class="form-horizontal">
                                     <div class="form-group row">
+                                    <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact12">名称</label>
+                                    <div class="col-xl-10 col-md-9 col-8">
+                                        <input class="form-control" id="inputContact12" type="text" v-model="enterprise.enterpriseName" />
+                                    </div>
+                            </div>
+                                    <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact2">邮箱</label>
                                         <div class="col-xl-10 col-md-9 col-8">
                                             <input class="form-control" id="inputContact2" type="email" v-model="enterprise.email" disabled="disabled" />
@@ -93,10 +99,24 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===1">
                                             <div class="float-left">
                                                 <div class="form-control">
-                                                <div class="badge badge-info">已认证</div>
+                                                <div class="badge badge-success">已认证</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===0">
+                                            <div class="float-left">
+                                                <div class="form-control">
+                                                    <div class="badge badge-info">审核中</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===-1">
+                                            <div class="float-left">
+                                                <div class="form-control">
+                                                    <div class="badge bg-gray-dark">认证失败</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,6 +176,9 @@
                     </div>
                 </div>
             </div>
+<!--            <label class="form-check-label">Right Top</label>-->
+<!--            <notifications group="notifdemo" :position="notifPosition" :duration="parseInt(notifDuration)" :class="getNotificationPositionClass()"/>-->
+
         </div>
     </ContentWrapper>
 </template>
@@ -166,10 +189,13 @@
     import qs from 'qs'
     // Vue.prototype.$axios = axios
 
+
     import EnterpriseUser from "../../model/EnterpriseUser";
     import CommonUser from "../../model/CommonUser";
-    import EnterpriseService from "../../service/EnterpriseService";
+    // import EnterpriseService from "../../service/EnterpriseService";
     import EntAPI from '../../service/EnterpriseService';
+    import Notifications from 'vue-notification';
+    Vue.use(Notifications)
 
     export default {
         data () {
@@ -183,11 +209,16 @@
                 newPassword1:'',
                 newPassword2:'',
 
-                ent:{},
 
                 //视图控制变量
                 ifEdit:false,
                 ifChangePassword:false,
+
+                notifDuration: 5000,
+                notifPosition: 'righttop',
+                notifTitle:'成功',
+                notifMessage:'成功',
+                notifVariant:'default',
             }
         },
 
@@ -198,29 +229,6 @@
             this.enterprise.accountId=this.$route.params['id'];
 
             this.getEnterpriseInfo(this.enterprise.accountId);
-
-            this.ent={
-                name:"徐佳炜",
-                email:"920054996@qq.com",
-                password:"123456",
-            };
-            // axios.post('http://118.25.180.45:8088/api/enterprise', {
-            //     name:"徐佳炜",
-            //     email:"920054996@qq.com",
-            //     password:"123456",
-            // }, {withCredentials: true}).
-            // then((res) => {
-            //     console.log(res);
-            // })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     });
-
-
-            // EnterpriseService.registerEnterprise(this.ent);
-
-
-
 
         },
 
@@ -247,24 +255,26 @@
                 console.log(this.enterprise.name);
                 console.log(this.enterprise.mobile);
                 EntAPI.updateAccountInfo(this.enterprise).then(data=>{
-                    console.log(data);
-                    alert("更新成功");
+                    this.showInfo('更新成功');
                     this.ifEdit=false;
                 });
             },
 
+
+
             //更新企业认证信息
             updateEnterpriseInfo:function () {
-                console.log(this.enterprise);
-                EnterpriseService.updateEnterpriseInfo(this.enterprise);
+                EntAPI.updateEnterpriseInfo(this.enterprise).then(data=>{
+                    EntAPI.showInfo('更新成功');
+                })
 
             },
 
             applyForCertification:function () {
-                if(this.enterprise.status==='1'){
-                    alert('已认证');
+                if(this.enterprise.authStatus==='1'){
+                    EntAPI.showInfo('已认证，无需再认证');
                 }else{
-                    console.log('申请认证');
+                    EntAPI.showInfo('正在申请，请等待1-3个工作日');
                 }
             },
 
@@ -291,6 +301,23 @@
                 }else{
                     alert('原密码错误');
                 }
+            },
+
+            showNotification() {
+                this.$notify({
+                    group: 'notifdemo',
+                    title: this.notifTitle,
+                    text: this.notifMessage,
+                    type: this.getNotificationVariantClass()
+                });
+            },
+            getNotificationVariantClass() {
+                if(this.notifVariant === 'default') return '';
+                return `bg-${this.notifVariant} text-white`
+            },
+
+            getNotificationPositionClass() {
+                return this.notifPosition.replace(' ', '-')
             },
 
 

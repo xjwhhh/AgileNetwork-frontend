@@ -102,6 +102,7 @@
                     for (let i = 0; i < data.length; i++) {
                         let ent = new EnterpriseUser();
                         ent.transfer(data[i]);
+                        console.log(ent);
                         this.enterpriseList.push(ent);
                     }
                 })

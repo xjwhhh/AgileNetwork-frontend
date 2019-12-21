@@ -144,9 +144,7 @@
                                                 <strong> 已投人员</strong>
                                             </td>
                                             <td>
-                                                <a class="inline mr-1" href="#">
-                                                    <img class="rounded-circle thumb24" src="img/user/02.jpg" alt="project member" />
-                                                </a>
+                                                    <img class="rounded-circle thumb24" src="img/user/02.jpg" alt="project member" v-on:click="showResumeInfo('postId','workerId')" />
                                                 <a class="inline mr-1" href="#">
                                                     <img class="rounded-circle thumb24" src="img/user/04.jpg" alt="project member" />
                                                 </a>
@@ -369,6 +367,13 @@
             getPostList(){
 
             },
+
+
+            showResumeInfo(postId,commonId){
+                console.log(postId);
+                console.log(commonId);
+                this.$router.push({name:'entResumeInfo',params:{postId:postId,commonId:commonId}})
+            }
 
 
         }

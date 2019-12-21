@@ -32,6 +32,7 @@ const CheckPost=()=>import('@/views/AdminUser/CheckPost.vue');
 const CommonUserManagement=()=>import('@/views/AdminUser/CommonUserManagement.vue');
 const EnterpriseUserManagement=()=>import('@/views/AdminUser/EnterpriseUserManagement.vue');
 const ShowEntInfo=()=> import('@/views/AdminUser/ShowEntInfo.vue');
+const ShowPostInfo=()=> import('@/views/AdminUser/ShowPostInfo.vue');
 const ShowCommonInfo=()=> import('@/views/AdminUser/ShowCommonInfo.vue');
 
 
@@ -115,7 +116,7 @@ export default new Router({
                     component: Statistics
                 },
                 {
-                    path:'ResumeInfo/:userId',
+                    path:'ResumeInfo/:postId/:commonId',
                     name:'entResumeInfo',
                     component:ResumeInfo,
                 }
@@ -157,6 +158,10 @@ export default new Router({
                     path:'showEntInfo/:entId',
                     name:'showEntInfo',
                     component:ShowEntInfo,
+                },{
+                    path:'showPostInfo/:postId',
+                    name:'showPostInfo',
+                    component:ShowPostInfo,
                 }
             ]
         },
