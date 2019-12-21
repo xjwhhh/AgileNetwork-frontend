@@ -91,7 +91,7 @@
                             <p class="d-flex">
                                 <span>
                                     <small class="mr-1">by
-                                        <router-link :to="{name:'enterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
+                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
                                     </small>
                                     <small class="mr-1">2018/23/23</small>
                                 </span>

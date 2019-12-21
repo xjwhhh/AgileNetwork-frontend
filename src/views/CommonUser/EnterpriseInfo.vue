@@ -2,237 +2,170 @@
     <ContentWrapper>
         <div class="row">
             <div class="col-lg-4">
-                <div class="card card-default">
-                    <div class="card-body text-center">
-                        <div class="py-4">
-                            <img class="img-fluid rounded-circle img-thumbnail thumb96" v-bind:src="enterprise.headUrl" alt="Contact" />
-                        </div>
-                        <h3 class="m-0 text-bold" v-if="!ifEdit">{{enterprise.name}}</h3>
-                        <input class="form-control" v-if="ifEdit" type="text" placeholder="请输入名字" v-model="enterprise.name" />
-                        <h4 class="m-0 text-bold" v-if="!ifEdit">{{enterprise.mobile}}</h4>
-                        <input class="form-control" v-if="ifEdit" type="number" placeholder="请输入手机号" v-model="enterprise.mobile" />
 
-                        <div class="my-3">
-                            <p>{{enterprise.description}}</p>
-                        </div>
-                        <div class="text-center" v-if="!ifEdit">
-                            <button class="btn btn-primary" v-on:click="setIfEdit(true)">编辑</button>
-                        </div>
-                        <div class="text-center" v-if="ifEdit">
-                            <button class="btn btn-primary" v-on:click="updateAccountInfo()">保存</button>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="card card-default d-none d-lg-block">
-                    <div class="card-header">
-                        <div class="card-title text-center">推荐用户</div>
+                <div class="card">
+                    <div class="card-body bg-green">
+                        <h3 class="my-3">{{enterprise.name}}</h3>
                     </div>
                     <div class="card-body">
-                        <div class="media" v-for="user of recUserList">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" v-bind:src="user.headUrl" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">{{user.name}}
-                                    <div class="text-sm text-muted">{{user.university}}</div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="d-flex">
+                                <span>
+                                    <small class="mr-1">{{enterprise.location}}
+                                    </small>
+                                </span>
+                            <span class="ml-auto">
+
+                                </span>
+                        </p>
+                        <p>
+                            {{enterprise.description}}
+                        </p>
                     </div>
                 </div>
+
             </div>
             <div class="col-lg-8">
-                <div class="card card-default">
+                <div class="card card-default"  id="showInfo">
                     <div class="card-header d-flex align-items-center">
                         <div class="d-flex justify-content-center col">
-                            <div class="h4 m-0 text-center">企业信息</div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <b-dropdown id="ddown1" variant="link" no-caret right>
-                                <template slot="button-content">
-                                    <em class="fa fa-ellipsis-v fa-lg text-muted"></em>
-                                </template>
-                                <b-dropdown-item v-on:click="setIfChangePassword(true)">修改密码</b-dropdown-item>
-                            </b-dropdown>
+                            <div class="h4 m-0 text-center">招聘信息</div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row py-4 justify-content-center">
                             <div class="col-12 col-sm-10">
-                                <form class="form-horizontal">
+                                <div class="form-horizontal">
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact12">名称</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >名称</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact12" type="text" v-model="enterprise.enterpriseName" />
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.title"></p>
+                                            <!--<input class="form-control" id="inputContact1" type="text" placeholder="" v-model="user.name" />-->
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact2">邮箱</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >投递人数</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact2" type="email" v-model="enterprise.email" disabled="disabled" />
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.headCount"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact3">地址</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >薪水</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact3" type="text" v-model="enterprise.location" />
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.salary"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact4">税号</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >工作地点</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="inputContact4" type="text" v-model="enterprise.creditCode" />
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.workLocation"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证文件</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >开始时间</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <div class="form-control">
-                                                <a v-bind:href="enterprise.licenseUrl">认证文件</a>
-                                            </div>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.createTime"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="inputContact6">描述</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >结束时间</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <textarea class="form-control" id="inputContact6" rows="4" v-model="enterprise.description"></textarea>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.endTime"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证</label>
-                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===1">
-                                            <div class="float-left">
-                                                <div class="form-control">
-                                                    <div class="badge badge-success">已认证</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===0">
-                                            <div class="float-left">
-                                                <div class="form-control">
-                                                    <div class="badge badge-info">审核中</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===-1">
-                                            <div class="float-left">
-                                                <div class="form-control">
-                                                    <div class="badge bg-gray-dark">认证失败</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info" type="button" style="float:right" v-on:click="updateEnterpriseInfo" >提交审核</button>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info " type="button" v-if="enterprise.status!=='1'" v-on:click="applyForCertification">申请认证</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card card-default"  v-if="ifChangePassword">
-                    <div class="card-header d-flex align-items-center">
-                        <div class="d-flex justify-content-center col">
-                            <div class="h4 m-0 text-center">修改密码</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row py-4 justify-content-center">
-                            <div class="col-12 col-sm-10">
-                                <form class="form-horizontal">
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="password">原密码</label>
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >描述</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="password" type="password" v-model="oldPassword" />
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.description"></p>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="newPassword1">新密码</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="newPassword1" type="password" v-model="newPassword1"  />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="newPassword2">确认新密码</label>
-                                        <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="newPassword2" type="password" v-model="newPassword2"  />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info" type="button" style="float:right" v-on:click="updatePassword()" >修改密码</button>
-                                        </div>
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--            <label class="form-check-label">Right Top</label>-->
-            <notifications group="notifdemo" :position="notifPosition" :duration="parseInt(notifDuration)" :class="getNotificationPositionClass()"/>
 
+                                    <div class="text-center">
+                                        <button  class="btn btn-primary" v-on:click="showDilivery()" v-if="!showDeliver">投递简历</button>
+                                        <select class="custom-select custom-select-m mb-1" v-if="showDeliver"  style="width: 200px" v-model="selectResume">
+                                            <option selected="">选择简历</option>
+                                            <option v-for="item in resumes"  :value="item.id">{{item.name}}</option>
+                                        </select>
+                                        <button  class="btn btn-green" v-on:click="dilivery()" v-if="showDeliver">确认投递</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </ContentWrapper>
 </template>
 
 <script>
     import axios from 'axios'
-    import Vue from 'Vue'
+    import swal from 'sweetalert2'
+    import Notifications from 'vue-notification'
+    // import Vue from 'Vue'
     import qs from 'qs'
     // Vue.prototype.$axios = axios
 
 
-    import EnterpriseUser from "../../model/EnterpriseUser";
     import CommonUser from "../../model/CommonUser";
-    // import EnterpriseService from "../../service/EnterpriseService";
-    import EntAPI from '../../service/EnterpriseService';
-    import Notifications from 'vue-notification';
-    Vue.use(Notifications)
+    import Post from "../../model/Post"
+    import Enterprise from "../../model/EnterpriseUser" ;   //import  simple enterprise
+    import Vue from 'vue'
+    import VueCropper from 'vue-cropper'
+
+    Vue.use(VueCropper)
+
 
     export default {
+        name:'postInfo',
         data () {
             return {
-                aboutMsg: '我是enterpriseInfo组件',
-                enterprise:new EnterpriseUser(),
-                recUserList:[],
-
-                //修改密码
-                oldPassword:'',
-                newPassword1:'',
-                newPassword2:'',
-
-
-                //视图控制变量
-                ifEdit:false,
-                ifChangePassword:false,
-
-                notifDuration: 5000,
-                notifPosition: 'righttop',
-                notifTitle:'成功',
-                notifMessage:'成功',
-                notifVariant:'default',
+                aboutMsg: '我是postinfo组件',
+                user:new CommonUser(),
+                showDeliver:false,
+                post:new Post(),
+                enterprise:new Enterprise(),
+                selectResume:'',
+                resumes:new Array(),
             }
         },
 
-
         created(){
-            this.getRecommendUser();
-
-            this.enterprise.accountId=this.$route.params['id'];
-
-            this.getEnterpriseInfo(this.enterprise.accountId);
-
+            // this.getUserPersonalInfo();
+            this.init();
         },
-
         methods: {
+
+            showDilivery:function(){
+                this.showDeliver = true;
+            },
+
+            dilivery:function(){
+                console.log(this.selectResume);
+                this.showDeliver = false;
+                axios.post('http://118.25.180.45:8088/api/user/'+this.$route.params.id+"/post/"+this.post.id+"/resume/"+this.selectResume,{},
+                    {withCredentials:true})
+                    .then(function (response) {
+                        // this.user.avatar = response.data.avatar
+                        swal({
+                            title: "投递成功",
+                            heightAuto: false
+                        })
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "投递失败",
+                        heightAuto: false
+                    })
+                });
+            },
+
+
+            hello:function(info){
+                this.changeInfo = true;
+            },
 
             //获取企业信息
             getEnterpriseInfo: function(id) {
@@ -242,83 +175,62 @@
                 })
             },
 
-            setIfEdit:function (flag){
-                this.ifEdit=flag;
-            },
-
-            setIfChangePassword:function(flag){
-                this.ifChangePassword=flag;
-            },
-
-            //更新企业账号信息
-            updateAccountInfo:function(){
-                console.log(this.enterprise.name);
-                console.log(this.enterprise.mobile);
-                EntAPI.updateAccountInfo(this.enterprise).then(data=>{
-                    this.showInfo('更新成功');
-                    this.ifEdit=false;
-                });
-            },
-
-
-            //更新企业认证信息
-            updateEnterpriseInfo:function () {
-                EntAPI.updateEnterpriseInfo(this.enterprise).then(data=>{
-                    EntAPI.showInfo('更新成功');
+            init:function(){
+                axios.get('http://118.25.180.45:8088/api/enterprise/post/'+this.$route.params.pid).then(data=>{
+                    // console.log(data.data);
+                    this.post.transfer(data.data.postInfo);
+                    this.enterprise.transferSimple(data.data.enterpriseInfo);
+                })
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
+                    this.resumes=data.data;
                 })
             },
 
-            applyForCertification:function () {
-                if(this.enterprise.authStatus==='1'){
-                    EntAPI.showInfo('已认证，无需再认证');
-                }else{
-                    EntAPI.showInfo('正在申请，请等待1-3个工作日');
-                }
+
+
+
+
+            //获取用户信息
+            getUserPersonalInfo: function() {
+                console.log(this.$route.params.id);
+                this.user.id=this.$route.params.id;
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
+                    // console.log(data);
+                    this.user.transfer(data.data);
+                    //console.log("--->user",this.user.avatar)
+
+                })
+                this.imageSrc = this.user.avatar
+                // console.log(this.user)
             },
 
-            getRecommendUser: function(){
-                for(let i=0;i<10;i++){
-                    let user=new CommonUser();
-                    user.id=i;
-                    user.name='testuser';
-                    user.university='njdx';
-                    user.headUrl='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576742745082&di=139aaf86c89d1c21698da6fd57cd1be6&imgtype=0&src=http%3A%2F%2F787823.s21i.faiusr.com%2F2%2FABUIABACGAAg-ZmKwwUowL7X5AUwigU41AQ.jpg';
-                    this.recUserList.push(user);
-                }
-            },
-
-            updatePassword: function () {
-                console.log(this.oldPassword);
-                console.log(this.enterprise.password);
-                if(this.oldPassword===this.enterprise.password){
-                    if(this.newPassword1===this.newPassword2){
-                        console.log('success');
-                    }else{
-                        alert('两次密码输入不一致');
-                    }
-                }else{
-                    alert('原密码错误');
-                }
-            },
-
-            showNotification() {
-                this.$notify({
-                    group: 'notifdemo',
-                    title: this.notifTitle,
-                    text: this.notifMessage,
-                    type: this.getNotificationVariantClass()
+            //更新用户信息
+            confirmChangeInfo:function () {
+                // console.log(this.user);
+                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
+                    .then(function (response) {
+                        // do something...
+                        // console.log("my",response)
+                        this.closeInfo();
+                        // swal({
+                        //     title: "更新失败意格式问题",
+                        //     heightAuto: false
+                        // })
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "更新失败，请注意格式问题",
+                        heightAuto: false
+                    })
                 });
             },
-            getNotificationVariantClass() {
-                if(this.notifVariant === 'default') return '';
-                return `bg-${this.notifVariant} text-white`
+
+
+
+            //获取用户已投递简历
+            getUserDeliveredResume:function () {
+
             },
-
-            getNotificationPositionClass() {
-                return this.notifPosition.replace(' ', '-')
-            },
-
-
 
         },
     }

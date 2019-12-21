@@ -84,7 +84,7 @@ export default new Router({
                 },
                 {
                     path:'enterprise/:eid',
-                    name:'enterpriseInfo',
+                    name:'commonEnterpriseInfo',
                     component:CommonEnterpriseInfo
                 }
             ]
