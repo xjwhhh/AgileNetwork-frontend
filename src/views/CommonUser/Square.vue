@@ -1,322 +1,140 @@
 <template>
     <ContentWrapper>
-        <div class="row">
-            <li class="multi-chosen"><span class="title">学历要求：</span>
 
-                <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                            0001
-                                                    " data-lg-tj-cid="idnull">不限
-                </a>
-                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0002
-                                                            " data-lg-tj-cid="idnull">大专
-                    <i class="delete"></i>
-                </a>
-                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0003
-                                                            " data-lg-tj-cid="idnull">本科
-                    <i class="delete"></i>
-                </a>
-                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0004
-                                                            " data-lg-tj-cid="idnull">硕士
-                    <i class="delete"></i>
-                </a>
-                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0005
-                                                            " data-lg-tj-cid="idnull">博士
-                    <i class="delete"></i>
-                </a>
-                <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0006
-                                                            " data-lg-tj-cid="idnull">不要求
-                    <i class="delete"></i>
-                </a>
-
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-search-open="">
-                    <em class="icon-magnifier"></em>
-                </a>
-                <a class="nav-link" href="#" data-search-open="">
-                    <em class="icon-magnifier"></em>
-                </a>
-                <a class="nav-link" href="#" data-search-open="">
-                    <em class="icon-magnifier"></em>
-                </a> <a class="nav-link" href="#" data-search-open="">
-                <em class="icon-magnifier"></em>
-            </a>
-            </li>
-        </div>
         <div class="row">
             <!-- Blog Content-->
             <div class="col-xl-9">
-                <div class="card-columns">
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg1.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Erica Castro</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>56</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Trip down the river</a>
-                            </h4>
-                            <p>Aenean in sollicitudin velit. Nam sem magna, tristique non facilisis a, porta ut elit. Aliquam luctus nulla in justo euismod blandit. Aliquam condimentum enim a risus cursus blandit.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body bg-primary">
-                            <h3 class="my-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Erica Castro</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>56</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg10.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Erin Clark</a>
-                                    </small>
-                                    <small class="mr-1">Apr 13, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>1000</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">New camera</a>
-                            </h4>
-                            <p>Nullam posuere euismod volutpat. Quisque in ligula eget libero tristique varius sed euismod dolor. Sed ultrices, diam varius pellentesque porta, nulla neque auctor elit, quis tempus orci massa eget odio. Duis eleifend elementum
-                                commodo. Donec volutpat tristique laoreet. Cras vitae turpis enim, eget malesuada erat. Suspendisse quam leo, gravida a ullamcorper a, interdum id odio. Nullam eu lacus in nibh rutrum ornare at eget tellus.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg2.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Erica Castro</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>56</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Reviewing latests phones</a>
-                            </h4>
-                            <p>Aenean in sollicitudin velit. Nam sem magna, tristique non facilisis a, porta ut elit. Aliquam luctus nulla in justo euismod blandit. Aliquam condimentum enim a risus cursus blandit.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg8.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Allen Stephens</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>5600</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Workspace showcase</a>
-                            </h4>
-                            <p>Aenean iaculis diam lectus. Morbi quis purus velit. Maecenas tincidunt tempus sapien id ultrices. Vivamus fermentum libero vel felis aliquet interdum.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg3.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Erica Castro</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>56</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Incredible panoramic</a>
-                            </h4>
-                            <p>Aenean in sollicitudin velit. Nam sem magna, tristique non facilisis a, porta ut elit. Aliquam luctus nulla in justo euismod blandit. Aliquam condimentum enim a risus cursus blandit.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body bg-purple">
-                            <h3 class="my-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="d-flex m-0">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Ava Chavez</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>999</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg4.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Danny Ford</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>1000</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Sunset in the forest</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="#">
-                            <img class="img-fluid" src="img/bg5.jpg" alt="demo" />
-                        </a>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">By
-                                        <a class="ml-1" href="#">Danny Ford</a>
-                                    </small>
-                                    <small class="mr-1">May 03, 2015</small>
-                                </span>
-                                <span class="ml-auto">
-                                    <small>
-                                        <strong>1000</strong>
-                                        <span>Comments</span>
-                                    </small>
-                                </span>
-                            </p>
-                            <h4>
-                                <a href="#">Tech review</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Blog Sidebar-->
-            <div class="col-xl-3">
+
                 <!-- Search-->
                 <div class="card card-default">
-                    <div class="card-header">Search</div>
                     <div class="card-body">
-                        <form class="form-horizontal">
+                        <div class="form-horizontal" >
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search for..." />
+                                <input class="form-control" type="search" v-model="searchKey" placeholder="请输入关键字"   @keyup.enter="search()"  />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button">
+                                    <button class="btn btn-secondary" type="button" v-on:click="search()">
                                         <em class="fa fa-search"></em>
                                     </button>
                                 </span>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-                <!-- Categories-->
-                <div class="card card-default">
-                    <div class="card-header">Categories</div>
+
+                <div class="card card-default"  id="">
+
                     <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#">
-                                    <em class="fa fa-angle-right fa-fw"></em>Smartphones</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <em class="fa fa-angle-right fa-fw"></em>Mobiles</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <em class="fa fa-angle-right fa-fw"></em>Tech</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <em class="fa fa-angle-right fa-fw"></em>Inpiration</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <em class="fa fa-angle-right fa-fw"></em>Workspace</a>
-                            </li>
-                        </ul>
+
+
+                        <li style=" list-style-type:none" class="multi-chosen">
+                            <span class="title">
+                                <b style="font-size: larger">
+                                     学历要求：
+                                </b>
+                            </span>
+
+                            <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                            0001
+                                                    " data-lg-tj-cid="idnull">不限
+                            </a>
+                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0002
+                                                            " data-lg-tj-cid="idnull">大专
+                                <i class="delete"></i>
+                            </a>
+                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0003
+                                                            " data-lg-tj-cid="idnull">本科
+                                <i class="delete"></i>
+                            </a>
+                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0004
+                                                            " data-lg-tj-cid="idnull">硕士
+                                <i class="delete"></i>
+                            </a>
+                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0005
+                                                            " data-lg-tj-cid="idnull">博士
+                                <i class="delete"></i>
+                            </a>
+                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                                    0006
+                                                            " data-lg-tj-cid="idnull">不要求
+                                <i class="delete"></i>
+                            </a>
+
+                        </li>
+                        <li style=" list-style-type:none" class="multi-chosen"><span class="title"><b style="font-size: larger">
+                            学历要求：
+                        </b></span>
+
+                            <a rel="nofollow" v-for="item in showEducation" href="javascript:;" v-on:click="chooseEducation($event)" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
+                                                            0001
+                                                    " data-lg-tj-cid="idnull">{{item}}
+                            </a>
+                        </li>
                     </div>
                 </div>
+                <div class="card-columns">
+
+
+
+                    <div class="card">
+                        <div class="card-body" :class="getRandomColor()">
+                            <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
+                                <!--<h3 class="my-3">急招聘Java工程师</h3>-->
+                            <!--</a>-->
+                            <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
+
+                        </div>
+                        <div class="card-body">
+                            <p class="d-flex">
+                                <span>
+                                    <small class="mr-1">by
+                                        <router-link :to="{name:'enterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
+                                    </small>
+                                    <small class="mr-1">2018/23/23</small>
+                                </span>
+                                <span class="ml-auto">
+
+                                </span>
+
+                            </p>
+                            <p>
+                                华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body" :class="getRandomColor()">
+                            <h3 class="my-3">急招聘Java工程师</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="d-flex">
+                                <span>
+                                    <small class="mr-1">by
+                                        <a class="ml-1" href="#">华为</a>
+                                    </small>
+                                    <small class="mr-1">2018/23/23</small>
+                                </span>
+                                <span class="ml-auto">
+
+                                </span>
+
+                            </p>
+                            <p>
+                                华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Blog Sidebar-->
+            <div class="col-xl-3">
+
                 <!-- Tag Cloud-->
                 <div class="card card-default">
                     <div class="card-header">Tag Cloud</div>
@@ -358,28 +176,89 @@
                     { text: 'Amet', weight: 6.2},
                     { text: 'Consectetur', weight: 5},
                     { text: 'Adipiscing', weight: 5
-                    }]
+                    }],
+                educations: new Array(),
+                showEducation:new Array(),
+                randomColor :['bg-purple' , 'bg-green', 'bg-primary','bg-warning'],
+                searchKey:'',
             }
         },
 
+
+        created(){
+              this.init();
+        },
         methods:{
+            init:function(){
+                this.showEducation=["dayiyi","daerer","wfwer"]
+            },
             getPosts(){
 
+            },
+            getRandomColor:function () {
+                return this.randomColor[Math.floor(Math.random() * 1)]
             },
 
             getPostsByCondition(){
 
+            },
+            search:function () {
+                this.$router.push({name: 'square', query: {search: this.searchKey}})
+            },
+
+            chooseEducation:function (event) {
+
+                var el = event.target;//哈哈
+                if(this.educations.includes(el.innerText)){
+                    this.educations = this.educations.filter(t => t != el.innerText)
+                    alert("nonon")
+                }else{
+                    this.educations.push(el.innerText);
+                    alert(el.innerText);
+                }
+
             }
 
         },
 
-        mounted() {
-            $(this.$refs.jqcloud).jQCloud(this.word_array, {
-                width: 240,
-                height: 200,
-                steps: 7
-            });
-        }
+        // mounted() {
+        //     $(this.$refs.jqcloud).jQCloud(this.word_array, {
+        //         width: 240,
+        //         height: 200,
+        //         steps: 7
+        //     });
+        // }
     }
 </script>
 
+<style scoped>
+    .multi-chosen a{
+        padding: 5px;
+    }
+    .multi-chosen a:link{
+        text-decoration: none;
+        color: #656565;
+    }
+    .multi-chosen a:hover{
+        background: #00bfe4;
+        color: white;
+    }
+    .multi-chosen a:active{
+        background: #00bfe4;
+        color: white;
+    }
+    .multi-chosen{
+        /*float: left;*/
+        margin-right: 5px;
+        padding: 5px 8px;
+        height: 34px;
+        line-height: 14px;
+    }
+    .card-body a{
+        text-decoration: none;
+        color: white;
+    }
+
+
+
+</style>

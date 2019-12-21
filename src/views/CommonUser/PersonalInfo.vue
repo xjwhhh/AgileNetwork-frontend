@@ -314,7 +314,7 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" for="retryPassword">确认密码</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="retryPassword" type="password" v-model="retryModel" />
+                                            <input class="form-control" id="retryPassword" type="password" v-model="retryPass" />
                                         </div>
                                     </div>
                                     <div class="form-group row text-right">
@@ -322,7 +322,7 @@
 
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-info right " type="button" v-on:click="changePassword()">确认修改</button>
+                                            <button class="btn btn-info right " type="button" v-on:click="confirmChangePassword()">确认修改</button>
                                         </div>
                                     </div>
                                 </form>
@@ -338,6 +338,8 @@
 
 <script>
     import axios from 'axios'
+    import swal from 'sweetalert2'
+    import Notifications from 'vue-notification'
     // import Vue from 'Vue'
     import qs from 'qs'
     // Vue.prototype.$axios = axios
@@ -345,17 +347,6 @@
     import CommonUser from "../../model/CommonUser";
     import Vue from 'vue'
     import VueCropper from 'vue-cropper'
-    // import commonService from '../../service/CommonService'
-    // import
-    // import api from '@/api/getData'
-
-    // axios.defaults.timeout = 5000
-    // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-    // axios.defaults.headers.post['Accept'] = 'application/json'
-    // axios.defaults.baseURL = 'http://localhost:9004'
-    // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-    // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 
     Vue.use(VueCropper)
 
@@ -371,32 +362,25 @@
                 changeAtatar:false,
 
                 uid:null,
-                imageSrc: 'img/mb-sample.jpg',
+                imageSrc: '',
                 outputSize: 1,
                 outputType: 'jpeg',
                 realTimePreviewData: {},
                 crap: false,
                 previewImage: null,
                 previewModalShow: false,
-                tempData:null
+                tempData:null,
+                newPassword:'',
+                retryPass:'',
+                oldPassword:'',
             }
         },
 
         created(){
-            // console.log(this.aboutMsg);
-            // this.user.id=this.$route.params('id');
-            // this.user.id='12';
-            // this.user.age='24';
-            // this.user.gender='男';
-            // this.user.aid='88324sd38';
-            // this.user.email='123123@smail.nju.edu.cn';
-            // this.user.name='张伟';
-            // this.user.avatar='https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
-            // this.user.education='博士';
-            // this.user.mobile='13234772773';
-            // this.user.university='南京大学';
             this.getUserPersonalInfo();
-            // this.imageSrc = 'https://pic4.zhimg.com/50/v2-1f5bf5c460a5801c741bf7b52f7af183_hd.jpg';
+            console.log(this.user.avatar)
+            this.imageSrc = 'img/logo.jpg';
+            console.log("imageSrc=>",this.imageSrc)
         },
         methods: {
             closeAtatar:function(){
@@ -429,37 +413,58 @@
                 console.log(this.$route.params.id);
                 this.user.id=this.$route.params.id;
                 axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
-                    console.log(data);
+                    // console.log(data);
                     this.user.transfer(data.data);
+                    //console.log("--->user",this.user.avatar)
+                    this.previewImage = this.user.avatar
+                    this.imageSrc = this.user.avatar
                 })
-                console.log(this.user)
+                this.imageSrc = this.user.avatar
+                // console.log(this.user)
             },
 
             //更新用户信息
             confirmChangeInfo:function () {
-                console.log(this.user);
+                // console.log(this.user);
                 axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
                     .then(function (response) {
                         // do something...
-                        console.log("my",response)
-                    }.bind(this))
-                    .catch(function (error) {
-                        console.log("ree",error)
+                        // console.log("my",response)
+                        this.closeInfo();
+                        // swal({
+                        //     title: "更新失败意格式问题",
+                        //     heightAuto: false
+                        // })
+                    }.bind(this)).catch(function (error) {
+                        // console.log("ree",error)
+                        swal({
+                            title: "更新失败，请注意格式问题",
+                            heightAuto: false
+                        })
                     });
-
-                // axios.put('http://118.25.180.45:8088/api/user',this.user).then(res=>{
-                //     console.log(res);
-                //
-                // }).catch(res=>{
-                //     alert("账号或密码不正确");
-                //     console.log("err",res)
-                // })
             },
 
-            // //修改用户的密码
-            // changePassword:function(){
-            //
-            // },
+            //修改用户的密码
+            confirmChangePassword:function(){
+                if(this.retryPass != this.newPassword){
+                    swal({
+                        title:"新密码不一致，请检查",
+                        heightAuto:false
+                    });
+                    // this.$notify({
+                    //     group: 'notifdemo',
+                    //     title: '123123',
+                    //     text: '234234'
+                    //     // type: this.getNotificationVariantClass()
+                    // });
+
+                }
+                let info ={
+                    'oldPass':this.oldPassword,
+                    'newPass':this.newPassword,
+                    'retryPass':this.retryPass
+                }
+            },
 
             //获取用户已投递简历
             getUserDeliveredResume:function () {
@@ -467,7 +472,26 @@
             },
 
             confirmChangeAtatar(){
-                //上传图片
+                this.$refs.cropper.getCropData((data) => {
+                    // console.log(data);
+                    let pa = {
+                        'accountId':this.user.id,
+                        'base64str':data
+                    }
+                    axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/avatar", pa,{withCredentials:true})
+                        .then(function (response) {
+                            this.user.avatar = response.data.avatar
+                            this.changeImage = false;
+                        }.bind(this)).catch(function (error) {
+                        // console.log("ree",error)
+                        swal({
+                            title: "更新失败",
+                            heightAuto: false
+                        })
+                    });
+                })
+
+
             },
 
 

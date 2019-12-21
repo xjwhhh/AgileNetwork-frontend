@@ -64,14 +64,14 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-3 col-md-4 col-5 col-form-label text-right" >名称</label>
                                         <div class="col-xl-9 col-md-8 col-7">
-                                            <input class="form-control" id="addName" type="text" placeholder=""   />
+                                            <input class="form-control" v-model="addName" id="addName" type="text" placeholder=""   />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-3 col-md-4 col-5 col-form-label text-right">简历文件</label>
                                         <div class="col-xl-9 col-md-8 col-7">
                                             <!-- Styled -->
-                                            <b-form-file v-model="file"  placeholder="选择一个文件"></b-form-file>
+                                            <b-form-file  v-model="file"  placeholder="选择一个文件"></b-form-file>
                                         </div>
                                     </div>
                                     <div class="form-group row text-right">
@@ -110,7 +110,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr v-for="item in resumes">
                                 <td>
                                     <a href="#">AngularJS</a>
                                 </td>
@@ -136,11 +136,14 @@
     </ContentWrapper>
 </template>
 <script>
-    import Datatable from '@/components/Tables/Datatable';
+    import Datatable from '../../components/Tables/Datatable';
+    import axios from 'axios'
+    import qs from 'qs'
+    import  swal from 'sweetalert2'
 
     export default {
         components: {
-            Datatable
+            // Datatable
         },
         data() {
             return {
@@ -166,12 +169,19 @@
                 },
                 file:null,
                 addFile:false,
+                addName:'',
+                resumes:new Array(),
             }
         },
         created(){
-
+            this.init();
         },
         methods:{
+            init:function(){
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
+                    this.resumes=data.data;
+                })
+            },
             showAddResume:function () {
                 this.addFile = true;
             },
@@ -180,6 +190,51 @@
             },
             addResume:function () {
                 // 添加简历
+                let formData = new FormData();
+                formData.append('file',this.file)
+                axios.post('http://118.25.180.45:8088/api/common/general_file', formData,{withCredentials:true})
+                    .then(function (response) {
+                        console.log(response)
+                        axios.post('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resume', {
+                            'name':this.addName,
+                            'annexUrl':response.data
+                        },{withCredentials:true})
+                            .then(function (response) {
+                                console.log("2345678")
+                            }.bind(this)).catch(function (error) {
+                            // console.log("ree",error)
+                            swal({
+                                title: "上传失败，请注意格式问题",
+                                heightAuto: false
+                            })
+                            return '';
+                        })
+
+
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "上传失败，请注意格式问题",
+                        heightAuto: false
+                    })
+                    return '';
+                });
+            },
+            uploadFile(){
+                // 添加简历
+                let formData = new FormData();
+                formData.append('file',this.file)
+                axios.post('http://118.25.180.45:8088/api/common/general_file', formData,{withCredentials:true})
+                    .then(function (response) {
+                        return response.data;
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "上传失败，请注意格式问题",
+                        heightAuto: false
+                    })
+                    return '';
+                });
             }
         }
     }
@@ -187,11 +242,7 @@
 
 <style scoped>
 
-    #datatable1 {
-        /* margin-top: 0px; */
-        /* padding-top: 0px; */
-        margin-top: 0rem !important;
-    }
+
 
 
 </style>
