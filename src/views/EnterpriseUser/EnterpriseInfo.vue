@@ -99,6 +99,13 @@
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >认证</label>
+                                        <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===-2">
+                                            <div class="float-left">
+                                                <div class="form-control">
+                                                    <div class="badge badge-success">未认证</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-xl-10 col-md-9 col-8" v-if="enterprise.authStatus===1">
                                             <div class="float-left">
                                                 <div class="form-control">
@@ -166,9 +173,9 @@
                                         <div class="col-md-6 ">
                                             <button class="btn btn-info" type="button" style="float:right" v-on:click="updatePassword()" >修改密码</button>
                                         </div>
-                                        <div class="col-md-6 ">
-                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>
-                                        </div>
+<!--                                        <div class="col-md-6 ">-->
+<!--                                            <button class="btn btn-info" type="button" style="float:left" v-on:click="setIfChangePassword(false)" >取消</button>-->
+<!--                                        </div>-->
                                     </div>
                                 </form>
                             </div>
@@ -265,18 +272,19 @@
             //更新企业认证信息
             updateEnterpriseInfo:function () {
                 EntAPI.updateEnterpriseInfo(this.enterprise).then(data=>{
-                    EntAPI.showInfo('更新成功');
+                    // EntAPI.showInfo('更新成功');
+                    EntAPI.showInfo('正在申请，请等待1-3个工作日');
                 })
 
             },
 
-            applyForCertification:function () {
-                if(this.enterprise.authStatus==='1'){
-                    EntAPI.showInfo('已认证，无需再认证');
-                }else{
-                    EntAPI.showInfo('正在申请，请等待1-3个工作日');
-                }
-            },
+            // applyForCertification:function () {
+            //     if(this.enterprise.authStatus==='1'){
+            //         EntAPI.showInfo('已认证，无需再认证');
+            //     }else{
+            //         EntAPI.showInfo('正在申请，请等待1-3个工作日');
+            //     }
+            // },
 
             getRecommendUser: function(){
                 for(let i=0;i<10;i++){

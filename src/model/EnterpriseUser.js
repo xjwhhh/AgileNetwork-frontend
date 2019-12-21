@@ -39,6 +39,10 @@ class EnterpriseUser {
         this.updateTime=enterpriseInfo['updateTime'];
         this.authStatus=enterpriseInfo['authStatus'];
 
+        if(enterpriseInfo===null){
+            this.authStatus=-2;
+        }
+
         console.log(this);
     }
 

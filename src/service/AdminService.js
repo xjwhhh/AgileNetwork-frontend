@@ -163,7 +163,44 @@ export default {
                     reject(error);
                 });
         });
-    }
+    },
+
+
+    //获取正在审核的企业认证信息
+    getUncheckedEntInfo() {
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/enterprises/status/unchecked',
+                method: 'get',
+                withCredentials:true,
+            })
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+        });
+    },
+
+    //获取已通过审核的企业认证信息
+    getCheckedEntInfo() {
+        return new Promise((resolve, reject) => {
+            axios({
+                url: '/enterprises/status/checked',
+                method: 'get',
+                withCredentials:true,
+            })
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch(function (error) {
+                    reject(error);
+                });
+        });
+    },
+
+
 
 
 
