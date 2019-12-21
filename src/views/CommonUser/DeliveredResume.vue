@@ -4,7 +4,7 @@
         <div class="content-heading">简历管理</div>
         <!-- Zero Configuration-->
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <div class="card card-default">
                     <!--            <div class="card-header">Blog articles manager</div>-->
                     <div class="card-header d-flex align-items-center">
@@ -43,7 +43,7 @@
 
 
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="card card-default" v-if="addFile">
                     <div class="card-header d-flex align-items-center">
                         <div class="d-flex justify-content-center col">
@@ -105,23 +105,23 @@
                                 <th data-priority="1">简历名称</th>
                                 <th>简历附件</th>
                                 <th>创建时间</th>
-                                <th>更新时间</th>
+                                <!--<th>更新时间</th>-->
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr v-for="item in resumes">
                                 <td>
-                                    <a href="#">AngularJS</a>
+                                    <p >{{item.name}}</p>
                                 </td>
                                 <td>
-                                    <a href="#">Keith Gutierrez</a>
+                                    <a :href="item.annexUrl">下载</a>
                                 </td>
-                                <td>10/05/2015</td>
-                                <td>10/05/2015</td>
+                                <td>{{item.createTime}}</td>
+                                <!--<td>{{// item.updateTime | formatDate}}</td>-->
                                 <td>
                                     <div class="btn-group">
-                                        <button class="btn btn-secondary">修改</button>
+                                        <!--<button class="btn btn-secondary">修改</button>-->
                                         <button class="btn btn-secondary">删除</button>
                                     </div>
                                 </td>
@@ -140,6 +140,7 @@
     import axios from 'axios'
     import qs from 'qs'
     import  swal from 'sweetalert2'
+    // import { formatDate } from 'vux'
 
     export default {
         components: {
@@ -173,15 +174,53 @@
                 resumes:new Array(),
             }
         },
+        filters: {
+            formatDate(time) {
+                var date = new Date(time);
+                return this.format(date, 'yyyy-MM-dd');
+            }
+        },
         created(){
             this.init();
         },
         methods:{
+            formatDate:function(time){
+                let date = new Date(time);
+                return fo
+            },
             init:function(){
                 axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
                     this.resumes=data.data;
+                    console.log(this.resumes)
                 })
             },
+            formatDate:function(time){
+                let date = new Date(time);
+                return this.format(time,'yyyy-MM-dd hh:mm')
+            },
+             format:function  (date, fmt) {
+                if (/(y+)/.test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+                }
+                let o = {
+                    'M+': date.getMonth() + 1,
+                    'd+': date.getDate(),
+                    'h+': date.getHours(),
+                    'm+': date.getMinutes(),
+                    's+': date.getSeconds()
+                }
+                for (let k in o) {
+                    if (new RegExp(`(${k})`).test(fmt)) {
+                        let str = o[k] + ''
+                        fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : this.padLeftZero(str))
+                    }
+                }
+                 return fmt
+             },
+
+             padLeftZero:function  (str) {
+                 return ('00' + str).substr(str.length)
+             },
             showAddResume:function () {
                 this.addFile = true;
             },
@@ -201,6 +240,8 @@
                         },{withCredentials:true})
                             .then(function (response) {
                                 console.log("2345678")
+                                // this.resumes = response.data
+                                this.closeAddFile();
                             }.bind(this)).catch(function (error) {
                             // console.log("ree",error)
                             swal({
@@ -209,7 +250,6 @@
                             })
                             return '';
                         })
-
 
                     }.bind(this)).catch(function (error) {
                     // console.log("ree",error)

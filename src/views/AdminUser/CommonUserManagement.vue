@@ -24,7 +24,7 @@
                     <tbody>
                     <tr v-for="user of commonUserList">
                         <td>
-                            <router-link :to="{name:'showCommonInfo',params:{commonId:1}}">
+                            <router-link :to="{name:'showCommonInfo',params:{commonId:user.id}}">
                                 <label>{{user.name}}</label>
                             </router-link>
                         </td>
@@ -104,6 +104,7 @@
                 AdminAPI.getCommonUser().then(data=>{
                     console.log(data);
                     for(let i=0;i<data.length;i++){
+                        console.log(data);
                         let user=new CommonUser();
                         user.transfer(data[i]);
                         this.commonUserList.push(user);
