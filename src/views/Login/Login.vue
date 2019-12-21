@@ -107,15 +107,12 @@
                 console.log(loginInfo);
                 axios.post('http://118.25.180.45:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
                     console.log(res);
-                    if(res.data.role=='1'){
-                        console.log(1)
+                    if(res.data.role===1){
                         this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})
-                    }else  if ( res.data.role == '2'){
-                        console.log(2)
+                    }else  if ( res.data.role === 2){
                         this.$router.push({name:'commonLayout',params:{id:res.data.id}})
                     }else{
-                        console.log(3)
-                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
+                        this.$router.push({name:'adminLayout',params:{id:res.data.id}})
                     }
                 }).catch(res=>{
                     alert("账号或密码不正确");
