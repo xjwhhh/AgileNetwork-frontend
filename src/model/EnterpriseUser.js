@@ -36,8 +36,13 @@ class EnterpriseUser {
         this.updateTime=enterpriseInfo['updateTime'];
 
         console.log(this);
+    }
 
-
+    transferSimple (data){
+        this.id = data.id;
+        this.name = data.enterpriseName;
+        this.location = data.location;
+        this.description = data.description;
     }
 }
 

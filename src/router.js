@@ -15,6 +15,8 @@ const Register = () => import('@/views/Login/Register.vue');
 const Square = () => import('@/views/CommonUser/Square.vue');
 const PersonalInfo = () => import('@/views/CommonUser/PersonalInfo.vue');
 const DeliveredResume = () => import('@/views/CommonUser/DeliveredResume.vue');
+const PostInfo = () =>import('@/views/CommonUser/PostInfo.vue')
+const CommonEnterpriseInfo = () =>import('@/views/CommonUser/EnterpriseInfo.vue');
 
 //EnterpriseUser
 const EnterpriseInfo=()=>import('@/views/EnterpriseUser/EnterpriseInfo.vue');
@@ -73,6 +75,16 @@ export default new Router({
                     path: 'personalInfo',
                     name:'personalInfo',
                     component: PersonalInfo
+                },
+                {
+                    path: 'postInfo/:pid',
+                    name:'postInfo',
+                    component:PostInfo
+                },
+                {
+                    path:'enterprise/:eid',
+                    name:'enterpriseInfo',
+                    component:CommonEnterpriseInfo
                 }
             ]
         },
