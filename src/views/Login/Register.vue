@@ -23,6 +23,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="text-muted" for="signupInputEmail1">名称</label>
+                        <div class="input-group with-focus">
+                            <input :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.name')}" placeholder="Enter email" v-model="registerInfo.name" v-validate="'required'" type="text" name="text"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-muted bg-transparent border-left-0">
+                                    <em class="fa fa-envelope"></em>
+                                </span>
+                            </div>
+                            <span v-show="errors.has('register.email')" class="invalid-feedback">{{ errors.first('register.email') }}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="text-muted" for="signupInputPassword1">Password</label>
                         <div class="input-group with-focus">
                             <input ref="password1" :class="{'form-control border-right-0':true, 'is-invalid': errors.has('register.password1')}" v-model="registerInfo.password1" v-validate="'required'" type="password" name="password1" placeholder="Password"/>
@@ -73,6 +85,8 @@
 <script>
     import Vue from 'vue'
     import VeeValidate from 'vee-validate';
+    import axios from 'axios';
+    import qs from 'qs'
 
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
@@ -85,6 +99,7 @@
                     email: '',
                     password1: '',
                     password2: '',
+                    name:'',
                     agreements: false
                 }
             }
@@ -96,8 +111,9 @@
                         console.log('Form Submitted!');
                         console.log(`Email: ${this.registerInfo.email}`);
                         console.log(`Password: ${this.registerInfo.password1}`);
-                        console.log(`Agreed: ${this.registerInfo.agreements}`);
-                        this.$router.push('/login');
+                        console.log(`PasswordRe: ${this.registerInfo.password2}`);
+                        this.register(this.registerInfo)
+                        // this.$router.push('/login');
                         return;
                     }
                     console.log('Correct them errors!');
@@ -105,29 +121,50 @@
             },
 
             register(registerInfo){
-                console.log('success');
+                console.log('in register ');
                 console.log(registerInfo.email);
-                this.$axios({
-                    method: "POST",
-                    url: '',
-                    transformRequest: [
-                        function(data) {
-                            // 对 data 进行任意转换处理
-                            return qs.stringify(data);
-                        }
-                    ],
-                    data: { email: registerInfo.email, password: registerInfo.password1 },
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                axios.post('http://118.25.180.45:8088/api/user',{
+                    email:registerInfo.email,
+                    password:registerInfo.password1,
+                    name:registerInfo.name
+                },{withCredentials:true}).then(res=>{
+                    console.log(res);
+                    if(res.data.role=='1'){
+                        console.log(1)
+                        this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})
+                    }else  if ( res.data.role == '2'){
+                        console.log(2)
+                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
+                    }else{
+                        console.log(3)
+                        this.$router.push({name:'commonLayout',params:{id:res.data.id}})
                     }
-                }).then(function(response) {
-                        var data = response.data
-                        //显示错误信息
-                        console.log(data);
+                }).catch(res=>{
+                    alert("账号或密码不正确");
+                    console.log("err",res)
+                })
 
-                    }, function(response) {
-                        alert(response.status)
-                    })
+                // axios({
+                //     method: "POST",
+                //     url: 'http://118.25.180.45:8088/api/account/user',
+                //     transformRequest: [
+                //         function(data) {
+                //             // 对 data 进行任意转换处理
+                //             return qs.stringify(data);
+                //         }
+                //     ],
+                //     data: { email: registerInfo.email, password: registerInfo.password1,name:registerInfo.name },
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     }
+                // }).then(function(response) {
+                //         var data = response.data
+                //         //显示错误信息
+                //         console.log(data);
+                //
+                //     }, function(response) {
+                //         console.log(response)
+                //     })
             },
         }
     }
