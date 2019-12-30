@@ -9,7 +9,7 @@
                         </div>
                         <h3 class="m-0 text-bold">{{user.name}}</h3>
                         <div class="my-3">
-                            <p>{{user.university}}<span>-</span>{{user.education}}</p>
+                            <p>{{user.university}}<span>-</span>{{educations[user.education]}}</p>
                         </div>
                         <div class="text-center">
                             <button  class="btn btn-primary" v-on:click="hello('fe')">修改个人信息</button>
