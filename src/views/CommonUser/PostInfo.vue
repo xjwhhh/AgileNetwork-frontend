@@ -153,10 +153,10 @@
                             title: "投递成功",
                             heightAuto: false
                         })
-                    }.bind(this)).catch(function (error) {
+                    }.bind(this)).catch(function (error,response) {
                     // console.log("ree",error)
                     swal({
-                        title: "投递失败",
+                        title: "投递失败"+"可能时间已经截止",
                         heightAuto: false
                     })
                 });
@@ -168,11 +168,13 @@
             },
 
             init:function(){
+                console.log("start-----")
                 axios.get('http://118.25.180.45:8088/api/enterprise/post/'+this.$route.params.pid).then(data=>{
                     // console.log(data.data);
-                    this.post.transfer(data.data.postInfo);
+                    this.post.transferSimple(data.data.postInfo);
                     this.enterprise.transferSimple(data.data.enterpriseInfo);
                 })
+                console.log("start222-----")
                 axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
                     this.resumes=data.data;
                 })

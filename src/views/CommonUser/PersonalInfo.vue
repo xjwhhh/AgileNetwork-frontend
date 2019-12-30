@@ -161,7 +161,7 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.education"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="educations[user.education]"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -173,7 +173,7 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.gender"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="genders[user.gender]"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -233,8 +233,13 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeEducation" type="text" placeholder="" v-model="user.education" />
+                                            <!--<input class="form-control" id="changeEducation" type="text" placeholder="" v-model="user.education" />-->
+                                            <select class="custom-select custom-select-m mb-1"  id="changeEducation" style="width: 200px" v-model="user.education">
+                                                <option selected="">选择学位</option>
+                                                <option v-for="item in educations"  :value="educationValue[ item ]">{{item}}</option>
+                                            </select>
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >年龄</label>
@@ -245,7 +250,10 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeGender" type="text" placeholder="" v-model="user.gender" />
+                                            <select class="custom-select custom-select-m mb-1" id="changeGender"  style="width: 200px" v-model="user.gender">
+                                                <option selected="">选择性别</option>
+                                                <option v-for="item in genders"  :value="gendersValue[ item ]">{{item}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -360,10 +368,21 @@
                 retryPass:'',
                 oldPassword:'',
                 postResume:new Array(),
+                genders : ['男','女','保密'],
+                educations : ['本科','本科在读','研究生','博士','其他'],
+                gendersValue:{
+                    '男':0,
+                    '女':1,
+                    '保密':2
+                },
+                educationValue:{
+                    '本科':0,'本科在读':1,'研究生':2,'博士':3,'其他':4
+                }
             }
         },
 
         created(){
+
             this.getUserPersonalInfo();
             this.getUserDeliveredResume();
             console.log(this.user.avatar)
@@ -414,6 +433,7 @@
             //更新用户信息
             confirmChangeInfo:function () {
                 // console.log(this.user);
+                console.log(this.user);
                 axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
                     .then(function (response) {
                         // do something...

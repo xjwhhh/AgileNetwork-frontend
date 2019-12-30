@@ -66,7 +66,7 @@
                             <p class="d-flex">
                                 <span>
                                     <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseInfo.id }}" class="ml-1" style="color: #6c757d">{{item.enterpriseInfo.enterpriseName}}</router-link>
+                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseInfo.accountId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseInfo.enterpriseName}}</router-link>
                                     </small>
                                     <small class="mr-1">{{item.postInfo.createTime.substr(0,10)}}</small>
                                 </span>
@@ -191,7 +191,8 @@
                 this.getInfo()
             },
             getInfo:function(){
-                axios.post('http://118.25.180.45:8088/api/square/posts?search='+this.$route.query.search,{
+
+                axios.post('http://118.25.180.45:8088/api/square/posts?search='+this.searchKey,{
                         'workLocations':this.locations,
                         'salaryScope':this.salarys
                     },
@@ -227,18 +228,24 @@
             getPostsByCondition(){
 
             },
+
+
             search:function () {
-                this.getInfo()
-                this.$router.push({name: 'square', query: {search: this.searchKey}})
+                this.getInfo();
+                // console.log('12312')
+                // this.$router.push({name: 'square', query: {search: this.searchKey}})
+                // console.log('1231qweq2')
             },
 
             chooseSalary:function (event) {
                 var el = event.target;//哈哈
-                if(this.salarys.includes(el.innerText)){ // 包含就移除
-                    this.salarys = this.salarys.filter(t => t != el.innerText)
+                if(this.salarys.includes(this.salaryExpected[el.innerText.trim()])){ // 包含就移除
+                    this.salarys = this.salarys.filter(t => t != this.salaryExpected[el.innerText.trim()])
                     this.salaryActive[el.innerText.trim()]=false
                 }else{
-                    this.salarys.push(el.innerText);
+                    this.salarys.push(this.salaryExpected[el.innerText.trim()]);
+                    console.log(el.innerText.trim())
+                    console.log(this.salaryExpected[el.innerText.trim()]);
                     this.salaryActive[el.innerText.trim()]=true
                 }
                 this.getInfo()

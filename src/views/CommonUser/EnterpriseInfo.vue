@@ -33,21 +33,21 @@
                     </div>
                     <div class="card-body">
                         <div class="card-columns">
-                            <div class="card">
+                            <div class="card"   v-for="item in allPost">
                                 <div class="card-body bg-primary" >
                                     <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
                                     <!--<h3 class="my-3">急招聘Java工程师</h3>-->
                                     <!--</a>-->
-                                    <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
+                                    <router-link  :to="{name:'postInfo', params: { pid: item.postInfo.id }}"><h3 class="my-3">{{item.postInfo.title}}</h3></router-link>
 
                                 </div>
                                 <div class="card-body">
                                     <p class="d-flex">
                                 <span>
                                     <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
+                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.postInfo.accountId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseInfo.enterpriseName}}</router-link>
                                     </small>
-                                    <small class="mr-1">2018/23/23</small>
+                                    <small class="mr-1">{{item.postInfo.createTime.substr(0,10)}}</small>
                                 </span>
                                         <span class="ml-auto">
 
@@ -55,88 +55,13 @@
 
                                     </p>
                                     <p>
-                                        华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
+                                        {{item.postInfo.description}}
                                     </p>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-body bg-primary" >
-                                    <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
-                                    <!--<h3 class="my-3">急招聘Java工程师</h3>-->
-                                    <!--</a>-->
-                                    <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
 
-                                </div>
-                                <div class="card-body">
-                                    <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
-                                    </small>
-                                    <small class="mr-1">2018/23/23</small>
-                                </span>
-                                        <span class="ml-auto">
 
-                                </span>
 
-                                    </p>
-                                    <p>
-                                        华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body bg-primary" >
-                                    <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
-                                    <!--<h3 class="my-3">急招聘Java工程师</h3>-->
-                                    <!--</a>-->
-                                    <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
-
-                                </div>
-                                <div class="card-body">
-                                    <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
-                                    </small>
-                                    <small class="mr-1">2018/23/23</small>
-                                </span>
-                                        <span class="ml-auto">
-
-                                </span>
-
-                                    </p>
-                                    <p>
-                                        华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body bg-primary" >
-                                    <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
-                                    <!--<h3 class="my-3">急招聘Java工程师</h3>-->
-                                    <!--</a>-->
-                                    <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
-
-                                </div>
-                                <div class="card-body">
-                                    <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
-                                    </small>
-                                    <small class="mr-1">2018/23/23</small>
-                                </span>
-                                        <span class="ml-auto">
-
-                                </span>
-
-                                    </p>
-                                    <p>
-                                        华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,6 +105,7 @@
                 enterprise:new Enterprise(),
                 selectResume:'',
                 resumes:new Array(),
+                allPost:new Array()
             }
         },
 
@@ -188,42 +114,25 @@
             this.init();
         },
         methods: {
-
-            showDilivery:function(){
-                this.showDeliver = true;
-            },
-
-            dilivery:function(){
-                console.log(this.selectResume);
-                this.showDeliver = false;
-                axios.post('http://118.25.180.45:8088/api/user/'+this.$route.params.id+"/post/"+this.post.id+"/resume/"+this.selectResume,{},
-                    {withCredentials:true})
-                    .then(function (response) {
-                        // this.user.avatar = response.data.avatar
-                        swal({
-                            title: "投递成功",
-                            heightAuto: false
-                        })
-                    }.bind(this)).catch(function (error) {
-                    // console.log("ree",error)
-                    swal({
-                        title: "投递失败",
-                        heightAuto: false
-                    })
-                });
-            },
-
-
-            hello:function(info){
-                this.changeInfo = true;
-            },
-
             //获取企业信息
             getEnterpriseInfo: function(id) {
                 EntAPI.getEnterpriseById(id).then(data=>{
                     console.log(data);
                     this.enterprise.transfer(data);
                 })
+
+                axios.get('http://118.25.180.45:8088/api/enterprise/'+id+'/posts',
+                    {withCredentials:true})
+                    .then(function (response) {
+                        this.allPost = response.data
+                        console.log("1231321")
+                        console.log(response.data[0].postInfo.title)
+                    }.bind(this)).catch(function (error) {
+                });
+
+
+
+
             },
 
             init:function(){
@@ -233,49 +142,6 @@
 
 
 
-
-
-            //获取用户信息
-            getUserPersonalInfo: function() {
-                console.log(this.$route.params.id);
-                this.user.id=this.$route.params.id;
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
-                    // console.log(data);
-                    this.user.transfer(data.data);
-                    //console.log("--->user",this.user.avatar)
-
-                })
-                this.imageSrc = this.user.avatar
-                // console.log(this.user)
-            },
-
-            //更新用户信息
-            confirmChangeInfo:function () {
-                // console.log(this.user);
-                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
-                    .then(function (response) {
-                        // do something...
-                        // console.log("my",response)
-                        this.closeInfo();
-                        // swal({
-                        //     title: "更新失败意格式问题",
-                        //     heightAuto: false
-                        // })
-                    }.bind(this)).catch(function (error) {
-                    // console.log("ree",error)
-                    swal({
-                        title: "更新失败，请注意格式问题",
-                        heightAuto: false
-                    })
-                });
-            },
-
-
-
-            //获取用户已投递简历
-            getUserDeliveredResume:function () {
-
-            },
 
         },
     }
