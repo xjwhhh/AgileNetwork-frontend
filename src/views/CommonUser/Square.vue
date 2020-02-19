@@ -8,7 +8,7 @@
                 <!-- Search-->
                 <div class="card card-default">
                     <div class="card-body">
-                        <div class="form-horizontal" >
+                        <div class="form-horizontal">
                             <div class="input-group">
                                 <input class="form-control" type="search" v-model="searchKey" placeholder="请输入关键字"   @keyup.enter="search()"  />
                                 <span class="input-group-btn">
@@ -29,46 +29,21 @@
                         <li style=" list-style-type:none" class="multi-chosen">
                             <span class="title">
                                 <b style="font-size: larger">
-                                     学历要求：
+                                     工作地点：
                                 </b>
                             </span>
-
-                            <a rel="nofollow" href="javascript:;" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                            0001
-                                                    " data-lg-tj-cid="idnull">不限
-                            </a>
-                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0002
-                                                            " data-lg-tj-cid="idnull">大专
-                                <i class="delete"></i>
-                            </a>
-                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0003
-                                                            " data-lg-tj-cid="idnull">本科
-                                <i class="delete"></i>
-                            </a>
-                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0004
-                                                            " data-lg-tj-cid="idnull">硕士
-                                <i class="delete"></i>
-                            </a>
-                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
-                                                                    0005
-                                                            " data-lg-tj-cid="idnull">博士
-                                <i class="delete"></i>
-                            </a>
-                            <a rel="nofollow" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
+                            <a rel="nofollow" v-for="item in workLocationStr" v-on:click="chooseLocation($event)" :class="{active : workLocationActive[item]}" href="javascript:;" data-lg-tj-id="8s00" data-lg-tj-no="
                                                                     0006
-                                                            " data-lg-tj-cid="idnull">不要求
+                                                            " data-lg-tj-cid="idnull">{{item}}
                                 <i class="delete"></i>
                             </a>
 
                         </li>
                         <li style=" list-style-type:none" class="multi-chosen"><span class="title"><b style="font-size: larger">
-                            学历要求：
+                            期望薪资：
                         </b></span>
 
-                            <a rel="nofollow" v-for="item in showEducation" href="javascript:;" v-on:click="chooseEducation($event)" class="active" data-lg-tj-id="8s00" data-lg-tj-no="
+                            <a rel="nofollow" v-for="item in salaryExpectedStr" href="javascript:;" v-on:click="chooseSalary($event)" :class="{active : salaryActive[item]}" data-lg-tj-id="8s00" data-lg-tj-no="
                                                             0001
                                                     " data-lg-tj-cid="idnull">{{item}}
                             </a>
@@ -79,21 +54,21 @@
 
 
 
-                    <div class="card">
+                    <div class="card" v-for="item in datas">
                         <div class="card-body" :class="getRandomColor()">
                             <!--<a :href="'/common/' + this.user.id + '/postInfo/1'">-->
                                 <!--<h3 class="my-3">急招聘Java工程师</h3>-->
                             <!--</a>-->
-                            <router-link  :to="{name:'postInfo', params: { pid: 1 }}"><h3 class="my-3">急招聘Java工程师</h3></router-link>
+                            <router-link  :to="{name:'postInfo', params: { pid: item.postInfo.id }}"><h3 class="my-3">{{item.postInfo.title}}</h3></router-link>
 
                         </div>
                         <div class="card-body">
                             <p class="d-flex">
                                 <span>
                                     <small class="mr-1">by
-                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: 1 }}" class="ml-1" style="color: #6c757d">华为</router-link>
+                                        <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseInfo.accountId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseInfo.enterpriseName}}</router-link>
                                     </small>
-                                    <small class="mr-1">2018/23/23</small>
+                                    <small class="mr-1">{{item.postInfo.createTime.substr(0,10)}}</small>
                                 </span>
                                 <span class="ml-auto">
 
@@ -101,34 +76,13 @@
 
                             </p>
                             <p>
-                                华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
+                                {{item.postInfo.description}}
                             </p>
                         </div>
                     </div>
 
 
-                    <div class="card">
-                        <div class="card-body" :class="getRandomColor()">
-                            <h3 class="my-3">急招聘Java工程师</h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="d-flex">
-                                <span>
-                                    <small class="mr-1">by
-                                        <a class="ml-1" href="#">华为</a>
-                                    </small>
-                                    <small class="mr-1">2018/23/23</small>
-                                </span>
-                                <span class="ml-auto">
 
-                                </span>
-
-                            </p>
-                            <p>
-                                华为公司几招一个是阿斯顿发，工作地点在算法，饱餐三，阿迪舒服哈死的份 啥傻傻打发时间的飞机啊 等哈发哈点话费
-                            </p>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -136,10 +90,29 @@
             <div class="col-xl-3">
 
                 <!-- Tag Cloud-->
-                <div class="card card-default">
-                    <div class="card-header">Tag Cloud</div>
+                <div class="card card-default d-none d-lg-block">
+                    <div class="card-header">
+                        <div class="card-title text-center">最近投递的简历</div>
+                    </div>
                     <div class="card-body">
-                        <div class="mw-100" ref="jqcloud"></div>
+                        <Datatable  class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">简历名称</th>
+                                <th>公司</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  v-for="item in postResume">
+                                <td style="width: 150px;">
+                                    <a :href="item.annexUrl">{{item.resumeName}}</a>
+                                </td>
+                                <td style="width: 150px;">
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseName}}</router-link>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
                     </div>
                 </div>
                 <!-- Ads-->
@@ -159,6 +132,7 @@
     // JQ Cloud
     import 'jqcloud2/dist/jqcloud.css';
     import 'jqcloud2/dist/jqcloud.js';
+    import axios from 'axios'
 
     export default {
         data() {
@@ -177,10 +151,33 @@
                     { text: 'Consectetur', weight: 5},
                     { text: 'Adipiscing', weight: 5
                     }],
-                educations: new Array(),
-                showEducation:new Array(),
+                salarys: new Array(),
+                locations:new Array(),
                 randomColor :['bg-purple' , 'bg-green', 'bg-primary','bg-warning'],
                 searchKey:'',
+                workLocationStr:['南京','北京','上海','杭州','深圳','其他'],
+                salaryExpectedStr:['1-5元',
+                '5-10元',
+                '10-20元',
+                '20元以上'],
+                salaryExpected:{
+                    '1-5元':'0-5',
+                    '5-10元':'5-10',
+                    '10-20元':'10-20',
+                    '20元以上':'20-1000000'
+                },
+                salaryActive:{
+                    '1-5元':false,
+                    '5-10元':false,
+                    '10-20元':false,
+                    '20元以上':false
+                },
+                workLocationActive:{
+                    '南京':false,'北京':false,'上海':false,'杭州':false,'深圳':false,'其他':false
+                },
+                postResume:new Array(),
+                posts:new Array(),
+                datas:new Array()
             }
         },
 
@@ -190,7 +187,36 @@
         },
         methods:{
             init:function(){
-                this.showEducation=["dayiyi","daerer","wfwer"]
+                this.getUserDeliveredResume();
+                this.getInfo()
+            },
+            getInfo:function(){
+
+                axios.post('http://118.25.180.45:8088/api/square/posts?search='+this.searchKey,{
+                        'workLocations':this.locations,
+                        'salaryScope':this.salarys
+                    },
+                    {withCredentials:true})
+                    .then(function (response) {
+                        // this.user.avatar = response.data.avatar
+                        this.datas = response.data
+                        console.log(this.datas)
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+
+                });
+                this.posts = [];
+            },
+            //获取用户已投递简历
+            getUserDeliveredResume:function () {
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                    console.log("data=>",data.data);
+                    if(data.data.length>=5){
+                        this.postResume = data.data.slice(0,5)
+                    }else{
+                        this.postResume = data.data
+                    }
+                })
             },
             getPosts(){
 
@@ -202,21 +228,38 @@
             getPostsByCondition(){
 
             },
+
+
             search:function () {
-                this.$router.push({name: 'square', query: {search: this.searchKey}})
+                this.getInfo();
+                // console.log('12312')
+                // this.$router.push({name: 'square', query: {search: this.searchKey}})
+                // console.log('1231qweq2')
             },
 
-            chooseEducation:function (event) {
-
+            chooseSalary:function (event) {
                 var el = event.target;//哈哈
-                if(this.educations.includes(el.innerText)){
-                    this.educations = this.educations.filter(t => t != el.innerText)
-                    alert("nonon")
+                if(this.salarys.includes(this.salaryExpected[el.innerText.trim()])){ // 包含就移除
+                    this.salarys = this.salarys.filter(t => t != this.salaryExpected[el.innerText.trim()])
+                    this.salaryActive[el.innerText.trim()]=false
                 }else{
-                    this.educations.push(el.innerText);
-                    alert(el.innerText);
+                    this.salarys.push(this.salaryExpected[el.innerText.trim()]);
+                    console.log(el.innerText.trim())
+                    console.log(this.salaryExpected[el.innerText.trim()]);
+                    this.salaryActive[el.innerText.trim()]=true
                 }
-
+                this.getInfo()
+            },
+            chooseLocation:function (event) {
+                var el = event.target;//哈哈
+                if(this.locations.includes(el.innerText)){ // 包含就移除
+                    this.locations = this.locations.filter(t => t != el.innerText)
+                    this.workLocationActive[el.innerText.trim()]=false
+                }else{
+                    this.locations.push(el.innerText);
+                    this.workLocationActive[el.innerText.trim()]=true
+                }
+                this.getInfo()
             }
 
         },
@@ -234,16 +277,18 @@
 <style scoped>
     .multi-chosen a{
         padding: 5px;
+        margin: 5px;
     }
     .multi-chosen a:link{
         text-decoration: none;
         color: #656565;
     }
+
     .multi-chosen a:hover{
         background: #00bfe4;
         color: white;
     }
-    .multi-chosen a:active{
+    .multi-chosen .active{
         background: #00bfe4;
         color: white;
     }
@@ -254,7 +299,7 @@
         height: 34px;
         line-height: 14px;
     }
-    .card-body a{
+    .col-xl-9 a{
         text-decoration: none;
         color: white;
     }

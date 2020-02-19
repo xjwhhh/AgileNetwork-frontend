@@ -9,13 +9,13 @@
                         </div>
                         <h3 class="m-0 text-bold">{{user.name}}</h3>
                         <div class="my-3">
-                            <p>{{user.university}}<span>-</span>{{user.education}}</p>
+                            <p>{{user.university}}<span>-</span>{{educations[user.education]}}</p>
                         </div>
                         <div class="text-center">
                             <button  class="btn btn-primary" v-on:click="hello('fe')">修改个人信息</button>
                         </div>
                         <!--<div class="text-center">-->
-                            <!--<a class="btn btn-primary" href="#">修改密码</a>-->
+                        <!--<a class="btn btn-primary" href="#">修改密码</a>-->
                         <!--</div>-->
 
                     </div>
@@ -25,38 +25,24 @@
                         <div class="card-title text-center">最近投递的简历</div>
                     </div>
                     <div class="card-body">
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3672407583,4066110750&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <img class="align-self-center mr-2 rounded-circle img-thumbnail thumb48" src="http://img5.imgtn.bdimg.com/it/u=109112484,3959150699&fm=26&gp=0.jpg" alt="Contact" />
-                            <div class="media-body py-2">
-                                <div class="text-bold">251技术优先公司
-                                    <div class="text-sm text-muted">11天前</div>
-                                </div>
-                            </div>
-                        </div>
+                        <Datatable  class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">简历名称</th>
+                                <th>公司</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  v-for="item in postResume">
+                                <td style="width: 150px;">
+                                    <a :href="item.annexUrl">{{item.resumeName}}</a>
+                                </td>
+                                <td style="width: 150px;">
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseId }}" class="ml-1" style="color: #6c757d">{{item.enterpriseName}}</router-link>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
                     </div>
                 </div>
             </div>
@@ -100,18 +86,18 @@
                                             </div>
 
                                             <!--<div class="btn-group flex-wrap">-->
-                                                <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('base64')" :disabled="!imageSrc">Preview (base64)</b-btn>-->
-                                                <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('blob')" :disabled="!imageSrc">Preview (blob)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('base64')" :disabled="!imageSrc">Preview (base64)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-2" variant="info" @click="previewImg('blob')" :disabled="!imageSrc">Preview (blob)</b-btn>-->
                                             <!--</div>-->
                                             <!--<b-form-group label="Output Format" class="p-0 my-4">-->
-                                                <!--<b-radio-group-->
-                                                        <!--v-model="outputType"-->
-                                                        <!--:disabled="!imageSrc"-->
-                                                        <!--:options="[{ text: 'jpeg', value: 'jpeg' }, { text: 'png', value: 'png' }, { text: 'webp', value: 'webp' }]" />-->
+                                            <!--<b-radio-group-->
+                                            <!--v-model="outputType"-->
+                                            <!--:disabled="!imageSrc"-->
+                                            <!--:options="[{ text: 'jpeg', value: 'jpeg' }, { text: 'png', value: 'png' }, { text: 'webp', value: 'webp' }]" />-->
                                             <!--</b-form-group>-->
                                             <!--<div class="btn-group flex-wrap">-->
-                                                <!--<b-btn class="mr-2 mb-4" @click="downloadImg('base64')" :disabled="!imageSrc">Download (base64)</b-btn>-->
-                                                <!--<b-btn class="mr-2 mb-4" @click="downloadImg('blob')" :disabled="!imageSrc">Download (blob)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-4" @click="downloadImg('base64')" :disabled="!imageSrc">Download (base64)</b-btn>-->
+                                            <!--<b-btn class="mr-2 mb-4" @click="downloadImg('blob')" :disabled="!imageSrc">Download (blob)</b-btn>-->
                                             <!--</div>-->
                                         </div>
                                         <div class="col-xl-5">
@@ -175,7 +161,7 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.education"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="educations[user.education]"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -187,7 +173,7 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="user.gender"></p>
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="genders[user.gender]"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -247,8 +233,13 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >学位</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeEducation" type="text" placeholder="" v-model="user.education" />
+                                            <!--<input class="form-control" id="changeEducation" type="text" placeholder="" v-model="user.education" />-->
+                                            <select class="custom-select custom-select-m mb-1"  id="changeEducation" style="width: 200px" v-model="user.education">
+                                                <option selected="">选择学位</option>
+                                                <option v-for="item in educations"  :value="educationValue[ item ]">{{item}}</option>
+                                            </select>
                                         </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >年龄</label>
@@ -259,7 +250,10 @@
                                     <div class="form-group row">
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >性别</label>
                                         <div class="col-xl-10 col-md-9 col-8">
-                                            <input class="form-control" id="changeGender" type="text" placeholder="" v-model="user.gender" />
+                                            <select class="custom-select custom-select-m mb-1" id="changeGender"  style="width: 200px" v-model="user.gender">
+                                                <option selected="">选择性别</option>
+                                                <option v-for="item in genders"  :value="gendersValue[ item ]">{{item}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -373,13 +367,26 @@
                 newPassword:'',
                 retryPass:'',
                 oldPassword:'',
+                postResume:new Array(),
+                genders : ['男','女','保密'],
+                educations : ['本科','本科在读','研究生','博士','其他'],
+                gendersValue:{
+                    '男':0,
+                    '女':1,
+                    '保密':2
+                },
+                educationValue:{
+                    '本科':0,'本科在读':1,'研究生':2,'博士':3,'其他':4
+                }
             }
         },
 
         created(){
+
             this.getUserPersonalInfo();
+            this.getUserDeliveredResume();
             console.log(this.user.avatar)
-            this.imageSrc = 'img/logonju.png';
+            this.imageSrc = 'img/logo.jpg';
             console.log("imageSrc=>",this.imageSrc)
         },
         methods: {
@@ -412,7 +419,7 @@
             getUserPersonalInfo: function() {
                 console.log(this.$route.params.id);
                 this.user.id=this.$route.params.id;
-                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id).then(data=>{
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
                     // console.log(data);
                     this.user.transfer(data.data);
                     //console.log("--->user",this.user.avatar)
@@ -426,7 +433,8 @@
             //更新用户信息
             confirmChangeInfo:function () {
                 // console.log(this.user);
-                axios.put('http://47.98.174.59:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
+                console.log(this.user);
+                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
                     .then(function (response) {
                         // do something...
                         // console.log("my",response)
@@ -436,12 +444,12 @@
                         //     heightAuto: false
                         // })
                     }.bind(this)).catch(function (error) {
-                        // console.log("ree",error)
-                        swal({
-                            title: "更新失败，请注意格式问题",
-                            heightAuto: false
-                        })
-                    });
+                    // console.log("ree",error)
+                    swal({
+                        title: "更新失败，请注意格式问题",
+                        heightAuto: false
+                    })
+                });
             },
 
             //修改用户的密码
@@ -451,24 +459,38 @@
                         title:"新密码不一致，请检查",
                         heightAuto:false
                     });
-                    // this.$notify({
-                    //     group: 'notifdemo',
-                    //     title: '123123',
-                    //     text: '234234'
-                    //     // type: this.getNotificationVariantClass()
-                    // });
-
                 }
                 let info ={
-                    'oldPass':this.oldPassword,
-                    'newPass':this.newPassword,
-                    'retryPass':this.retryPass
+                    'oldPassword':this.oldPassword,
+                    'newPassword':this.newPassword,
+                    'repeatNewPwd':this.retryPass
                 }
+                axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/password", info,{withCredentials:true})
+                    .then(function (response) {
+                        swal({
+                            title:"更新成功",
+                            heightAuto:false
+                        })
+                        this.$router.push("login")
+                    }.bind(this)).catch(function (error) {
+                    // console.log("ree",error)
+                    swal({
+                        title: "更新失败",
+                        heightAuto: false
+                    })
+                });
             },
 
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-
+                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                    console.log("data=>",data.data);
+                    if(data.data.length>=5){
+                        this.postResume = data.data.slice(0,5)
+                    }else{
+                        this.postResume = data.data
+                    }
+                })
             },
 
             confirmChangeAtatar(){
@@ -478,7 +500,7 @@
                         'accountId':this.user.id,
                         'base64str':data
                     }
-                    axios.put('http://47.98.174.59:8088/api/account/'+this.$route.params.id+"/avatar", pa,{withCredentials:true})
+                    axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/avatar", pa,{withCredentials:true})
                         .then(function (response) {
                             this.user.avatar = response.data.avatar
                             this.changeImage = false;
