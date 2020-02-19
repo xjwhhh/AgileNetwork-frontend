@@ -121,7 +121,7 @@
                     this.enterprise.transfer(data);
                 })
 
-                axios.get('http://118.25.180.45:8088/api/enterprise/'+id+'/posts',
+                axios.get('http://47.98.174.59:8088/api/enterprise/'+id+'/posts',
                     {withCredentials:true})
                     .then(function (response) {
                         this.allPost = response.data

@@ -187,7 +187,7 @@
         methods:{
             delResume:function(id) {
                // alert("you want delete this "+id)
-                axios.delete('http://118.25.180.45:8088/api/user/resume/'+id, {withCredentials:true})
+                axios.delete('http://47.98.174.59:8088/api/user/resume/'+id, {withCredentials:true})
                     .then(function (response) {
                         // console.log("2345678")
                         // alert("bbb")
@@ -220,7 +220,7 @@
             },
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
                     // console.log("data=>",data.data);
                     this.postResume = data.data
                 })

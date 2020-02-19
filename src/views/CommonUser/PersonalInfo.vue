@@ -419,7 +419,7 @@
             getUserPersonalInfo: function() {
                 console.log(this.$route.params.id);
                 this.user.id=this.$route.params.id;
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id).then(data=>{
                     // console.log(data);
                     this.user.transfer(data.data);
                     //console.log("--->user",this.user.avatar)
@@ -434,7 +434,7 @@
             confirmChangeInfo:function () {
                 // console.log(this.user);
                 console.log(this.user);
-                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
+                axios.put('http://47.98.174.59:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
                     .then(function (response) {
                         // do something...
                         // console.log("my",response)
@@ -465,7 +465,7 @@
                     'newPassword':this.newPassword,
                     'repeatNewPwd':this.retryPass
                 }
-                axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/password", info,{withCredentials:true})
+                axios.put('http://47.98.174.59:8088/api/account/'+this.$route.params.id+"/password", info,{withCredentials:true})
                     .then(function (response) {
                         swal({
                             title:"更新成功",
@@ -483,7 +483,7 @@
 
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
                     console.log("data=>",data.data);
                     if(data.data.length>=5){
                         this.postResume = data.data.slice(0,5)
@@ -500,7 +500,7 @@
                         'accountId':this.user.id,
                         'base64str':data
                     }
-                    axios.put('http://118.25.180.45:8088/api/account/'+this.$route.params.id+"/avatar", pa,{withCredentials:true})
+                    axios.put('http://47.98.174.59:8088/api/account/'+this.$route.params.id+"/avatar", pa,{withCredentials:true})
                         .then(function (response) {
                             this.user.avatar = response.data.avatar
                             this.changeImage = false;

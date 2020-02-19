@@ -192,7 +192,7 @@
             },
             getInfo:function(){
 
-                axios.post('http://118.25.180.45:8088/api/square/posts?search='+this.searchKey,{
+                axios.post('http://47.98.174.59:8088/api/square/posts?search='+this.searchKey,{
                         'workLocations':this.locations,
                         'salaryScope':this.salarys
                     },
@@ -209,7 +209,7 @@
             },
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
                     console.log("data=>",data.data);
                     if(data.data.length>=5){
                         this.postResume = data.data.slice(0,5)
