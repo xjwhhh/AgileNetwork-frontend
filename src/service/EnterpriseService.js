@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 axios.defaults.timeout = 5000;
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 axios.defaults.headers.post['Accept'] = '*/*';
-axios.defaults.baseURL = 'http://118.25.180.45:8088/api';
+axios.defaults.baseURL = 'http://47.98.174.59:8088/api';
 axios.defaults.withCredentials = true;
 
 // POST传参序列化
@@ -73,7 +73,7 @@ export default {
 
     updateAccountInfo(enterprise) {
         return new Promise((resolve, reject) => {
-            axios.put('http://118.25.180.45:8088/api/account/' + enterprise.accountId,
+            axios.put('http://47.98.174.59:8088/api/account/' + enterprise.accountId,
                 {
                     avatar: enterprise.headUrl,
                     mobile: enterprise.mobile,
@@ -91,7 +91,7 @@ export default {
 
     updateEnterpriseInfo(enterprise){
         return new Promise((resolve, reject) => {
-            axios.put('http://118.25.180.45:8088/api/enterprise/' + enterprise.accountId,
+            axios.put('http://47.98.174.59:8088/api/enterprise/' + enterprise.accountId,
                 enterprise, {withCredentials: true}
             ).then(function (response) {
                 console.log(response.data);

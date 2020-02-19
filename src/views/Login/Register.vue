@@ -131,9 +131,9 @@
             register(registerInfo){
                 let url='';
                 if(registerInfo.type) {
-                    url='http://118.25.180.45:8088/api/enterprise';
+                    url='http://47.98.174.59:8088/api/enterprise';
                 }else{
-                    url='http://118.25.180.45:8088/api/user';
+                    url='http://47.98.174.59:8088/api/user';
                 }
                 axios.post(url, {
                     email: registerInfo.email,

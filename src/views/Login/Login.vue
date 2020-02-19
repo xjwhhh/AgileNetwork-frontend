@@ -105,7 +105,7 @@
             login(loginInfo){
                 // console.log(data)
                 console.log(loginInfo);
-                axios.post('http://118.25.180.45:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
+                axios.post('http://47.98.174.59:8088/api/login',loginInfo,{withCredentials:true}).then(res=>{
                     console.log(res);
                     if(res.data.role===1){
                         this.$router.push({name:'enterpriseLayout',params:{id:res.data.id}})

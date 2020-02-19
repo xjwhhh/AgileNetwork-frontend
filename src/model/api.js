@@ -1,4 +1,4 @@
-const API_PRE='http://118.25.180.45:8088/api';
+const API_PRE='http://47.98.174.59:8088/api';
 
 const API={
     COMMON:{

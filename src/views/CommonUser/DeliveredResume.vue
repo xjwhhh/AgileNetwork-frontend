@@ -189,7 +189,7 @@
                 return fo
             },
             init:function(){
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
                     this.resumes=data.data;
                     console.log(this.resumes)
                 })
@@ -231,10 +231,10 @@
                 // 添加简历
                 let formData = new FormData();
                 formData.append('file',this.file)
-                axios.post('http://118.25.180.45:8088/api/common/general_file', formData,{withCredentials:true})
+                axios.post('http://47.98.174.59:8088/api/common/general_file', formData,{withCredentials:true})
                     .then(function (response) {
                         console.log(response)
-                        axios.post('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resume', {
+                        axios.post('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resume', {
                             'name':this.addName,
                             'annexUrl':response.data
                         },{withCredentials:true})
@@ -264,7 +264,7 @@
                 // 添加简历
                 let formData = new FormData();
                 formData.append('file',this.file)
-                axios.post('http://118.25.180.45:8088/api/common/general_file', formData,{withCredentials:true})
+                axios.post('http://47.98.174.59:8088/api/common/general_file', formData,{withCredentials:true})
                     .then(function (response) {
                         return response.data;
                     }.bind(this)).catch(function (error) {

@@ -110,7 +110,7 @@
                 console.log(this.$route.params['commonId']);
                 this.resumeUrl=this.$route.params['resumeUrl']
                 this.user.id=this.$route.params['commonId'];
-                axios.get('http://118.25.180.45:8088/api/user/'+this.user.id).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.user.id).then(data=>{
                     console.log(data);
                     this.user.transfer(data.data);
                 });

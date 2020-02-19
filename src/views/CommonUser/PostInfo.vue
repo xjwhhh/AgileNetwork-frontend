@@ -145,7 +145,7 @@
             dilivery:function(){
                 console.log(this.selectResume);
                 this.showDeliver = false;
-                axios.post('http://118.25.180.45:8088/api/user/'+this.$route.params.id+"/post/"+this.post.id+"/resume/"+this.selectResume,{},
+                axios.post('http://47.98.174.59:8088/api/user/'+this.$route.params.id+"/post/"+this.post.id+"/resume/"+this.selectResume,{},
                     {withCredentials:true})
                     .then(function (response) {
                         // this.user.avatar = response.data.avatar
@@ -168,12 +168,12 @@
             },
 
             init:function(){
-                axios.get('http://118.25.180.45:8088/api/enterprise/post/'+this.$route.params.pid).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/enterprise/post/'+this.$route.params.pid).then(data=>{
                     // console.log(data.data);
                     this.post.transfer(data.data.postInfo);
                     this.enterprise.transferSimple(data.data.enterpriseInfo);
                 })
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
                     this.resumes=data.data;
                 })
             },
@@ -186,7 +186,7 @@
             getUserPersonalInfo: function() {
                 console.log(this.$route.params.id);
                 this.user.id=this.$route.params.id;
-                axios.get('http://118.25.180.45:8088/api/user/'+this.$route.params.id).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id).then(data=>{
                     // console.log(data);
                     this.user.transfer(data.data);
                     //console.log("--->user",this.user.avatar)
@@ -199,7 +199,7 @@
             //更新用户信息
             confirmChangeInfo:function () {
                 // console.log(this.user);
-                axios.put('http://118.25.180.45:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
+                axios.put('http://47.98.174.59:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
                     .then(function (response) {
                         // do something...
                         // console.log("my",response)
