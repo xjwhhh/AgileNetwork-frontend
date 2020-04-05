@@ -63,6 +63,7 @@ export default new Router({
             component: CommonLayout,
             children: [
                 {
+                    
                     path: 'square',
                     name:'square',
                     component: Square
