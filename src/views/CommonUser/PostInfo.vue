@@ -150,6 +150,10 @@
                         <div class="d-flex justify-content-center col">
                             <div class="h4 m-0 text-center">招聘信息</div>
                         </div>
+
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-info right " type="button" v-on:click="addFavorite()" >收藏</button>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row py-4 justify-content-center">
