@@ -1,8 +1,27 @@
-<template>
+<template xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <ContentWrapper>
         <div class="content-heading">招聘信息审核
         </div>
         <div class="card card-default">
+            <div>
+
+
+                <b-modal id="modal-1" title="拒绝" hide-footer>
+                    <!--<template v-slot:modal-title>-->
+                        <!--Using <code>$bvModal</code> Methods-->
+                    <!--</template>-->
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">理由</label>
+                        <div class="col-xl-10">
+                            <input class="form-control" v-model="reason" type="text" placeholder="理由" />
+                        </div>
+                    </div>
+                    <b-button class=" btn btn-primary " block v-on:click="postRefuse()">确认</b-button>
+                </b-modal>
+
+            </div>
+
+
             <form class="card">
                 <b-tabs nav-class="nav-justified" class="ie-fix-flex">
                     <b-tab title="未审核" active>
@@ -43,7 +62,7 @@
                                         <div class="badge badge-success" v-on:click="postPass(post.id)">通过</div>
                                     </td>
                                     <td>
-                                        <div class="badge bg-gray-dark" v-on:click="postRefuse(post.id)">拒绝</div>
+                                        <div class="badge bg-gray-dark" v-b-modal.modal-1 v-on:click="openModal(post.id)" >拒绝</div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -105,6 +124,16 @@
     import AdminAPI from '../../service/AdminService';
     import Datatable from '@/components/Tables/Datatable';
     import Post from "../../model/Post";
+    // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+    // import { ModalPlugin } from 'bootstrap-vue'
+
+    import BootstrapVue from 'bootstrap-vue'
+    // import store from './store/store'
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
+    import Modal from 'bootstrap-vue/es/components/modal'
+
+    Vue.use(Modal)
 
     Vue.use(VeeValidate, {
         fieldsBagName: 'formFields'  // fix issue with b-table
@@ -113,8 +142,9 @@
     export default {
         data() {
             return {
-
+                deletePost:0,
                 postList: [],
+                reason:'',
                 dtOptions1: {
                     'paging': true, // Table pagination
                     'ordering': true, // Column ordering
@@ -184,11 +214,24 @@
 
             },
 
-            postRefuse: function (postId) {
-                AdminAPI.postRefuse(postId).then(data=>{
+            postRefuse: function () {
+                alert(this.deletePost+" "+ this.reason)
+                return ;
+                AdminAPI.postRefuse(this.deletePost).then(data=>{
                     console.log(data);
                     this.getAllPosts();
                 })
+            },
+
+            openModal:function (postId) {
+                this.deletePost = postId
+                console.log(this.deletePost)
+                // alert('ge')
+                // console.log($("#modal-1").innerText);
+                // this._vm.$bvModal.show('modal-1');
+                // this.$bvModal.show('modal-1')
+                // $("#modal-1").modal('show');
+                // this.$bvModal.show('modal-1');
             }
         }
     }
