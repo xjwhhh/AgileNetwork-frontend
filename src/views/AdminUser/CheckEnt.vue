@@ -3,6 +3,24 @@
         <div class="content-heading">企业审核
         </div>
         <div class="card card-default">
+            <div>
+
+
+                <b-modal id="modal-1" title="拒绝" hide-footer>
+                    <!--<template v-slot:modal-title>-->
+                    <!--Using <code>$bvModal</code> Methods-->
+                    <!--</template>-->
+                    <div class="form-group row">
+                        <label class="col-xl-2 col-form-label">理由</label>
+                        <div class="col-xl-10">
+                            <input class="form-control" v-model="reason" type="text" placeholder="理由" />
+                        </div>
+                    </div>
+                    <b-button class=" btn btn-primary " block v-on:click="entRefuse()">确认</b-button>
+                </b-modal>
+
+            </div>
+
             <form class="card">
                 <b-tabs nav-class="nav-justified" class="ie-fix-flex">
                     <b-tab title="未审核" active>
@@ -40,7 +58,7 @@
                                                 <div class="badge badge-success" v-on:click="entPass(enterprise.accountId)">通过</div>
                                             </td>
                                             <td>
-                                                <div class="badge bg-gray-dark" v-on:click="entRefuse(enterprise.accountId)">拒绝</div>
+                                                <div class="badge bg-gray-dark" v-on:click="showModal(enterprise.accountId)">拒绝</div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -122,6 +140,8 @@
     export default {
         data() {
             return {
+                reason:'',
+                rejectId:'',
                 dtOptions1: {
                     'paging': true, // Table pagination
                     'ordering': true, // Column ordering
@@ -194,8 +214,14 @@
                 })
             },
 
-            entRefuse:function (accountId) {
-                AdminAPI.enterpriseRefuse(accountId).then(data=>{
+            showModal :function(accountId){
+                this.rejectId = accountId;
+            },
+
+            entRefuse:function () {
+                alert(this.rejectId+" "+this.reason);
+                return ;
+                AdminAPI.enterpriseRefuse(this.rejectId).then(data=>{
                     console.log(data);
                     this.getEnterpriseList();
                 })
