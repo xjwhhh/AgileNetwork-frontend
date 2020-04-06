@@ -45,6 +45,31 @@
                         </Datatable>
                     </div>
                 </div>
+                <div class="card card-default d-none d-lg-block">
+                    <div class="card-header">
+                        <div class="card-title text-center">我的收藏</div>
+                    </div>
+                    <div class="card-body">
+                        <Datatable  class="table table-striped my-4 w-100" id="datatable1">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">公司</th>
+                                <th>岗位</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  v-for="item in favority">
+                                <td style="width: 150px;">
+                                    <a :href="item.annexUrl">{{item.compony}}</a>
+                                </td>
+                                <td style="width: 150px;">
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.id }}" class="ml-1" style="color: #6c757d">{{item.postName}}</router-link>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </Datatable>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-8">
                 <div class="card card-default" v-if="changeAtatar" id="changeAtatar">
@@ -368,6 +393,8 @@
                 retryPass:'',
                 oldPassword:'',
                 postResume:new Array(),
+                // favority:new Array(),
+                favority:[{'compony':'华为','postName':'软件开发工程师','id':'123'},{'compony':'华为','postName':'软件开发工程师','id':'123'}],
                 genders : ['男','女','保密'],
                 educations : ['本科','本科在读','研究生','博士','其他'],
                 gendersValue:{
@@ -483,7 +510,8 @@
 
             //获取用户已投递简历
             getUserDeliveredResume:function () {
-                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes/sent',{withCredentials:true}).then(data=>{
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes/sent',
+                    {withCredentials:true}).then(data=>{
                     console.log("data=>",data.data);
                     if(data.data.length>=5){
                         this.postResume = data.data.slice(0,5)

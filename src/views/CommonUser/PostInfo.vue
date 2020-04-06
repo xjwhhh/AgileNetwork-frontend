@@ -24,6 +24,125 @@
                     </div>
                 </div>
 
+                <div class="card card-default">
+                    <div class="card-header">
+                        <!--<div class="px-2 float-right badge badge-danger">5</div>-->
+                        <!--<div class="px-2 mr-2 float-right badge badge-success">12</div>-->
+                        <div class="card-title">讨论区</div>
+                    </div>
+                    <!-- START list group-->
+                    <Scrollable :height="180">
+                        <div class="list-group">
+                            <!-- START list group item-->
+                            <div class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/02.jpg" alt="Image">
+                                    <div class="media-body text-truncate">
+                                        <p class="mb-1">
+                                            <strong class="text-primary">
+                                                <span class="circle bg-success circle-lg text-left"></span>
+                                                <span>Catherine Ellis</span>
+                                            </strong>
+                                        </p>
+                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <small class="text-muted ml-2">2h</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END list group item-->
+                            <!-- START list group item-->
+                            <div class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/03.jpg" alt="Image">
+                                    <div class="media-body text-truncate">
+                                        <p class="mb-1">
+                                            <strong class="text-primary">
+                                                <span class="circle bg-success circle-lg text-left"></span>
+                                                <span>Jessica Silva</span>
+                                            </strong>
+                                        </p>
+                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <small class="text-muted ml-2">3h</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END list group item-->
+                            <!-- START list group item-->
+                            <div class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/09.jpg" alt="Image">
+                                    <div class="media-body text-truncate">
+                                        <p class="mb-1">
+                                            <strong class="text-primary">
+                                                <span class="circle bg-danger circle-lg text-left"></span>
+                                                <span>Jessie Wells</span>
+                                            </strong>
+                                        </p>
+                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <small class="text-muted ml-2">4h</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END list group item-->
+                            <!-- START list group item-->
+                            <div class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/12.jpg" alt="Image">
+                                    <div class="media-body text-truncate">
+                                        <p class="mb-1">
+                                            <strong class="text-primary">
+                                                <span class="circle bg-danger circle-lg text-left"></span>
+                                                <span>Rosa Burke</span>
+                                            </strong>
+                                        </p>
+                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <small class="text-muted ml-2"> 1d</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END list group item-->
+                            <!-- START list group item-->
+                            <div class="list-group-item list-group-item-action">
+                                <div class="media">
+                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/10.jpg" alt="Image">
+                                    <div class="media-body text-truncate">
+                                        <p class="mb-1">
+                                            <strong class="text-primary">
+                                                <span class="circle bg-danger circle-lg text-left"></span>
+                                                <span>Michelle Lane</span>
+                                            </strong>
+                                        </p>
+                                        <p style="word-break:break-word;" class="mb-1 text-sm">Mauris eleifend, libero nec cursuafasd  asdf as dfd fads sdf sas lacinia...</p>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <small class="text-muted ml-2"> 2d</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END list group item-->
+                        </div>
+                    </Scrollable>
+                    <!-- END list group-->
+                    <!-- START card footer-->
+                    <div class="card-footer">
+                        <div class="input-group">
+                            <input class="form-control form-control-sm" type="text" placeholder="发送消息">
+                            <span class="input-group-btn">
+                            <button class="btn btn-secondary btn-sm" type="submit"><i class="fa  fas fa-arrow-up"></i></button>
+                         </span>
+                        </div>
+                    </div>
+                    <!-- END card-footer-->
+                </div>
+
             </div>
             <div class="col-lg-8">
                 <div class="card card-default"  id="showInfo">
