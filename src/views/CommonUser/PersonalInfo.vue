@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <ContentWrapper>
         <div class="row">
             <div class="col-lg-4">
@@ -60,15 +60,17 @@
                             <tbody>
                             <tr  v-for="item in favority">
                                 <td style="width: 150px;">
-                                    <a :href="item.annexUrl">{{item.compony}}</a>
+                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.enterpriseInfo.id }}" class="ml-1" style="color: #6c757d">{{item.enterpriseInfo.enterpriseName}}</router-link>
+
+                                    <!--<a :href="item.annexUrl">{{item.enterpriseInfo.enterpriseName}}</a>-->
                                 </td>
                                 <td style="width: 150px;">
-                                    <router-link :to="{name:'commonEnterpriseInfo', params: { eid: item.id }}" class="ml-1" style="color: #6c757d">{{item.postName}}</router-link>
+                                    <router-link :to="{name:'postInfo', params: { pid: item.postInfo.id }}" class="ml-1" style="color: #6c757d">{{item.postInfo.title}}</router-link>
                                 </td>
                             </tr>
                             </tbody>
                         </Datatable>
-                    </div>
+                    </div>\
                 </div>
             </div>
             <div class="col-lg-8">
@@ -394,7 +396,7 @@
                 oldPassword:'',
                 postResume:new Array(),
                 // favority:new Array(),
-                favority:[{'compony':'华为','postName':'软件开发工程师','id':'123'},{'compony':'华为','postName':'软件开发工程师','id':'123'}],
+                favority:new Array(),
                 genders : ['男','女','保密'],
                 educations : ['本科','本科在读','研究生','博士','其他'],
                 gendersValue:{
@@ -409,9 +411,9 @@
         },
 
         created(){
-
-            this.getUserPersonalInfo();
             this.getUserDeliveredResume();
+            this.getUserPersonalInfo();
+            this.getUserStarPosts();
             console.log(this.user.avatar)
             this.imageSrc = 'img/logo.jpg';
             console.log("imageSrc=>",this.imageSrc)
@@ -444,7 +446,7 @@
 
             //获取用户信息
             getUserPersonalInfo: function() {
-                console.log(this.$route.params.id);
+                // console.log(this.$route.params.id);
                 this.user.id=this.$route.params.id;
                 axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id).then(data=>{
                     // console.log(data);
@@ -517,6 +519,19 @@
                         this.postResume = data.data.slice(0,5)
                     }else{
                         this.postResume = data.data
+                    }
+                })
+            },
+
+            //获取用户已收藏的招聘信息
+            getUserStarPosts:function () {
+                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/star/posts',
+                    {withCredentials:true}).then(data=>{
+                    console.log("data=>",data.data);
+                    if(data.data.length>=5){
+                        this.favority = data.data.slice(0,5)
+                    }else{
+                        this.favority = data.data
                     }
                 })
             },
