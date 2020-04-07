@@ -34,109 +34,36 @@
                     <Scrollable :height="180">
                         <div class="list-group">
                             <!-- START list group item-->
-                            <div class="list-group-item list-group-item-action">
+                            <div v-for="item in comments"  class="list-group-item list-group-item-action">
                                 <div class="media">
-                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/02.jpg" alt="Image">
+                                    <!--<img class="align-self-start mx-2 circle thumb32" src="img/user/02.jpg" alt="Image">-->
                                     <div class="media-body text-truncate">
                                         <p class="mb-1">
                                             <strong class="text-primary">
                                                 <span class="circle bg-success circle-lg text-left"></span>
-                                                <span>Catherine Ellis</span>
+                                                <span>{{item.name}}<small class="text-muted ml-2">{{item.university}}</small></span>
                                             </strong>
                                         </p>
-                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
+                                        <p class="mb-1 text-sm">{{item.comment}}</p>
                                     </div>
                                     <div class="ml-auto">
-                                        <small class="text-muted ml-2">2h</small>
+                                        <small class="text-muted ml-2">{{item.createTime.substr(0,10)}}</small>
                                     </div>
                                 </div>
                             </div>
                             <!-- END list group item-->
-                            <!-- START list group item-->
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media">
-                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/03.jpg" alt="Image">
-                                    <div class="media-body text-truncate">
-                                        <p class="mb-1">
-                                            <strong class="text-primary">
-                                                <span class="circle bg-success circle-lg text-left"></span>
-                                                <span>Jessica Silva</span>
-                                            </strong>
-                                        </p>
-                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <small class="text-muted ml-2">3h</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END list group item-->
-                            <!-- START list group item-->
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media">
-                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/09.jpg" alt="Image">
-                                    <div class="media-body text-truncate">
-                                        <p class="mb-1">
-                                            <strong class="text-primary">
-                                                <span class="circle bg-danger circle-lg text-left"></span>
-                                                <span>Jessie Wells</span>
-                                            </strong>
-                                        </p>
-                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <small class="text-muted ml-2">4h</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END list group item-->
-                            <!-- START list group item-->
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media">
-                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/12.jpg" alt="Image">
-                                    <div class="media-body text-truncate">
-                                        <p class="mb-1">
-                                            <strong class="text-primary">
-                                                <span class="circle bg-danger circle-lg text-left"></span>
-                                                <span>Rosa Burke</span>
-                                            </strong>
-                                        </p>
-                                        <p class="mb-1 text-sm">Cras sit amet nibh libero, in gravida nulla. Nulla...</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <small class="text-muted ml-2"> 1d</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END list group item-->
-                            <!-- START list group item-->
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media">
-                                    <img class="align-self-start mx-2 circle thumb32" src="img/user/10.jpg" alt="Image">
-                                    <div class="media-body text-truncate">
-                                        <p class="mb-1">
-                                            <strong class="text-primary">
-                                                <span class="circle bg-danger circle-lg text-left"></span>
-                                                <span>Michelle Lane</span>
-                                            </strong>
-                                        </p>
-                                        <p style="word-break:break-word;" class="mb-1 text-sm">Mauris eleifend, libero nec cursuafasd  asdf as dfd fads sdf sas lacinia...</p>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <small class="text-muted ml-2"> 2d</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END list group item-->
+
+
+
                         </div>
                     </Scrollable>
                     <!-- END list group-->
                     <!-- START card footer-->
                     <div class="card-footer">
                         <div class="input-group">
-                            <input class="form-control form-control-sm" type="text" placeholder="发送消息">
+                            <input class="form-control form-control-sm" type="text" v-model="commentContent" placeholder="发送消息">
                             <span class="input-group-btn">
-                            <button class="btn btn-secondary btn-sm" type="submit"><i class="fa  fas fa-arrow-up"></i></button>
+                            <button class="btn btn-secondary btn-sm" v-on:click="comment()" type="button"><i class="fa  fas fa-arrow-up"></i></button>
                          </span>
                         </div>
                     </div>
@@ -170,6 +97,12 @@
                                         <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >投递人数</label>
                                         <div class="col-xl-10 col-md-9 col-8">
                                             <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="post.headCount"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="text-bold col-xl-2 col-md-3 col-4 col-form-label text-right" >收藏人数</label>
+                                        <div class="col-xl-10 col-md-9 col-8">
+                                            <p class="text-bold col-xl-10 col-md-9 col-8 col-form-label text-left" v-text="startCount"></p>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -237,6 +170,7 @@
     import Enterprise from "../../model/EnterpriseUser" ;   //import  simple enterprise
     import Vue from 'vue'
     import VueCropper from 'vue-cropper'
+    import Comment from "../../model/Comment";
 
     Vue.use(VueCropper)
 
@@ -252,12 +186,15 @@
                 enterprise:new Enterprise(),
                 selectResume:'',
                 resumes:new Array(),
+                startCount:0,
+                comments:new Array(),
+                commentContent:''
             }
         },
 
         created(){
-            // this.getUserPersonalInfo();
             this.init();
+            this.getComment()
         },
         methods: {
 
@@ -296,6 +233,7 @@
                     // console.log(data.data);
                     this.post.transferSimple(data.data.postInfo);
                     this.enterprise.transferSimple(data.data.enterpriseInfo);
+                    this.startCount = data.data.starCount;
                 })
                 console.log("start222-----")
                 axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/resumes',{withCredentials:true}).then(data=>{
@@ -306,47 +244,61 @@
 
 
 
-
-            //获取用户信息
-            getUserPersonalInfo: function() {
-                console.log(this.$route.params.id);
-                this.user.id=this.$route.params.id;
-                axios.get('http://47.98.174.59:8088/api/user/'+this.$route.params.id).then(data=>{
-                    // console.log(data);
-                    this.user.transfer(data.data);
-                    //console.log("--->user",this.user.avatar)
-
-                })
-                this.imageSrc = this.user.avatar
-                // console.log(this.user)
+            //添加这个post到收藏
+            addFavorite :function(){
+                // console.log(this.user);
+                axios.post('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/star/post/'+this.post.id, {withCredentials:true})
+                    .then(function (response) {
+                        swal({
+                            title: "收藏成功",
+                            heightAuto: false
+                        })
+                    }.bind(this)).catch(function (error) {
+                    // swal({
+                    //     title: "更新失败，请注意格式问题",
+                    //     heightAuto: false
+                    // })
+                });
             },
 
-            //更新用户信息
-            confirmChangeInfo:function () {
-                // console.log(this.user);
-                axios.put('http://47.98.174.59:8088/api/user/'+this.$route.params.id, this.user,{withCredentials:true})
-                    .then(function (response) {
-                        // do something...
-                        // console.log("my",response)
-                        this.closeInfo();
-                        // swal({
-                        //     title: "更新失败意格式问题",
-                        //     heightAuto: false
-                        // })
-                    }.bind(this)).catch(function (error) {
-                    // console.log("ree",error)
-                    swal({
-                        title: "更新失败，请注意格式问题",
-                        heightAuto: false
-                    })
-                });
+            //获取该post的评价信息
+            getComment:function(){
+                axios.get('http://47.98.174.59:8088/api/enterprise/post/'+this.$route.params.pid+'/comments').then(data=>{
+                    this.comments = new Array()
+                    for(let i = 0 ;i<data.data.length;i++){
+                        let comment = new Comment();
+                        comment.transfer(data.data[i]);
+                        this.comments.push(comment);
+                    }
+                })
+                // console.log(this.comments)
             },
 
 
 
             //获取用户已投递简历
-            getUserDeliveredResume:function () {
+            comment:function () {
+                if(this.commentContent==null || this.commentContent.trim().length == 0){
+                    swal({
+                        title: "请输入评价内容",
+                        heightAuto: false
+                    })
+                }else{
 
+                    let params = qs.stringify({
+                        'comment':this.commentContent
+                    })
+                    axios.post('http://47.98.174.59:8088/api/enterprise/post/'+this.post.id+'/comment',params,
+                        {withCredentials:true})
+                        .then(function (response) {
+                            // this.user.avatar = response.data.avatar
+                            this.getComment()
+                        }.bind(this)).catch(function (error,response) {
+                        // console.log("ree",error)
+
+                    });
+                }
+                // alert(this.commentContent)
             },
 
         },
