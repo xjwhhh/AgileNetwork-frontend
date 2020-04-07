@@ -79,7 +79,8 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-info right " type="button" v-on:click="addFavorite()" >收藏</button>
+                            <button class="btn btn-info right " v-if="!isStar" type="button" v-on:click="addFavorite()" >收藏</button>
+                            <button class="btn btn-info right "  v-if="isStar" type="button" v-on:click="deleteFavorite()" >取消收藏</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -179,6 +180,7 @@
         name:'postInfo',
         data () {
             return {
+                isStar:false,
                 aboutMsg: '我是postinfo组件',
                 user:new CommonUser(),
                 showDeliver:false,
@@ -243,16 +245,34 @@
 
 
 
-
             //添加这个post到收藏
             addFavorite :function(){
                 // console.log(this.user);
                 axios.post('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/star/post/'+this.post.id, {withCredentials:true})
                     .then(function (response) {
+                        this.isStar = true;
                         swal({
                             title: "收藏成功",
                             heightAuto: false
                         })
+                    }.bind(this)).catch(function (error) {
+                    // swal({
+                    //     title: "更新失败，请注意格式问题",
+                    //     heightAuto: false
+                    // })
+                });
+            },
+
+            //添加这个post到收藏
+            deleteFavorite :function(){
+                // console.log(this.user);
+                axios.delete('http://47.98.174.59:8088/api/user/'+this.$route.params.id+'/star/post/'+this.post.id, {withCredentials:true})
+                    .then(function (response) {
+                        this.isStar = false
+                        // swal({
+                        //     title: "收藏成功",
+                        //     heightAuto: false
+                        // })
                     }.bind(this)).catch(function (error) {
                     // swal({
                     //     title: "更新失败，请注意格式问题",
