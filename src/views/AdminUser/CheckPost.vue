@@ -215,9 +215,9 @@
             },
 
             postRefuse: function () {
-                alert(this.deletePost+" "+ this.reason)
-                return ;
-                AdminAPI.postRefuse(this.deletePost).then(data=>{
+                // alert(this.deletePost+" "+ this.reason)
+                // return ;
+                AdminAPI.postRefuse(this.deletePost,this.reason).then(data=>{
                     console.log(data);
                     this.getAllPosts();
                 })

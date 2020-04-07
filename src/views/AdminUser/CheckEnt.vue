@@ -219,9 +219,9 @@
             },
 
             entRefuse:function () {
-                alert(this.rejectId+" "+this.reason);
-                return ;
-                AdminAPI.enterpriseRefuse(this.rejectId).then(data=>{
+                // alert(this.rejectId+" "+this.reason);
+                // return ;
+                AdminAPI.enterpriseRefuse(this.rejectId,this.reason).then(data=>{
                     console.log(data);
                     this.getEnterpriseList();
                 })

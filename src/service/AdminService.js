@@ -111,12 +111,15 @@ export default {
     },
 
     //拒绝企业用户的认证申请
-    enterpriseRefuse(accountId){
+    enterpriseRefuse(accountId,reason){
         return new Promise((resolve, reject) => {
             axios({
                 url: '/enterprise/'+accountId+"/auth_info/fail",
                 method: 'put',
-                data:JSON.stringify(""),
+                data:JSON.stringify({'message':reason}),
+                headers:{
+                    'Content-Type':'application/json'
+                },
                 withCredentials:true,
             })
                 .then((res) => {
@@ -148,12 +151,15 @@ export default {
     },
 
     //通过企业用户的认证申请
-    postRefuse(postId){
+    postRefuse(postId,reason){
         return new Promise((resolve, reject) => {
             axios({
                 url: '/enterprise/post/'+postId+"/status/fail",
                 method: 'put',
-                data:JSON.stringify(""),
+                data:JSON.stringify({'message':reason}),
+                headers:{
+                    'Content-Type':'application/json'
+                },
                 withCredentials:true,
             })
                 .then((res) => {
